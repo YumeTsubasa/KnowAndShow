@@ -8,37 +8,35 @@ This is just a test
 <head>
 	<link rel="stylesheet" type="text/css" href="CSS\Main.css">
 	<link rel="stylesheet" type="text/css" href="CSS\Carousel.css">
-	<script src="JS\carousell.js"></script>
-	<script src="JS\index.js"></script>
-	<style type="text/css">
-					body{
-				font-family: 'Arial';
-							}
-	</style>
 </head>
-<!-- Initiate carousel controls -->
-	<template id="carousel-controls">
-		<ol role="list" class="carousel-controls" aria-label="Navigation controls">
-			<li>
-				<button class="carousel-control" aria-label="Previous" data-direction="start">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="15 18 9 12 15 6"></polyline>
-					</svg>
-				</button>
-			</li>
-			<li>
-				<button class="carousel-control" aria-label="Next" data-direction="end">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="9 18 15 12 9 6"></polyline>
-					</svg>
-				</button>
-			</li>
-		</ol>
-	</template>
+
 <body>
 	<div class="body">
 		<!-- Carousel initialization -->
 		<div class="carousel" role="region" aria-label="Image carousel" tabindex="0">
+		<!-- Carousel contents -->
+			<ol class="carousel-media" role="list">
+			
+				<li class="carousel-item">
+					
+					<img src="Art\X.png" width="100%" height="100%" loading="lazy">
+					
+					</img>
+				</li>
+				<li class="carousel-item">
+					<img src="Art\X.png" width="100%" height="100%" loading="lazy">
+					
+					</img>
+				</li>
+				<li class="carousel-item">
+					<h1 popover id="Question3">Hello</h1>
+					<button class="trigger-btn" type="button" popovertarget="Question3">				
+					<img src="Art\Kirbys-Pinball-Land-Boxart.png" width="100%" height="100%" loading="lazy">
+					
+					</img>
+					</button>
+				</li>
+			</ol>
 			<ol class="carousel-media" role="list">
 			<!-- Carousel contents -->
 				<li class="carousel-item">
