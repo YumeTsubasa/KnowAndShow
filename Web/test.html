@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Custom Popover with Fade</title>
+<style>
+  .popover {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    width: 300px;
+    padding: 1rem;
+    background: #f8f9fa;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  .popover.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+</style>
+</head>
+<body>
+
+<button id="toggleBtn">Toggle Popover</button>
+
+<div id="customPopover" class="popover">
+  <h2>Hello!</h2>
+  <p>This popover fades and slides in smoothly with JS.</p>
+</div>
+
+<script src="JS/fade.js"></script>
+
+</body>
+</html>
