@@ -1,43 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Custom Popover with Fade</title>
-<style>
-  .popover {
-    position: absolute;
-    top: 50px;
-    left: 20px;
-    width: 300px;
-    padding: 1rem;
-    background: #f8f9fa;
-    border: 2px solid #28a745;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    pointer-events: none;
-  }
-
-  .popover.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Counter Test</title>
+  <style>
+    .popover { display: none; }
+    .popover.show { display: block; }
+  </style>
 </head>
 <body>
+  <div class="lives">
+    <h1>Lives: 1</h1>
+  </div>
+  <div class="points">
+    <h1>Points: 0</h1>
+  </div>
 
-<button id="toggleBtn">Toggle Popover</button>
+  <button popovertarget="myPopover">Tile 1</button>
+  <div id="myPopover" class="popover">
+    <button class="close-subtract">Wrong</button>
+    <button class="close-add">Right</button>
+  </div>
 
-<div id="customPopover" class="popover">
-  <h2>Hello!</h2>
-  <p>This popover fades and slides in smoothly with JS.</p>
-</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let livesCounter = 1;
+      let pointsCounter = 0;
 
-<script src="JS/fade.js"></script>
+      const livesDisplay = document.querySelector('.lives h1');
+      const pointsDisplay = document.querySelector('.points h1');
 
+      livesDisplay.textContent = `Lives: ${livesCounter}`;
+      pointsDisplay.textContent = `Points: ${pointsCounter}`;
+
+      const buttons = document.querySelectorAll('[popovertarget]');
+      buttons.forEach(btn => {
+        const targetId = btn.getAttribute('popovertarget');
+        const popover = document.getElementById(targetId);
+        if (!popover) return;
+
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.popover.show').forEach(p => {
+            if (p !== popover) p.classList.remove('show');
+          });
+          popover.classList.toggle('show');
+        });
+
+        const wrongBtn = popover.querySelector('.close-subtract');
+        const rightBtn = popover.querySelector('.close-add');
+
+        if (wrongBtn) {
+          wrongBtn.addEventListener('click', () => {
+            livesCounter -= 1;
+            livesDisplay.textContent = `Lives: ${livesCounter}`;
+            console.log("Lives:", livesCounter);
+            popover.classList.remove('show');
+          });
+        }
+
+        if (rightBtn) {
+          rightBtn.addEventListener('click', () => {
+            pointsCounter += 1;
+            pointsDisplay.textContent = `Points: ${pointsCounter}`;
+            console.log("Points:", pointsCounter);
+            popover.classList.remove('show');
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>

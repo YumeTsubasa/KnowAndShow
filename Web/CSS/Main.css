@@ -2,7 +2,7 @@
 /* Black: #0E0301 */
 /* Lime: #00FF00 */
 
-/* Only use for main containers, functions in other CSS files */
+/* Basic functionalities of body */
 
 body	{
 		background-color: #0E0301;
@@ -23,39 +23,71 @@ body	{
 h1			{
 			font-family: Arial;
 			font-size: 15p;
+			color: #FFFFFF;
 			}
 
+h2			{
+			font-family: Arial;
+			font-size: 10p;
+			color: #FFFFFF;
+			}
 			
-.popover {
-  width: 650px;
-  min-height: 550px;
-  max-height: 550px;
-  border: 5px solid #00FF00;
-  background: black;
-  position: absolute;
-  top: 40px;
-  left: 40px;
+.lives		{			
+			width: 200px;
+			height: 50px;
+			border: 5px solid #00FF00;
+			background: black;
+			position: absolute;
+			top: 570px;
+			left: 100px;
+			right: 100px;
+			}
 
-  opacity: 0;
-  transform: translateY(10px); /* Add subtle slide effect */
-  transition: opacity 1s ease, transform 1s ease;
-  pointer-events: none;
-  z-index: 999;
+.points		{			
+			width: 200px;
+			height: 50px;
+			border: 5px solid #00FF00;
+			background: black;
+			position: absolute;
+			top: 570px;
+			left: 400px;
+			right: 100px;
+			}
+			
+			
+			
+/* Popover section */
+
+.popover 	{
+			width: 650px;
+			min-height: 550px;
+			max-height: 550px;
+			border: 5px solid #00FF00;
+			background: black;
+			position: absolute;
+			top: 40px;
+			left: 40px;
+
+			opacity: 0;
+			transform: translateY(10px); /* Add subtle slide effect */
+			transition: opacity 1s ease, transform 1s ease;
+			pointer-events: none;
+			z-index: 999;
 }
 
 .popover.show {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+			opacity: 1;
+			transform: translateY(0);
+			pointer-events: auto;
 }
 
 
 .popover_type	{
 				width: 125px;
-				height: 75px;
+				height: 50px;
 				border: 5px solid;
 				border-color: #00FF00;
-				background-color: #FFFFFF;
+				background-color: #000000;
 				position: absolute;
 				top: 40px;
 				left: 40px;
@@ -66,7 +98,7 @@ h1			{
 				height:100px;
 				border: 5px solid;
 				border-color: #00FF00;
-				background-color: #FFFFFF;
+				background-color: #000000;
 				position: absolute;
 				top: 40px;
 				right: 140px;
@@ -77,3 +109,91 @@ h1			{
 					height: 100%;
 					object-fit: contain;
 					}
+
+.popover_question	{
+				width: 560px;
+				height: 270px;
+				border: 5px solid;
+				border-color: #00FF00;
+				background-color: #000000;
+				position: absolute;
+				top: 150px;
+				left: 40px;
+				}
+				
+.popover_answer	{
+				width: 560px;
+				height: 150px;
+				border: 5px solid;
+				border-color: #00FF00;
+				background-color: #000000;
+				position: absolute;
+				top: 270px;
+				left: 40px;
+				display: none;
+				}
+				
+.popover_answer.show	{
+						display: block;
+						}
+						
+.popover_btnAnswer	{
+					width: 250px;
+					height: 117px;
+					position: absolute;
+					top: 280px;
+					left: 195px;
+					border: 5px solid;
+					border-color: #00FF00;
+					object-fit: contain;
+					background-color: #000000;
+					display:block
+					}
+
+.popover_btnAnswer.show	{
+						display:none
+						}
+					
+.popover_btnRight	{
+					width: 141px;
+					height: 67px;
+					position: absolute;
+					bottom: 40px;
+					right: 40px;
+					border: 5px solid;
+					border-color: #00FF00;
+					object-fit: contain;
+					background-color: #000000;
+					}
+				
+.popover_btnWrong	{
+					width: 141px;
+					height: 67px;
+					position: absolute;
+					bottom: 40px;
+					left: 40px;
+					border: 5px solid;
+					border-color: #00FF00;
+					object-fit: contain;
+					background-color: #000000;
+					}
+					
+/* button config */
+		
+button {
+		background: none;       /* remove gray background */
+		border: none;           /* remove border */
+		padding: 0;             /* remove default spacing */
+		margin: 0;
+		box-shadow: none;       /* remove drop shadow */
+		outline: none;          /* remove focus outline (be careful for accessibility!) */
+		cursor: pointer;        /* make it still look clickable */
+		}
+
+/* Button config border if wanted
+	
+button:focus 	{
+				outline: 2px solid #00f;   /* example: blue focus ring 
+				outline-offset: 2px;
+				}
+*/
