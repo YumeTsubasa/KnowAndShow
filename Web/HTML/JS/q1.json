@@ -1,0 +1,14 @@
+const jsonData = [
+  {
+    "id": "q3",
+	"type": "HARD Question",
+    "img": "img\questions\YT.png",
+    "question": "What is the logo displayed?"
+  },
+  {
+    "id": "q12",
+	"type": "HARD Question",
+    "img": "img\questions\Twitch.png",
+    "question": "What is the logo displayed?"
+  }
+]

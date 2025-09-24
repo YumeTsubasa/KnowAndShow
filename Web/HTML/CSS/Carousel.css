@@ -1,0 +1,99 @@
+@font-face 	{
+			font-family: 'MyCustomFont';
+			src: url('../font/The Rift Shop.otf') format('opentype');
+			font-weight: normal;
+			font-style: normal;
+			}
+
+body 	{
+		font-family: 'MyCustomFont', Arial, sans-serif;
+		}
+
+/* Reset default spacing and enforce box model consistency */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remove default list padding and bullets */
+.carousel [role='list'] {
+  padding: 0;
+  list-style: none;
+}
+
+/* Arrange media items horizontally inside the carousel */
+.carousel-media {
+  display: flex;
+}
+
+/* Container: allow horizontal scrolling & enable scroll snapping */
+.carousel-scroll-container {
+  overflow-x: auto;
+  scroll-snap-type: x proximity;   /* snap horizontally, but not strictly */
+  scroll-behavior: smooth;         /* smooth scroll when swiping/arrow keys */
+}
+
+/* Each carousel item */
+.carousel-item {
+  height: 78px;        /* limit height of each tile */
+  margin-right: 5px;   /* spacing between tiles */
+  margin-bottom: 5px;  /* spacing to next row */
+  flex-shrink: 0;      /* prevent shrinking */
+  scroll-snap-align: center; /* snap each tile to center by default */
+}
+
+/* Ensure direct children (buttons, figures, etc.) 
+   and wrapped media (picture, figure, img) 
+   always stretch to item height */
+.carousel-item > *,
+.carousel-item :is(picture, figure, img) {
+  height: 100%;
+  position:relative;
+}
+
+/* Images inside carousel: block display removes line-height gaps */
+.carousel-item img {
+  display: block;
+  width: auto; /* maintain aspect ratio */
+}
+
+/* Allow users to fully scroll to start and end */
+.carousel-item:first-of-type {
+  scroll-snap-align: start;
+}
+.carousel-item:last-of-type {
+  scroll-snap-align: end;
+}
+
+.tileBtn {
+  position: relative;   /* so span is positioned relative to button */
+  display: inline-block;
+  border: none;
+  padding: 0;
+  background: none;
+  width: 100%;          /* makes button fill carousel-item */
+  height: 100%;
+}
+
+.tileBtn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tileBtn span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* perfect centering */
+  font-family: 'MyCustomFont', Arial, sans-serif;
+  font-size: 54px;
+  font-weight: bold;
+  color: white;
+  pointer-events: none;
+  text-shadow: 2px 1px 1px black;
+  white-space: nowrap;  /* prevent line breaks for "10" */
+}
+

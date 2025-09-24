@@ -1,0 +1,80 @@
+/* Colours are as follows */
+/* Black: #0E0301 */
+/* Lime: #00FF00 */
+
+/* Basic functionalities of body */
+
+@font-face 	{
+			font-family: 'MyCustomFont';
+			src: url('../font/The Rift Shop.otf') format('opentype');
+			font-weight: normal;
+			font-style: normal;
+			}
+body	{
+		background-color: #0E0301;
+		font-family: 'MyCustomFont', Arial, sans-serif;
+		}		
+		
+h1		{
+		font-family: Arial;
+		font-size: 15p;
+		color: #FFFFFF;
+		}
+
+h2		{
+		font-family: Arial;
+		font-size: 10p;
+		color: #FFFFFF;
+		}
+			
+.container_startBtn	{	
+			width: 500px;
+			height: 200px;
+			position: absolute;
+			top: 280px;
+			left: 700px;
+			border: 5px solid;
+			border-color: #00FF00;
+			object-fit: contain;
+			background-color: #000000;
+			display:block
+			}
+			
+.container_quitBtn	{	
+			width: 500px;
+			height: 200px;
+			position: absolute;
+			top: 590px;
+			left: 700px;
+			border: 5px solid;
+			border-color: #00FF00;
+			object-fit: contain;
+			background-color: #000000;
+			display:block
+			}
+
+.startBtn img,
+.quitBtn img 	{
+				pointer-events: none;
+				display: block;
+				}
+					
+/* button config */
+		
+button 	{
+		background: none;       /* remove gray background */
+		border: none;           /* remove border */
+		padding: 0;             /* remove default spacing */
+		margin: 0;
+		box-shadow: none;       /* remove drop shadow */
+		outline: none;          /* remove focus outline (be careful for accessibility!) */
+		cursor: pointer;        /* make it still look clickable */
+		}
+
+/* Button config border if wanted
+	
+button:focus 	{
+				outline: 2px solid #00f;   /* example: blue focus ring 
+				outline-offset: 2px;
+				}
+*/
