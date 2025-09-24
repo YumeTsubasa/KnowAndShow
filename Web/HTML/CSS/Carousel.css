@@ -93,7 +93,7 @@ body 	{
   font-weight: bold;
   color: white;
   pointer-events: none;
-  text-shadow: 2px 1px 1px black;
+  text-shadow: 3px 3px 1px black;
   white-space: nowrap;  /* prevent line breaks for "10" */
 }
 

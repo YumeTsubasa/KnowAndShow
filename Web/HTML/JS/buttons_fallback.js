@@ -50,9 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         popoverText.textContent = `Do you choose "${nameValue}" as your name?`;
       }
 
-      // Store the last popover ID globally for tile disable
-      window.lastPopoverID = targetId;
-
       // Hide other popovers first
       document.querySelectorAll('.popover_name.show, .popover.show').forEach(p => {
         if (p !== popover) p.classList.remove('show');
@@ -74,27 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
       wrongBtn.addEventListener('click', () => {
         livesCounter -= 1;
         updateLivesDisplay();
-
-        // Disable the tile that called this popover
-        const popoverID = window.lastPopoverID;
-        if (popoverID) {
-          const tileBtn = document.querySelector(`.tileBtn[popovertarget="${popoverID}"]`);
-          if (tileBtn) {
-            tileBtn.disabled = true;
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            overlay.style.pointerEvents = 'none';
-            tileBtn.style.position = 'relative';
-            tileBtn.appendChild(overlay);
-          }
-          window.lastPopoverID = null;
-        }
-
         popover.classList.remove('show');  // hide popover
       });
     }
@@ -103,27 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
       rightBtn.addEventListener('click', () => {
         pointsCounter += 1;
         updatePointsDisplay();
-
-        // Disable the tile that called this popover
-        const popoverID = window.lastPopoverID;
-        if (popoverID) {
-          const tileBtn = document.querySelector(`.tileBtn[popovertarget="${popoverID}"]`);
-          if (tileBtn) {
-            tileBtn.disabled = true;
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            overlay.style.pointerEvents = 'none';
-            tileBtn.style.position = 'relative';
-            tileBtn.appendChild(overlay);
-          }
-          window.lastPopoverID = null;
-        }
-
         popover.classList.remove('show');  // hide popover
       });
     }
@@ -145,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCross = popoverName ? popoverName.querySelector('.btnCross') : null;
 
   if (readyBtn && playerInput && popoverName && popoverText && btnCheck && btnCross) {
+
     // Cancel → hide popover
     btnCross.addEventListener('click', () => {
       popoverName.classList.remove('show');
