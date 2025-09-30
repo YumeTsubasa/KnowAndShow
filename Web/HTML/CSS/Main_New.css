@@ -1,227 +1,252 @@
-/* Colours are as follows */
+/* Colours */
 /* Black: #0E0301 */
 /* Lime: #00FF00 */
 
-/* Basic functionalities of body */
+/* Font */
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../font/The Rift Shop.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-@font-face 	{
-			font-family: 'MyCustomFont';
-			src: url('../font/The Rift Shop.otf') format('opentype');
-			font-weight: normal;
-			font-style: normal;
-			}
+body {
+    background-color: #0E0301;
+    font-family: 'MyCustomFont', Arial, sans-serif;
+}
 
-body	{
-		background-color: #0E0301;
-		font-family: 'MyCustomFont', Arial, sans-serif;
-		}		
-		
-.carousel	{
-			width: 1400px;
-			height: 855px;
-			border: 5px solid;
-			border-color: #00FF00;
-			top: 185px;
-			left: 250px;
-			right: 100px;
-			padding: 10px;
-			position: absolute;
-			}
+/* Headings */
+h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
+}
 
-h1			{
-			font-family: 'MyCustomFont', Arial, sans-serif;
-			font-size: 15p;
-			color: #FFFFFF;
-			}
+h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 10px;
+    color: #FFFFFF;
+}
 
-h2			{
-			font-family: 'MyCustomFont', Arial, sans-serif;
-			font-size: 10p;
-			color: #FFFFFF;
-			}
-			
-.lives		{			
-			width: 300px;
-			height: 105px;
-			border: 5px solid #00FF00;
-			background: black;
-			position: absolute;
-			top: 60px;
-			left: 250px;
-			}
-
+/* Flex containers */
 .points {
-  width: 700px;
-  height: 105px;
-  border: 5px solid #00FF00;
-  background: black;
-  position: absolute;
-  top: 60px;
-  left: 550px;
+    width: 700px;
+    height: 105px;
+    border: 5px solid #00FF00;
+    background: black;
+    position: absolute;
+    top: 60px;
+    left: 550px;
 
-  display: flex;               /* enable flexbox */
-  align-items: end;         /* vertical centering */
-  justify-content: left;     /* horizontal centering */
+    display: flex;
+    align-items: end;
+    justify-content: left;
 }
 
 .points h1 {
-  margin: 0;
-  font-size: 60px;             /* adjust as needed */
-  font-weight: bold;
-  color: white;
-  text-align: center;
+    margin: 0;
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
 }
 
-/*disable a tile after question answered*/
+/* Life counter */
+.lives {
+    width: 300px;
+    height: 105px;
+    border: 5px solid #00FF00;
+    background: black;
+    position: absolute;
+    top: 60px;
+    left: 250px;
+}
 
-.tile.disabled 	{
-				pointer-events: none;      /* make it unclickable */
-				opacity: 0.5;              /* fade it out */
-				box-shadow: inset 0 0 10px #000; /* optional shadow effect */
-				}
+/* Carousel container */
+.carousel {
+    width: 1400px;
+    height: 855px;
+    border: 5px solid #00FF00;
+    top: 185px;
+    left: 250px;
+    right: 100px;
+    padding: 10px;
+    position: absolute;
+}
 
-			
-			
-			
-/* Popover section */
+/* Tiles */
+.tile.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    box-shadow: inset 0 0 10px #000;
+}
 
-.popover 	{
-			width: 1400px;
-			height: 855px;
-			border: 0px solid #00FF00;
-			background: black;
-			position: absolute;
-			top: 185px;
-			left: 250px;
-			bottom: 40px;
-			right: 40px;
+/* Popovers */
+.popover {
+    width: 1400px;
+    height: 855px;
+    border: 0;
+    background: black;
+    position: absolute;
+    top: 185px;
+    left: 250px;
+    bottom: 40px;
+    right: 40px;
 
-			opacity: 0;
-			transform: translateY(10px); /* Add subtle slide effect */
-			transition: opacity 1s ease, transform 1s ease;
-			pointer-events: none;
-			z-index: 999;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
+    pointer-events: none;
+    z-index: 999;
 }
 
 .popover.show {
-			opacity: 1;
-			transform: translateY(0);
-			pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
+/* Popover components */
+.popover_cat {
+    width: 100%;
+    height: 550px;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
-.popover_cat	{
-				width: 1400px;
-				height: 550px;
-				border: 0px solid;
-				border-color: #00FF00;
-				background-color: #000000;
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				}
+.popover_cat h1,
+.popover_cat h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
 
-.popover_img	{
-				width: 100px;
-				height:100px;
-				border: 5px solid;
-				border-color: #00FF00;
-				background-color: #000000;
-				position: absolute;
-				top: 40px;
-				right: 140px;
-				}
-				
-.popover_img img	{
-					 width: 100%;
-					height: 100%;
-					object-fit: contain;
-					}
+.popover_img {
+    width: 100px;
+    height: 100px;
+    border: 5px solid #00FF00;
+    background-color: #000;
+    position: absolute;
+    top: 40px;
+    right: 140px;
+}
 
-.popover_question	{
-				width: 1400px;
-				height: 306px;
-				border: 0px solid;
-				border-color: #00FF00;
-				background-color: #000000;
-				position: absolute;
-				top: 550px;
-				left: 0px;
-				}
-				
-.popover_answer	{
-				width: 560px;
-				height: 150px;
-				border: 5px solid;
-				border-color: #00FF00;
-				background-color: #000000;
-				position: absolute;
-				top: 270px;
-				left: 40px;
-				display: none;
-				}
-				
-.popover_answer.show	{
-						display: block;
-						}
-						
-.popover_btnAnswer	{
-					width: 250px;
-					height: 117px;
-					position: absolute;
-					top: 280px;
-					left: 195px;
-					border: 5px solid;
-					border-color: #00FF00;
-					object-fit: contain;
-					background-color: #000000;
-					display:block
-					}
+.popover_img img,
+.popover_question img,
+.gameover_popover_gameoverBtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-.popover_btnAnswer.show	{
-						display:none
-						}
-					
-.popover_btnRight	{
-					width: 141px;
-					height: 67px;
-					position: absolute;
-					bottom: 40px;
-					right: 40px;
-					border: 5px solid;
-					border-color: #00FF00;
-					object-fit: contain;
-					background-color: #000000;
-					}
-				
-.popover_btnWrong	{
-					width: 141px;
-					height: 67px;
-					position: absolute;
-					bottom: 40px;
-					left: 40px;
-					border: 5px solid;
-					border-color: #00FF00;
-					object-fit: contain;
-					background-color: #000000;
-					}
-					
-/* button config */
-		
-button 	{
-		background: none;       /* remove gray background */
-		border: none;           /* remove border */
-		padding: 0;             /* remove default spacing */
-		margin: 0;
-		box-shadow: none;       /* remove drop shadow */
-		outline: none;          /* remove focus outline (be careful for accessibility!) */
-		cursor: pointer;        /* make it still look clickable */
-		}
+.popover_question {
+    width: 100%;
+    height: 306px;
+    background-color: #000;
+    position: relative;
+    top: 550px;
+}
 
-/* Button config border if wanted
-	
-button:focus 	{
-				outline: 2px solid #00f;   /* example: blue focus ring 
-				outline-offset: 2px;
-				}
-*/
+.popover_answer {
+    width: 560px;
+    height: 150px;
+    border: 5px solid #00FF00;
+    background-color: #000;
+    position: absolute;
+    top: 270px;
+    left: 40px;
+    display: none;
+}
+
+.popover_answer.show {
+    display: block;
+}
+
+/* Popover buttons */
+.popover_btnAnswer,
+.popover_btnRight,
+.popover_btnWrong {
+    border: 5px solid #00FF00;
+    background-color: #000;
+    object-fit: contain;
+}
+
+.popover_btnAnswer {
+    width: 250px;
+    height: 117px;
+    position: absolute;
+    top: 280px;
+    left: 195px;
+}
+
+.popover_btnAnswer.show {
+    display: none;
+}
+
+.popover_btnRight {
+    width: 141px;
+    height: 67px;
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+}
+
+.popover_btnWrong {
+    width: 141px;
+    height: 67px;
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+}
+
+/* Gameover popover */
+.gameover_popover {
+    display: none;
+    width: 1400px;
+    height: 855px;
+    background: black;
+    position: absolute;
+    top: 185px;
+    left: 250px;
+    bottom: 40px;
+    right: 40px;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
+    pointer-events: auto;
+    z-index: 999;
+    cursor: default;
+}
+
+.gameover_popover.show {
+    display: flex;
+}
+
+.gameover_popover_gameoverBtn {
+    width: 250px;
+    height: 117px;
+    position: absolute;
+    top: 650px;
+    left: 500px;
+    border: 5px solid #00FF00;
+    background-color: #000;
+    display: block;
+    cursor: pointer;
+}
+
+/* Buttons */
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

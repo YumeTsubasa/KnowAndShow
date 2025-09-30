@@ -7,24 +7,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const livesDisplay = document.querySelector('.lives img');
   const pointsDisplay = document.querySelector('.points h1');
+  const gameoverPopover = document.querySelector('.gameover_popover');
 
-  // image paths for lives states
+  // image paths for lives states (removed obsolete -1 state)
   const livesImages = {
     1: "img/misc/safe.png",
-    0: "img/misc/danger.png",
-    "-1": "img/lives/gameover.png"
+    0: "img/misc/danger.png"
   };
 
   // helper to update lives image
-  function updateLivesDisplay() {
-    if (livesCounter >= 1) livesCounter = 1;
-    else if (livesCounter <= -1) livesCounter = -1;
-    if (livesDisplay) livesDisplay.src = livesImages[livesCounter];
+function updateLivesDisplay() {
+  if (livesCounter >= 1) {
+    livesCounter = 1;
+    if (livesDisplay) livesDisplay.src = livesImages[1];
+  } else if (livesCounter === 0) {
+    if (livesDisplay) livesDisplay.src = livesImages[0];
+  } else if (livesCounter < 0) {
+    if (livesDisplay) livesDisplay.src = livesImages[0]; // keep danger image
+    showGameOver(); // trigger game over popup
   }
+}
 
   // helper for updating points display
   function updatePointsDisplay() {
     if (pointsDisplay) pointsDisplay.textContent = `${playerName}: ${pointsCounter}`;
+  }
+
+  // 🔹 Show Game Over Popover
+  function showGameOver() {
+    if (!gameoverPopover) return;
+
+    // Fill placeholders
+    const gameoverText = gameoverPopover.querySelector('h2');
+    if (gameoverText) {
+      gameoverText.textContent = `Player ${playerName} has scored ${pointsCounter} points`;
+    }
+
+    // Save result (localStorage JSON array of scores)
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    scores.push({ player: playerName, points: pointsCounter });
+    localStorage.setItem('scores', JSON.stringify(scores));
+
+    // Show popover
+    gameoverPopover.classList.add('show');
+
+    // Handle restart button
+    const restartBtn = gameoverPopover.querySelector('.gameoverBtn');
+    if (restartBtn) {
+      restartBtn.addEventListener('click', () => {
+        window.location.href = 'Name.html';
+      });
+    }
   }
 
   // init displays
@@ -50,9 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         popoverText.textContent = `Do you choose "${nameValue}" as your name?`;
       }
 
-      // Store the last popover ID globally for tile disable
-      window.lastPopoverID = targetId;
-
       // Hide other popovers first
       document.querySelectorAll('.popover_name.show, .popover.show').forEach(p => {
         if (p !== popover) p.classList.remove('show');
@@ -74,27 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
       wrongBtn.addEventListener('click', () => {
         livesCounter -= 1;
         updateLivesDisplay();
-
-        // Disable the tile that called this popover
-        const popoverID = window.lastPopoverID;
-        if (popoverID) {
-          const tileBtn = document.querySelector(`.tileBtn[popovertarget="${popoverID}"]`);
-          if (tileBtn) {
-            tileBtn.disabled = true;
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            overlay.style.pointerEvents = 'none';
-            tileBtn.style.position = 'relative';
-            tileBtn.appendChild(overlay);
-          }
-          window.lastPopoverID = null;
-        }
-
         popover.classList.remove('show');  // hide popover
       });
     }
@@ -103,27 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
       rightBtn.addEventListener('click', () => {
         pointsCounter += 1;
         updatePointsDisplay();
-
-        // Disable the tile that called this popover
-        const popoverID = window.lastPopoverID;
-        if (popoverID) {
-          const tileBtn = document.querySelector(`.tileBtn[popovertarget="${popoverID}"]`);
-          if (tileBtn) {
-            tileBtn.disabled = true;
-            const overlay = document.createElement('div');
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
-            overlay.style.pointerEvents = 'none';
-            tileBtn.style.position = 'relative';
-            tileBtn.appendChild(overlay);
-          }
-          window.lastPopoverID = null;
-        }
-
         popover.classList.remove('show');  // hide popover
       });
     }
@@ -145,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCross = popoverName ? popoverName.querySelector('.btnCross') : null;
 
   if (readyBtn && playerInput && popoverName && popoverText && btnCheck && btnCross) {
+
     // Cancel → hide popover
     btnCross.addEventListener('click', () => {
       popoverName.classList.remove('show');
