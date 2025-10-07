@@ -4,10 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.querySelector('.startBtn');
   const quitBtn  = document.querySelector('.quitBtn');
 
-  // Start button → go to Name.html
+  // Start button → clear board state and go to Name.html
   if (startBtn) {
     startBtn.addEventListener('click', () => {
       console.log('▶️ Start clicked');
+
+      // Clear saved board state (tiles) and any counters
+      localStorage.removeItem('disabledTiles');  // if used for tiles
+      localStorage.removeItem('scores');         // optional: reset scores
+      localStorage.removeItem('playerName');     // optional: reset name
+      localStorage.removeItem('pointsCounter');  // if points stored separately
+      localStorage.removeItem('livesCounter');   // if lives stored separately
+
       window.location.href = 'HTML/Name.html';
     });
   }

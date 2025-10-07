@@ -1,0 +1,37 @@
+const jsonData = [
+  {
+    "id": "Question1",
+	"type": "HARD Question",
+    "img": "img\questions\YT.png",
+    "question": "What is the logo displayed?",
+	"answer": "Youtube"
+  },
+  {
+    "id": "Question2",
+	"type": "HARD Question",
+    "img": "img\questions\YT.png",
+    "question": "What is the logo displayed?",
+	"answer": "Youtube"
+  },
+    {
+    "id": "Question3",
+	"type": "HARD Question",
+    "img": "img\questions\YT.png",
+    "question": "What is the logo displayed?",
+	"answer": "Youtube"
+  },
+    {
+    "id": "Question12",
+	"type": "HARD Question",
+    "img": "img\questions\YT.png",
+    "question": "What is the logo displayed?",
+	"answer": "Youtube"
+  },
+    {
+    "id": "Question13",
+	"type": "HARD Question",
+    "img": "img\questions\YT.png",
+    "question": "What is the logo displayed?",
+	"answer": "Youtube"
+  },
+]
