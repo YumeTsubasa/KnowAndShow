@@ -162,16 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-// 🔹 Handle showing the answer and hiding the answer button
-	if (answerBtn && answerDiv) {
-		answerBtn.addEventListener('click', () => {
-		// Show the answer text
-		answerDiv.classList.add('show');
-		// Hide the entire answer button container
-		answerBtn.parentElement.classList.add('hidden');
-  });
-}
-
+		// 🔹 Handle showing the answer and hiding the answer button
+		if (answerBtn && answerDiv) {
+			answerBtn.addEventListener('click', () => {
+			// Show the answer text
+			answerDiv.classList.add('show');
+			// Hide the entire answer button container
+			answerBtn.parentElement.classList.add('hidden');
+		});
+    }
   });
 
   // 🔹 player name logic

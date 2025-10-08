@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   let livesCounter = 1;   // start safe
   let pointsCounter = 0;
   let playerName = localStorage.getItem('playerName') || "Player";
@@ -162,14 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-		// 🔹 Handle showing the answer and hiding the answer button
-		if (answerBtn && answerDiv) {
-			answerBtn.addEventListener('click', () => {
-			// Show the answer text
-			answerDiv.classList.add('show');
-			// Hide the entire answer button container
-			answerBtn.parentElement.classList.add('hidden');
-		});
+    // 🔹 Handle showing the answer and hiding the answer button
+    if (answerBtn && answerDiv) {
+      answerBtn.addEventListener('click', () => {
+        answerDiv.classList.add('show');
+        answerBtn.parentElement.classList.add('hidden');
+      });
     }
   });
 
@@ -189,8 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCheck.addEventListener('click', () => {
       playerName = playerInput.value.trim();
       localStorage.setItem('playerName', playerName);
-      // 🟢 keep board state for next player — no reset here
       window.location.href = 'Main_New.html';
     });
   }
+
 });

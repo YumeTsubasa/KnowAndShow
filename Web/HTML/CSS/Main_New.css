@@ -32,12 +32,13 @@ h2 {
 .points {
     width: 700px;
     height: 105px;
-    border: 5px solid #00FF00;
-    background: black;
+    /* border: 5px solid #00FF00;
+    background: black; */
     position: absolute;
     top: 60px;
     left: 550px;
-
+	padding-left: 10px;
+	padding-bottom:5px;
     display: flex;
     align-items: end;
     justify-content: left;
@@ -45,7 +46,7 @@ h2 {
 
 .points h1 {
     margin: 0;
-    font-size: 60px;
+    font-size: 85px;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -55,8 +56,8 @@ h2 {
 .lives {
     width: 300px;
     height: 105px;
-    border: 5px solid #00FF00;
-    background: black;
+    /* border: 5px solid #00FF00;
+    background: black; */
     position: absolute;
     top: 60px;
     left: 250px;
@@ -66,11 +67,11 @@ h2 {
 .carousel {
     width: 1400px;
     height: 855px;
-    border: 5px solid #00FF00;
+    /* border: 5px solid #00FF00; */
     top: 185px;
-    left: 250px;
+    left: 258px;
     right: 100px;
-    padding: 10px;
+    padding: 15px;
     position: absolute;
 }
 
@@ -154,13 +155,13 @@ h2 {
 }
 
 .popover_question_text {
-    width: 99%;
+    width: 97%;
     height: 170px;
     position: absolute;
 	/* border: 5px solid #00FF00;
     background-color: #000; */
     top: 7px;
-	left: 7px;
+	left: 15px;
 }
 
 .popover_question_text h1 {

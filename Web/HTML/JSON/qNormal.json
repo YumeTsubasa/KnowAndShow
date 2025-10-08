@@ -1,37 +1,72 @@
-const jsonData = [
+[
   {
     "id": "Question1",
-	"type": "HARD Question",
-    "img": "img\questions\YT.png",
-    "question": "What is the logo displayed?",
-	"answer": "Youtube"
+	"type": "branch",
+    "img": "img/questions/YT.png",
+    "question": "Lorem",
+	"answer": "Ipsum"
   },
-  {
+    {
     "id": "Question2",
-	"type": "HARD Question",
-    "img": "img\questions\YT.png",
-    "question": "What is the logo displayed?",
-	"answer": "Youtube"
+	"type": "brutal",
+    "img": "img/questions/YT.png",
+    "question": "Ducktales",
+	"answer": "Wohoo"
   },
     {
     "id": "Question3",
-	"type": "HARD Question",
-    "img": "img\questions\YT.png",
-    "question": "What is the logo displayed?",
-	"answer": "Youtube"
+	"type": "audience",
+    "img": "img/questions/YT.png",
+    "question": "Silk",
+	"answer": "Song"
   },
     {
-    "id": "Question12",
-	"type": "HARD Question",
-    "img": "img\questions\YT.png",
-    "question": "What is the logo displayed?",
-	"answer": "Youtube"
+    "id": "Question4",
+	"type": "audio",
+    "img": "img/questions/YT.png",
+    "question": "Dirty",
+	"answer": "Harry"
   },
     {
-    "id": "Question13",
-	"type": "HARD Question",
-    "img": "img\questions\YT.png",
-    "question": "What is the logo displayed?",
-	"answer": "Youtube"
+    "id": "Question5",
+	"type": "character",
+    "img": "img/questions/YT.png",
+    "question": "Harry Potter and the",
+	"answer": "Philosophers Stone"
   },
+    {
+    "id": "Question6",
+	"type": "decision",
+    "img": "img/questions/YT.png",
+    "question": "Corn",
+	"answer": "Hub"
+  },
+    {
+    "id": "Question7",
+	"type": "easy",
+    "img": "img/questions/YT.png",
+    "question": "Unstable",
+	"answer": "Unicorns"
+  },
+    {
+    "id": "Question8",
+	"type": "hint",
+    "img": "img/questions/YT.png",
+    "question": "Do not go peepee",
+	"answer": "In the ocean"
+  },
+    {
+    "id": "Question9",
+	"type": "host",
+    "img": "img/questions/YT.png",
+    "question": "Red",
+	"answer": "Blue"
+  },
+    {
+    "id": "Question10",
+	"type": "mine",
+    "img": "img/questions/YT.png",
+    "question": "Hello",
+	"answer": "Scykoh"
+  }
 ]
