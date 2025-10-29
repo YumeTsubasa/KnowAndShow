@@ -263,6 +263,18 @@ h2 {
     cursor: pointer;
 }
 
+.gameover_popover_scoresBtn {
+							width: 250px;
+							height: 117px;
+							position: absolute;
+							top: 650px;
+							left: 800px;
+							border: 5px solid #00FF00;
+							background-color: #000;
+							display: block;
+							cursor: pointer;
+}
+
 /* Buttons */
 button {
     background: none;

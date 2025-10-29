@@ -77,10 +77,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     gameoverPopover.classList.add('show');
 
-    const restartBtn = gameoverPopover.querySelector('.gameoverBtn');
+    const restartBtn = gameoverPopover.querySelector('.restartBtn');
     if (restartBtn) {
       restartBtn.addEventListener('click', () => {
         window.location.href = 'Name.html'; // back to name input
+	  });
+	}	
+		
+    const scoresBtn = gameoverPopover.querySelector('.scoresBtn');
+    if (scoresBtn) {
+      scoresBtn.addEventListener('click', () => {
+        window.location.href = 'Scores.html'; // back to name input
       });
     }
   }
