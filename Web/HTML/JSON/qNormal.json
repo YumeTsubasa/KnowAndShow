@@ -1,65 +1,70 @@
 [
   {
     "id": "Question1",
-	"type": "branch",
+	"type": "easy",
     "img": "img/questions/YT.png",
     "question": "Lorem",
 	"answer": "Ipsum"
   },
     {
     "id": "Question2",
-	"type": "brutal",
+	"type": "multi",
     "img": "img/questions/YT.png",
     "question": "Ducktales",
-	"answer": "Wohoo"
+	"answerA": "Wohoo",
+	"answerB": "Wohoo",
+	"answerC": "Wohoo",
+	"answerD": "Wohoo"
   },
     {
     "id": "Question3",
-	"type": "audience",
+	"type": "brutal",
     "img": "img/questions/YT.png",
     "question": "Silk",
 	"answer": "Song"
   },
     {
     "id": "Question4",
-	"type": "audio",
+	"type": "qte",
     "img": "img/questions/YT.png",
     "question": "Dirty",
 	"answer": "Harry"
   },
     {
     "id": "Question5",
-	"type": "character",
-    "img": "img/questions/YT.png",
-    "question": "Harry Potter and the",
+	"type": "screen",
+    "img": "img/screenshot/snore.jpg",
+	"question": "What game is the following screenshot from?",
 	"answer": "Philosophers Stone"
   },
     {
     "id": "Question6",
-	"type": "decision",
+	"type": "character",
     "img": "img/questions/YT.png",
     "question": "Corn",
 	"answer": "Hub"
   },
     {
     "id": "Question7",
-	"type": "easy",
+	"type": "jukebox",
     "img": "img/questions/YT.png",
     "question": "Unstable",
 	"answer": "Unicorns"
   },
     {
     "id": "Question8",
-	"type": "hint",
+	"type": "audio",
     "img": "img/questions/YT.png",
     "question": "Do not go peepee",
 	"answer": "In the ocean"
   },
     {
     "id": "Question9",
-	"type": "host",
+	"type": "hint",
     "img": "img/questions/YT.png",
-    "question": "Red",
+    "hint1": "Red",
+	"hint2": "Green",
+	"hint3": "Yellow",
 	"answer": "Blue"
   },
     {
@@ -68,5 +73,63 @@
     "img": "img/questions/YT.png",
     "question": "Hello",
 	"answer": "Scykoh"
+  },
+    {
+    "id": "Question11",
+	"type": "solo",
+    "img": "img/questions/YT.png",
+    "challenge1": "Red",
+	"challenge2": "Red"
+  },
+    {
+    "id": "Question12",
+	"type": "audience",
+    "img": "img/questions/YT.png",
+    "challenge1": "Red"
+  },
+    {
+    "id": "Question13",
+	"type": "team",
+    "img": "img/questions/YT.png",
+    "challenge1": "Red"
+  },
+    {
+    "id": "Question14",
+	"type": "trust",
+    "img": "img/questions/YT.png",
+    "challenge1": "Red"
+  },
+    {
+    "id": "Question15",
+	"type": "host",
+    "img": "img/questions/YT.png",
+    "Boxmeister": "Red",
+	"DoubleDubbel": "Red"
+  },
+    {
+    "id": "Question16",
+	"type": "branch",
+    "img": "img/questions/YT.png",
+    "category1": "Red",
+	"category2": "Red",
+	"category3": "Red",
+	"answer": "Blue"
+  },
+    {
+    "id": "Question17",
+	"type": "decision",
+    "img": "img/questions/YT.png",
+    "game1": "Red",
+	"game2": "Red",
+	"game1desc": "Red",
+	"game2desc": "Red",
+	"answer": "Blue"
+  },
+    {
+    "id": "Question18",
+	"type": "risky",
+    "img": "img/questions/YT.png",
+    "question": "Red",
+	"answer": "Blue"
   }
 ]

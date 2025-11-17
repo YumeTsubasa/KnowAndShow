@@ -170,6 +170,16 @@ h2 {
     color: #FFFFFF;
 }
 
+.popover_question_text h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+    align-items: center; 
+    font-size: 60px;
+    color: #FFFFFF;
+	text-align: center; 
+}
+
 .popover_answer {
     width: 560px;
     height: 70px;
@@ -177,7 +187,7 @@ h2 {
     background-color: #000; */
     position: absolute;
     left: 420px;
-    bottom: 40px;
+    bottom: 20px;
     display: none;
 	text-align: center;
 }
@@ -195,7 +205,8 @@ h2 {
 /* Popover buttons */
 .popover_btnAnswer,
 .popover_btnRight,
-.popover_btnWrong {
+.popover_btnWrong,
+.popover_btnSkip	{
     /* border: 5px solid #00FF00;
     background-color: #000; */
     object-fit: contain;
@@ -205,7 +216,7 @@ h2 {
     width: 141px;
     height: 70px;
     position: absolute;
-    bottom: 40px;
+    bottom: 20px;
     left: 630px;
 }
 
@@ -213,11 +224,19 @@ h2 {
     display: none;
 }
 
+.popover_btnSkip {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 120px;
+    right: 40px;
+}
+
 .popover_btnRight {
     width: 141px;
     height: 70px;
     position: absolute;
-    bottom: 40px;
+    bottom: 20px;
     right: 40px;
 }
 
@@ -225,9 +244,84 @@ h2 {
     width: 141px;
     height: 70px;
     position: absolute;
-    bottom: 40px;
+    bottom: 20px;
     left: 40px;
 }
+
+.popover_answer_multiA {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    left: 30px;
+    top: 70px;
+	text-align: left;
+}
+
+.popover_answer_multiB {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    right: 30px;
+    top: 70px;
+	text-align: left;
+}
+
+.popover_answer_multiC {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    left: 30px;
+    bottom: 100px;
+	text-align: left;
+}
+
+.popover_answer_multiD {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    right: 30px;
+    bottom: 100px;
+	text-align: left;
+}
+
+.popover_answer_multiA h2,
+.popover_answer_multiB h2,
+.popover_answer_multiC h2,
+.popover_answer_multiD h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 50px;
+    color: #FFFFFF;
+}
+
+.popover_screenshot {
+    width: 500px;
+    height: 500px;
+    background-color: #000;
+    position: absolute;
+    top: 450px;
+    left: 177px;
+	opacity:1; 
+	transition: opacity 1s ease;
+	z-index: 9999;
+	background:none;
+}
+
+.popover_screenshot img {
+    opacity: 0;
+}
+
+.popover_screenshot img.show {
+    opacity: 1;
+}
+
 
 /* Gameover popover */
 .gameover_popover {
@@ -255,7 +349,7 @@ h2 {
     width: 250px;
     height: 117px;
     position: absolute;
-    top: 650px;
+    top: 150px;
     left: 500px;
     border: 5px solid #00FF00;
     background-color: #000;
@@ -267,12 +361,20 @@ h2 {
 							width: 250px;
 							height: 117px;
 							position: absolute;
-							top: 650px;
+							top: 150px;
 							left: 800px;
 							border: 5px solid #00FF00;
 							background-color: #000;
 							display: block;
 							cursor: pointer;
+}
+
+.popover_btnDismiss {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 120px;
+    right: 40px;
 }
 
 /* Buttons */
