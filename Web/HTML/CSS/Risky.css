@@ -1,0 +1,841 @@
+/* Colours */
+/* Black: #0E0301 */
+/* Lime: #00FF00 */
+
+/* Font */
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../font/The Rift Shop.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #0E0301;
+    font-family: 'MyCustomFont', Arial, sans-serif;
+}
+
+/* Headings */
+h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 10px;
+    color: #FFFFFF;
+}
+
+/* body container */
+
+.body {
+    width: 1920px;
+    height: 1080px;
+    /* border: 5px solid #00FF00;
+    background: black; */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/* Flex containers */
+
+.points {
+    width: 700px;
+    height: 105px;
+    /* border: 5px solid #00FF00;
+    background: black; */
+    position: absolute;
+    top: 60px;
+    left: 550px;
+	padding-left: 10px;
+	padding-bottom:5px;
+    display: flex;
+    align-items: end;
+    justify-content: left;
+}
+
+.points h1 {
+    margin: 0;
+    font-size: 85px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+/* Life counter */
+.lives {
+    width: 300px;
+    height: 105px;
+    /* border: 5px solid #00FF00;
+    background: black; */
+    position: absolute;
+    top: 60px;
+    left: 250px;
+}
+
+/* Carousel container */
+.carousel {
+    width: 1400px;
+    height: 855px;
+    /* border: 5px solid #00FF00; */
+    top: 185px;
+    left: 258px;
+    right: 100px;
+    padding: 15px;
+    position: absolute;
+}
+
+/* Tiles */
+.tileBtn.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    box-shadow: inset 0 0 10px #000;
+}
+
+/* Popovers */
+.popover {
+    width: 1400px;
+    height: 855px;
+    border: 0;
+    background: black;
+    position: absolute;
+    top: 185px;
+    left: 250px;
+    bottom: 40px;
+    right: 40px;
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.popover.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Popover components */
+
+/* Category Box */
+
+.popover_cat_body {
+    width: 100%;
+    height: 550px;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/*
+.popover_cat_body h1,
+.popover_cat_body h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+*/
+
+
+.popover_cat_img {
+    width: 1380px;
+    height: 530px;
+	top: 10px;
+	left: 10px;
+    /* border: 5px solid #00FF00; */
+	display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    position: absolute;
+}
+
+.popover_cat_img img {
+	display:block;
+	margin: 0 auto;
+}
+
+
+/* Question/Interactive boxes */
+
+/* Main */
+
+.popover_question_body {
+    width: 100%;
+    height: 305px;
+    background-color: #000;
+    position: absolute;
+    top: 550px;
+}
+
+.popover_question_body img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_question_text {
+    width: 97%;
+    height: 170px;
+    position: absolute;
+	/* border: 5px solid #00FF00;
+    background-color: #000; */
+    top: 7px;
+	left: 15px;
+}
+
+.popover_question_text h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 60px;
+    color: #FFFFFF;
+}
+
+.popover_question_text h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+    align-items: center; 
+    font-size: 40px;
+    color: #FFFFFF;
+	text-align: center; 
+}
+
+/* Popover buttons */
+
+.popover_answer {
+    width: 560px;
+    height: 70px;
+	/* border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    left: 420px;
+    bottom: 20px;
+    display: none;
+	text-align: center;
+}
+
+.popover_answer h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 60px;
+    color: #FFFFFF;
+}
+
+.popover_answer.show {
+    display: block;
+}
+
+.popover_btnAnswer {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 630px;
+}
+
+.popover_btnAnswer.hidden {
+    display: none;
+}
+
+.popover_btnSkip {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 120px;
+    right: 40px;
+}
+
+.popover_btnRight {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.popover_btnWrong {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+}
+
+.popover_btnAnswer,
+.popover_btnRight,
+.popover_btnWrong,
+.popover_btnSkip	{
+    /* border: 5px solid #00FF00;
+    background-color: #000; */
+    object-fit: contain;
+}
+
+/* Multiple Choice */
+
+.popover_answer_multiA {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    left: 30px;
+    top: 70px;
+	text-align: left;
+}
+
+.popover_answer_multiB {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    right: 30px;
+    top: 70px;
+	text-align: left;
+}
+
+.popover_answer_multiC {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    left: 30px;
+    bottom: 100px;
+	text-align: left;
+}
+
+.popover_answer_multiD {
+    width: 670px;
+    height: 70px;
+	/*border: 5px solid #00FF00;
+    background-color: #000; */
+    position: absolute;
+    right: 30px;
+    bottom: 100px;
+	text-align: left;
+}
+
+.popover_answer_multiA h2,
+.popover_answer_multiB h2,
+.popover_answer_multiC h2,
+.popover_answer_multiD h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 50px;
+    color: #FFFFFF;
+}
+
+/* Screenshot */
+
+.popover_screenshot {
+    width: 500px;
+    height: 500px;
+    background-color: #000;
+    position: absolute;
+    top: 25px;
+    left: 450px;
+	opacity:1; 
+	transition: opacity 1s ease;
+	z-index: 9999;
+	background:none;
+}
+
+.popover_screenshot img {
+    opacity: 0;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_screenshot img.show {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Character Spotlight */
+
+.popover_character {
+    width: 500px;
+    height: 500px;
+    background-color: #000;
+    position: absolute;
+    top: 25px;
+    left: 450px;
+	opacity:1; 
+	transition: opacity 1s ease;
+	z-index: 9999;
+	background:none;
+}
+
+.popover_character img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_character img.show {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Audio Clip & The Jukebox */
+
+.popover_audio_btn {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 120px;
+    left: 630px;
+}
+
+.popover_audio_btn img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Hint System */
+
+.popover_hint1 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+}
+
+.popover_hint2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 110px;
+	text-align: left;
+	display: none;
+}
+
+.popover_hint2.show {
+    display: block;
+}
+
+.popover_hint3 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 160px;
+	text-align: left;
+	display: none;
+}
+
+.popover_hint3.show {
+    display: block;
+}
+
+.popover_hint1 h2,
+.popover_hint2 h2,
+.popover_hint3 h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+.popover_btnHint2 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 110px;
+}
+.popover_btnHint2.hidden {
+    display: none;
+}
+
+.popover_btnHint2 img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.popover_btnHint3 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 160px;
+}
+
+.popover_btnHint3.hidden {
+    display: none;
+}
+
+.popover_btnHint3 img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Solo Game Challenge*/
+
+.popover_btnSolo2 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 60px;
+}
+
+.popover_btnSolo2.hidden {
+    display: none;
+}
+
+.popover_btnSolo2_btn img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_solo2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_solo2.show {
+    display: block;
+}
+
+
+.popover_solo2 h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Audience Game Challenge */
+
+.popover_audience {
+    width: 1160px;
+    height: 150px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: block;
+}
+
+.popover_audience h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Team Effort */
+
+.popover_team {
+    width: 1160px;
+    height: 150px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: block;
+}
+
+.popover_team h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Sign of Trust */
+
+.popover_trust {
+    width: 1160px;
+    height: 150px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: block;
+}
+
+.popover_trust h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Host Challenge */
+
+.popover_btnHost1 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 60px;
+}
+
+.popover_host1 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_btnHost2 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 120px;
+}
+
+.popover_host2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_host1.show,
+.popover_host2.show {
+    display: block;
+}
+
+.popover_host1.hidden,
+.popover_host2.hidden {
+    display: none;
+}
+
+.popover_btnHost1.hidden,
+.popover_btnHost2.hidden {
+    display: none;
+}
+
+.popover_host1,
+.popover_host2, h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+.popover_btnHost1_btn,
+.popover_btnHost2_btn, img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Branching Paths */
+
+.popover_btnBranchA {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.popover_btnBranchB {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+}
+
+/* Decision Time */
+
+.popover_question_text h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 35px;
+    color: #FFFFFF;
+	text-align: center;
+}
+
+.popover_btnDecision1 {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 60px;
+}
+
+.popover_decision1 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_btnDecision2 {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 120px;
+}
+
+.popover_decision2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_decision1.show,
+ .popover_decision2.show {
+    display: block;
+}
+
+.popover_decision1.hidden,
+.popover_decision2.hidden {
+    display: none;
+}
+
+.popover_btnDecision1.hidden,
+.popover_btnDecision2.hidden {
+    display: none;
+} 
+
+.popover_btnDecision1,
+.popover_btnDecision2 img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_decision1,
+.popover_decision2 h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Risky Strat */
+
+.popover_btnRiskyYes {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.popover_btnRiskyNo {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+}
+
+/* Gameover popover */
+.gameover_popover {
+    display: none;
+    width: 1400px;
+    height: 855px;
+    background: black;
+    position: absolute;
+    top: 185px;
+    left: 250px;
+    bottom: 40px;
+    right: 40px;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
+    pointer-events: auto;
+    z-index: 999;
+    cursor: default;
+}
+
+.gameover_popover.show {
+    display: flex;
+}
+
+.gameover_popover_gameoverBtn {
+    width: 250px;
+    height: 117px;
+    position: absolute;
+    top: 150px;
+    left: 500px;
+    border: 5px solid #00FF00;
+    background-color: #000;
+    display: block;
+    cursor: pointer;
+}
+
+.gameover_popover_scoresBtn {
+							width: 250px;
+							height: 117px;
+							position: absolute;
+							top: 150px;
+							left: 800px;
+							border: 5px solid #00FF00;
+							background-color: #000;
+							display: block;
+							cursor: pointer;
+}
+
+.popover_btnDismiss {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 120px;
+    right: 40px;
+}
+
+gameover_popover_gameoverBtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Buttons */
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+}

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>This is just a test</title>
+  <meta name="description" content="Main page for Know&show">
+
+  <link rel="stylesheet" type="text/css" href="CSS/Risky.css">
+  <link rel="stylesheet" type="text/css" href="CSS/Carousel.css">
+</head>
+
+
+<body>
+
+<!-- GAME OVER repository -->
+
+
+<div class="gameover_popover">
+	<div class="popover_cat_body">
+		<img src="img/layout/catRisky_2.png" width="100%" height="100%">
+		<h1>GAMEOVER <br> <br> <br> <br> </h1>
+		<h2>Player [playername] has scored [points] points</h2>
+	</div>
+	<div class="popover_question_body">
+		<img src="img/layout/textRisky.png" width="100%" height="100%">
+		<div class="gameover_popover_gameoverBtn">
+			<button class="restartBtn" type="button">
+				<img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+			</button>
+		</div>
+		<div class="gameover_popover_scoresBtn">
+			<button class="scoresBtn" type="button">
+				<img src="img/misc/score.png" width="100%" height="100%" loading="lazy">
+			</button>
+		</div>
+		<div class="popover_btnDismiss">
+			<button class="dismissBtn" type="button">
+				<img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
+			</button>
+		</div>
+	</div>
+</div>	
+
+
+<!-- GAME OVER repository end -->
+
+	<div class="body">
+	<img src="img/layout/bgRisky.png">
+		<!-- Carousel initialization -->
+		<div class="carousel" role="region" aria-label="Image carousel" tabindex="0">
+		<!-- Carousel contents Line 1 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question101">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question102">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question103">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question104">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question105">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question106">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question107">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question108">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question109">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question110">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">	
+					<span>1</span>
+					</button>
+				</li>
+			</ol>
+			
+		<!-- Carousel contents Line 2 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question111">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question112">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question113">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question114">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question115">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question116">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question117">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question118">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question119">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question120">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">	
+					<span>2</span>
+					</button>
+				</li>
+			</ol>	
+			
+		<!-- Carousel contents Line 3 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question121">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question122">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">	
+					<span>3</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question123">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>					
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question124">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>					
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question125">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">	
+					<span>3</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question126">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>					
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question127">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>					
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question128">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>					
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question129">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>					
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question130">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">
+					<span>3</span>					
+					</button>
+				</li>
+			</ol>	
+			
+		<!-- Carousel contents Line 4 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question131">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>4</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question132">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question133">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question134">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question135">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question136">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question137">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question138">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question139">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question140">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">	
+					<span>4</span>				
+					</button>
+				</li>
+			</ol>
+			
+		<!-- Carousel contents Line 5 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question141">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">	
+					<span>5</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question142">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">		
+					<span>5</span>			
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question143">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">		
+					<span>5</span>			
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question144">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">		
+					<span>5</span>			
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question145">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">		
+					<span>5</span>			
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question146">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">		
+					<span>5</span>			
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question147">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">	
+					<span>5</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question148">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">	
+					<span>5</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question149">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">		
+					<span>5</span>			
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question150">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">		
+					<span>5</span>			
+					</button>
+				</li>
+			</ol>
+			
+		<!-- Carousel contents Line 6 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question151">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question152">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">	
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question153">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">	
+					<span>6</span>				
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question154">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question155">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question156">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question157">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question158">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question159">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question160">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">
+					<span>6</span>
+					</button>
+				</li>
+			</ol>
+			
+		<!-- Carousel contents Line 7 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question161">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question162">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question163">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question164">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question165">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question166">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question167">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question168">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question169">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question170">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">
+					<span>7</span>
+					</button>
+				</li>
+			</ol>
+			
+		<!-- Carousel contents Line 8 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question171">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question172">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question173">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question174">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question175">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question176">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question177">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question178">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question179">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question180">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">
+					<span>8</span>
+					</button>
+				</li>
+			</ol>
+			
+		<!-- Carousel contents Line 9 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question181">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question182">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question183">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question184">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question185">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question186">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question187">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question188">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question189">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question190">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">
+					<span>9</span>
+					</button>
+				</li>
+			</ol>
+			
+		<!-- Carousel contents Line 10 -->
+			<ol class="carousel-media" role="list">
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question191">					
+					<img src="img/tiles/rRed.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question192">					
+					<img src="img/tiles/rYellow.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question193">					
+					<img src="img/tiles/rBlue.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question194">					
+					<img src="img/tiles/rGreen.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question195">					
+					<img src="img/tiles/rOrange.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question196">					
+					<img src="img/tiles/rPurple.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question197">					
+					<img src="img/tiles/rPink.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question198">					
+					<img src="img/tiles/rBrown.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question199">					
+					<img src="img/tiles/rWhite.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+				<li class="carousel-item">
+					<button class="tileBtn" type="button" popovertarget="Question200">					
+					<img src="img/tiles/rBlack.png" width="100%" height="100%" loading="lazy">
+					<span>10</span>
+					</button>
+				</li>
+			</ol>
+		</div>
+		<div class="lives">
+			<img src="img/misc/safe.png" alt="Lives status">
+		</div>
+		<div class="points">
+			<h1>Player: 0</h1>
+		</div>
+	</div>
+</div>
+	
+	
+	
+
+<!-- popover scripts -->
+<script type="module" src="JS/contentBuilder.js"></script>
+<script type="module" src="JS/buttons.js"></script>
+
+
+</body>
+</html>

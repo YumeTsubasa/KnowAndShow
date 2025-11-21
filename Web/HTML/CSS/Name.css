@@ -28,6 +28,14 @@ h2		{
 		font-size: 10p;
 		color: #FFFFFF;
 		}
+		
+.body {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
 			
 .container_namechoice	{	
 			width: 700px;

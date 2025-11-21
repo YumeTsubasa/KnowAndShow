@@ -8,7 +8,6 @@
   <link rel="stylesheet" type="text/css" href="CSS/Name.css">
 </head>
 <body>
-<img src="img/layout/bgNormal.png">
 <!-- popover target confirmation of name -->
 <div id="InputOK" class="popover_name">
 	<div class="popover_text">
@@ -27,20 +26,22 @@
 </div>
 
 <!-- start of main body -->
-<div class="container_namechoice">
-	<div class="container_text">
-		<h1>Choose your <br> NAME </h1>
-	</div>
-	<div class="container_entername">
-		<input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="26">
-	</div>
-	<div class="container_readyBtn">
-		<button class="readyBtn" type="button" popovertarget="InputOK">
-			<img src="img/name/ready.png" width="100%" height="100%" loading="lazy">
-		</button>
+<div class="body">
+	<img src="img/layout/bgNormal.png">
+	<div class="container_namechoice">
+		<div class="container_text">
+			<h1>Choose your <br> NAME </h1>
+		</div>
+		<div class="container_entername">
+			<input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="26">
+		</div>
+		<div class="container_readyBtn">
+			<button class="readyBtn" type="button" popovertarget="InputOK">
+				<img src="img/name/ready.png" width="100%" height="100%" loading="lazy">
+			</button>
+		</div>
 	</div>
 </div>
-
 	
 <!-- name save script -->
 <script type="module" src="JS/buttons.js"></script>

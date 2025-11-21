@@ -28,7 +28,20 @@ h2 {
     color: #FFFFFF;
 }
 
+/* body container */
+
+.body {
+    width: 1920px;
+    height: 1080px;
+    /* border: 5px solid #00FF00;
+    background: black; */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
 /* Flex containers */
+
 .points {
     width: 700px;
     height: 105px;
@@ -108,6 +121,9 @@ h2 {
 }
 
 /* Popover components */
+
+/* Category Box */
+
 .popover_cat_body {
     width: 100%;
     height: 550px;
@@ -116,7 +132,7 @@ h2 {
     top: 0;
     left: 0;
 }
-
+/*
 .popover_cat_body h1,
 .popover_cat_body h2 {
     position: absolute;
@@ -128,23 +144,30 @@ h2 {
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
+*/
+
 
 .popover_cat_img {
-    width: 99%;
-    height: 96%;
+    width: 1380px;
+    height: 530px;
 	top: 10px;
-	left: 7px;
+	left: 10px;
     /* border: 5px solid #00FF00; */
+	display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
     position: absolute;
 }
 
-.popover_cat_img img,
-.popover_question_body img,
-.gameover_popover_gameoverBtn img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.popover_cat_img img {
+	display:block;
+	margin: 0 auto;
 }
+
+
+/* Question/Interactive boxes */
+
+/* Main */
 
 .popover_question_body {
     width: 100%;
@@ -152,6 +175,12 @@ h2 {
     background-color: #000;
     position: absolute;
     top: 550px;
+}
+
+.popover_question_body img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .popover_question_text {
@@ -175,10 +204,12 @@ h2 {
 	display: flex;
 	justify-content: center;
     align-items: center; 
-    font-size: 60px;
+    font-size: 40px;
     color: #FFFFFF;
 	text-align: center; 
 }
+
+/* Popover buttons */
 
 .popover_answer {
     width: 560px;
@@ -200,16 +231,6 @@ h2 {
 
 .popover_answer.show {
     display: block;
-}
-
-/* Popover buttons */
-.popover_btnAnswer,
-.popover_btnRight,
-.popover_btnWrong,
-.popover_btnSkip	{
-    /* border: 5px solid #00FF00;
-    background-color: #000; */
-    object-fit: contain;
 }
 
 .popover_btnAnswer {
@@ -247,6 +268,17 @@ h2 {
     bottom: 20px;
     left: 40px;
 }
+
+.popover_btnAnswer,
+.popover_btnRight,
+.popover_btnWrong,
+.popover_btnSkip	{
+    /* border: 5px solid #00FF00;
+    background-color: #000; */
+    object-fit: contain;
+}
+
+/* Multiple Choice */
 
 .popover_answer_multiA {
     width: 670px;
@@ -301,13 +333,15 @@ h2 {
     color: #FFFFFF;
 }
 
+/* Screenshot */
+
 .popover_screenshot {
     width: 500px;
     height: 500px;
     background-color: #000;
     position: absolute;
-    top: 450px;
-    left: 177px;
+    top: 25px;
+    left: 450px;
 	opacity:1; 
 	transition: opacity 1s ease;
 	z-index: 9999;
@@ -316,12 +350,424 @@ h2 {
 
 .popover_screenshot img {
     opacity: 0;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .popover_screenshot img.show {
     opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
+/* Character Spotlight */
+
+.popover_character {
+    width: 500px;
+    height: 500px;
+    background-color: #000;
+    position: absolute;
+    top: 25px;
+    left: 450px;
+	opacity:1; 
+	transition: opacity 1s ease;
+	z-index: 9999;
+	background:none;
+}
+
+.popover_character img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_character img.show {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Audio Clip & The Jukebox */
+
+.popover_audio_btn {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 120px;
+    left: 630px;
+}
+
+.popover_audio_btn img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Hint System */
+
+.popover_hint1 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+}
+
+.popover_hint2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 110px;
+	text-align: left;
+	display: none;
+}
+
+.popover_hint2.show {
+    display: block;
+}
+
+.popover_hint3 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 160px;
+	text-align: left;
+	display: none;
+}
+
+.popover_hint3.show {
+    display: block;
+}
+
+.popover_hint1 h2,
+.popover_hint2 h2,
+.popover_hint3 h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+.popover_btnHint2 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 110px;
+}
+.popover_btnHint2.hidden {
+    display: none;
+}
+
+.popover_btnHint2 img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.popover_btnHint3 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 160px;
+}
+
+.popover_btnHint3.hidden {
+    display: none;
+}
+
+.popover_btnHint3 img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Solo Game Challenge*/
+
+.popover_btnSolo2 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 60px;
+}
+
+.popover_btnSolo2.hidden {
+    display: none;
+}
+
+.popover_btnSolo2_btn img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_solo2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_solo2.show {
+    display: block;
+}
+
+
+.popover_solo2 h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Audience Game Challenge */
+
+.popover_audience {
+    width: 1160px;
+    height: 150px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: block;
+}
+
+.popover_audience h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Team Effort */
+
+.popover_team {
+    width: 1160px;
+    height: 150px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: block;
+}
+
+.popover_team h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Sign of Trust */
+
+.popover_trust {
+    width: 1160px;
+    height: 150px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: block;
+}
+
+.popover_trust h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Host Challenge */
+
+.popover_btnHost1 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 60px;
+}
+
+.popover_host1 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_btnHost2 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 120px;
+}
+
+.popover_host2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_host1.show,
+.popover_host2.show {
+    display: block;
+}
+
+.popover_host1.hidden,
+.popover_host2.hidden {
+    display: none;
+}
+
+.popover_btnHost1.hidden,
+.popover_btnHost2.hidden {
+    display: none;
+}
+
+.popover_host1,
+.popover_host2, h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+.popover_btnHost1_btn,
+.popover_btnHost2_btn, img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Branching Paths */
+
+.popover_btnBranchA {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.popover_btnBranchB {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+}
+
+/* Decision Time */
+
+.popover_question_text h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 35px;
+    color: #FFFFFF;
+	text-align: center;
+}
+
+.popover_btnDecision1 {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 60px;
+}
+
+.popover_decision1 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_btnDecision2 {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 120px;
+}
+
+.popover_decision2 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
+.popover_decision1.show,
+ .popover_decision2.show {
+    display: block;
+}
+
+.popover_decision1.hidden,
+.popover_decision2.hidden {
+    display: none;
+}
+
+.popover_btnDecision1.hidden,
+.popover_btnDecision2.hidden {
+    display: none;
+} 
+
+.popover_btnDecision1,
+.popover_btnDecision2 img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_decision1,
+.popover_decision2 h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+/* Risky Strat */
+
+.popover_btnRiskyYes {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.popover_btnRiskyNo {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+}
 
 /* Gameover popover */
 .gameover_popover {
@@ -375,6 +821,12 @@ h2 {
     position: absolute;
     bottom: 120px;
     right: 40px;
+}
+
+gameover_popover_gameoverBtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* Buttons */

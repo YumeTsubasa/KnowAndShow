@@ -26,9 +26,12 @@
     {
     "id": "Question4",
 	"type": "qte",
-    "img": "img/questions/YT.png",
     "question": "Dirty",
-	"answer": "Harry"
+	"img1": "img/questions/YT.png",
+	"img2": "img/questions/YT.png",
+	"img3": "img/questions/YT.png",
+	"img4": "img/questions/YT.png",
+	"img5": "img/questions/YT.png"
   },
     {
     "id": "Question5",
@@ -40,21 +43,21 @@
     {
     "id": "Question6",
 	"type": "character",
-    "img": "img/questions/YT.png",
-    "question": "Corn",
+    "question": "Who's this character?",
+	"img": "img/character/knuckles.jpg",
 	"answer": "Hub"
   },
     {
     "id": "Question7",
 	"type": "jukebox",
-    "img": "img/questions/YT.png",
+    "audio": "audio/audio/kirby.mp3",
     "question": "Unstable",
 	"answer": "Unicorns"
   },
     {
     "id": "Question8",
 	"type": "audio",
-    "img": "img/questions/YT.png",
+    "audio": "audio/audio/knuckles.mp3",
     "question": "Do not go peepee",
 	"answer": "In the ocean"
   },
@@ -62,10 +65,11 @@
     "id": "Question9",
 	"type": "hint",
     "img": "img/questions/YT.png",
+	"question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
     "hint1": "Red",
 	"hint2": "Green",
 	"hint3": "Yellow",
-	"answer": "Blue"
+	"answer": "Pokemon"
   },
     {
     "id": "Question10",
@@ -77,59 +81,88 @@
     {
     "id": "Question11",
 	"type": "solo",
-    "img": "img/questions/YT.png",
-    "challenge1": "Red",
-	"challenge2": "Red"
+    "challengePart1": "Han",
+	"challengePart2": "Solo"
   },
     {
     "id": "Question12",
 	"type": "audience",
-    "img": "img/questions/YT.png",
-    "challenge1": "Red"
+	"question": "Take on an audience member in a head-to-head challenge!",
+    "challenge": "OhNo"
   },
     {
     "id": "Question13",
 	"type": "team",
-    "img": "img/questions/YT.png",
-    "challenge1": "Red"
+	"question": "Complete this challenge with the aid of an audience member",
+    "challenge": "Your Team Effort Challenge!"
   },
     {
     "id": "Question14",
 	"type": "trust",
-    "img": "img/questions/YT.png",
-    "challenge1": "Red"
+	"question": "Choose an audience member to take on a challenge for you!",
+    "challenge": "Your Sign of Trust Challenge"
   },
     {
     "id": "Question15",
 	"type": "host",
-    "img": "img/questions/YT.png",
-    "Boxmeister": "Red",
-	"DoubleDubbel": "Red"
+	"question": "Choose a host and take on their challenge!",
+    "Boxmeister": "Survive 5 minutes of puns from Box",
+	"DoubleDubbel": "Mario Kart Double Dash baby!"
   },
     {
     "id": "Question16",
+	"question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
 	"type": "branch",
-    "img": "img/questions/YT.png",
-    "category1": "Red",
-	"category2": "Red",
-	"category3": "Red",
-	"answer": "Blue"
+    "branchA": {
+		"id": "Question16_A",
+		"type": "host",
+		"question": "Choose a host and take on their challenge!",
+		"Boxmeister": "Survive 5 minutes of puns from Box",
+		"DoubleDubbel": "Mario Kart Double Dash baby!"
+	},
+	"branchB": {
+		"id": "Question16_B",
+		"type": "trust",
+		"question": "Choose an audience member to take on a challenge for you!",
+		"challenge": "Your Sign of Trust Challenge"
+	}
   },
     {
     "id": "Question17",
 	"type": "decision",
+	"question": "Two games to choose from, but you will not know what the challenge is. Time to make a decision…",
     "img": "img/questions/YT.png",
-    "game1": "Red",
-	"game2": "Red",
-	"game1desc": "Red",
-	"game2desc": "Red",
-	"answer": "Blue"
+    "game1": "Mario Kart 8",
+	"game2": "Kirby's Dream Land",
+	"game1desc": "Time Trials: Get a time of xx:xx on the XXXXXX Circuit",
+	"game2desc": "Beat the first boss"
   },
     {
     "id": "Question18",
 	"type": "risky",
     "img": "img/questions/YT.png",
-    "question": "Red",
-	"answer": "Blue"
+    "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+  
+    {
+    "id": "Question19",
+	"type": "risky",
+    "img": "img/questions/YT.png",
+    "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+
+    {
+    "id": "Question20",
+	"type": "risky",
+    "img": "img/questions/YT.png",
+    "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+  {
+    "id": "Question101",
+	"type": "easy",
+    "img": "img/questions/YT.png",
+    "question": "Lorem",
+	"answer": "Ipsum"
   }
+
 ]

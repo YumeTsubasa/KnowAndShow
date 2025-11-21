@@ -15,6 +15,14 @@ body {
     font-family: 'MyCustomFont', Arial, sans-serif;
 }
 
+.body {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
 /* Headings */
 h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
