@@ -59,47 +59,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     localStorage.setItem('pointsCounter', pointsCounter);
   }
 
-  function saveDisabledTiles() {
-    const disabledTiles = Array.from(document.querySelectorAll('.tileBtn:disabled')).map(btn => btn.getAttribute('popovertarget'));
+  // -----------------------------
+  // Save individual tile to localStorage
+  // -----------------------------
+  function saveDisabledTiles(tileId) {
+    let disabledTiles = JSON.parse(localStorage.getItem('disabledTiles')) || [];
+    if (!disabledTiles.includes(tileId)) disabledTiles.push(tileId);
     localStorage.setItem('disabledTiles', JSON.stringify(disabledTiles));
   }
 
   // -----------------------------
   // Game over handling
   // -----------------------------
-function showGameOver() {
-  if (!gameoverPopover) return;
+  function showGameOver() {
+    if (!gameoverPopover) return;
 
-  const gameoverText = gameoverPopover.querySelector('h2');
-  if (gameoverText) gameoverText.textContent = `Player ${playerName} scored ${pointsCounter} points`;
+    const gameoverText = gameoverPopover.querySelector('h2');
+    if (gameoverText) gameoverText.textContent = `Player ${playerName} scored ${pointsCounter} points`;
 
-  // Save the score
-  let scores = JSON.parse(localStorage.getItem('scores')) || [];
-  const existingIndex = scores.findIndex(s => s.player === playerName);
-  if (existingIndex >= 0) { 
-    scores[existingIndex].points = pointsCounter; 
-  } else { 
-    scores.push({ player: playerName, points: pointsCounter }); 
+    // Save the score
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    const existingIndex = scores.findIndex(s => s.player === playerName);
+    if (existingIndex >= 0) { 
+      scores[existingIndex].points = pointsCounter; 
+    } else { 
+      scores.push({ player: playerName, points: pointsCounter }); 
+    }
+    localStorage.setItem('scores', JSON.stringify(scores));
+
+    // --- RESET GAME STATE ---
+    localStorage.removeItem('livesCounter');
+    localStorage.removeItem('pointsCounter');
+
+    livesCounter = 1;
+    pointsCounter = 0;
+
+    gameoverPopover.classList.add('show');
+
+    const restartBtn = gameoverPopover.querySelector('.restartBtn');
+    if (restartBtn) restartBtn.addEventListener('click', () => window.location.href = 'Name.html');
+    const scoresBtn = gameoverPopover.querySelector('.scoresBtn');
+    if (scoresBtn) scoresBtn.addEventListener('click', () => window.location.href = 'Scores.html');
+    const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
+    if (dismissBtn) dismissBtn.addEventListener('click', () => gameoverPopover.classList.remove('show'));
   }
-  localStorage.setItem('scores', JSON.stringify(scores));
-
-  // --- RESET GAME STATE ---
-  localStorage.removeItem('livesCounter');
-  localStorage.removeItem('pointsCounter');
-
-  livesCounter = 1;
-  pointsCounter = 0;
-
-  gameoverPopover.classList.add('show');
-
-  const restartBtn = gameoverPopover.querySelector('.restartBtn');
-  if (restartBtn) restartBtn.addEventListener('click', () => window.location.href = 'Name.html');
-  const scoresBtn = gameoverPopover.querySelector('.scoresBtn');
-  if (scoresBtn) scoresBtn.addEventListener('click', () => window.location.href = 'Scores.html');
-  const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
-  if (dismissBtn) dismissBtn.addEventListener('click', () => gameoverPopover.classList.remove('show'));
-}
-
 
   updateLivesDisplay();
   updatePointsDisplay();
@@ -260,11 +263,12 @@ function showGameOver() {
         overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);pointer-events:none;';
         tileBtn.style.position = 'relative';
         tileBtn.appendChild(overlay);
-        saveDisabledTiles();
+        saveDisabledTiles(popoverID); // ← pass ID here
       }
       window.lastPopoverID = null;
     }
 
+    // --- Attach standard button events ---
     if (answerBtn && answerDiv) answerBtn.addEventListener('click', () => { 
       answerDiv.classList.add('show'); 
       answerBtn.parentElement.classList.add('hidden'); 

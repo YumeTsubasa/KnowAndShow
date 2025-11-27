@@ -74,9 +74,27 @@
     {
     "id": "Question10",
 	"type": "mine",
-    "img": "img/questions/YT.png",
-    "question": "Hello",
-	"answer": "Scykoh"
+    "question": "Which of these items are NOT in The Legend of Zelda: A Link to the Past?",
+	"tiles": [
+	[
+		{ "text": "bomb bag",            "correct": false  },
+		{ "text": "hookshot",           "correct": true },
+		{ "text": "flute",              "correct": true },
+		{ "text": "gold sword",         "correct": true }
+	],
+	[
+		{ "text": "lamp",               "correct": true },
+		{ "text": "zora mask",          "correct": false  },
+		{ "text": "bombos medallion",   "correct": true },
+		{ "text": "diving suit",        "correct": false  }
+	],
+	[
+		{ "text": "harp",               "correct": false  },
+		{ "text": "goron shield",       "correct": false  },
+		{ "text": "silver arrows",      "correct": true },
+		{ "text": "bottle",             "correct": true }
+	]
+   ]
   },
     {
     "id": "Question11",

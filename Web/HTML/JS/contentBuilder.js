@@ -24,6 +24,7 @@ const typeHandlers = {
   audio: createAudioContent,          
   character: createCharacterContent,
   hint: createHintContent,
+  mine: createMineContent,
   solo: createSoloContent,
   audience: createAudienceContent,
   team: createTeamContent,
@@ -493,6 +494,65 @@ function createHintContent(data) {
   `;
   return wrapper;
 }
+
+function createMineContent(data) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("popover", "minefieldPopover"); // Minefield popover
+  wrapper.id = data.id;
+
+  wrapper.innerHTML = `
+    <div class="popover_cat_body">
+      <img src="img/layout/catNormal_2.png" width="100%" height="100%">
+      <div class="popover_cat_img">
+        <img src="img/categories/mine.png" loading="lazy">
+      </div>
+    </div>
+
+    <div class="popover_question_body">
+      <img src="img/layout/textNormal.png" width="100%" height="100%">
+      <div class="popover_question_text">
+        <h2>${data.question || ""}</h2>
+      </div>
+
+      <div class="popover_mine"></div>
+
+      <div class="popover_btnSkip">
+        <button class="skipBtn" type="button" popovertarget="${data.id}">
+          <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+        </button>
+      </div>
+    </div>
+  `;
+
+  const mineContainer = wrapper.querySelector(".popover_mine");
+
+  // Split options into rows of 4 for visual layout
+const rowCount = data.tiles.length;
+
+for (let i = 0; i < rowCount; i++) {
+  const ol = document.createElement("ol");
+  ol.classList.add("carousel-media");
+  ol.setAttribute("role", "list");
+
+  data.tiles[i].forEach(tile => {
+    const li = document.createElement("li");
+    li.classList.add("carousel-item_mine", "minefieldTile");
+    li.setAttribute("data-type", tile.correct ? "safe" : "mine");
+
+    const h1 = document.createElement("h1");
+    h1.textContent = tile.text;
+
+    li.appendChild(h1);
+    ol.appendChild(li);
+  });
+
+  mineContainer.appendChild(ol);
+}
+
+
+  return wrapper;
+}
+
 
 function createSoloContent(data) {
   const wrapper = document.createElement("div");

@@ -253,6 +253,71 @@ document.addEventListener('DOMContentLoaded', async () => {
     const riskyYesBtn = popover.querySelector('.riskyYesBtn');
     const riskyNoBtn = popover.querySelector('.riskyNoBtn');
 
+// -----------------------------
+// Minefield minigame state
+// -----------------------------
+let minefieldCorrectCount = 0;
+let minefieldPoints = 0;
+let minefieldActive = false;
+
+// Start minefield if this popover is a minefield
+if (popover.classList.contains('minefieldPopover')) {
+  minefieldCorrectCount = 0;
+  minefieldPoints = 0;
+  minefieldActive = true;
+
+  popover.querySelectorAll('.minefieldTile').forEach(tileBtn => {
+    tileBtn.disabled = false;
+    tileBtn.classList.remove('used-safe','used-mine');
+    tileBtn.style.backgroundColor = ""; // reset background
+
+    tileBtn.addEventListener('click', () => {
+      if (!minefieldActive) return;
+      const isMine = tileBtn.dataset.type === 'mine';
+      tileBtn.disabled = true;
+
+      if (isMine) {
+        tileBtn.classList.add('used-mine');
+        tileBtn.style.backgroundColor = "red"; // mark mine visually
+        minefieldActive = false;
+        livesCounter--;
+        updateLivesDisplay();
+		// delay the alert slightly so color renders first
+		setTimeout(() => {
+		alert("💥 Mine hit! Minigame over.");
+		}, 50);
+      } else {
+        tileBtn.classList.add('used-safe');
+        tileBtn.style.backgroundColor = "lime"; // mark safe visually
+        minefieldCorrectCount++;
+
+        // Update potential points
+        switch(minefieldCorrectCount) {
+          case 1: minefieldPoints = 0; break;
+          case 2: minefieldPoints = 1; break;
+          case 3: minefieldPoints = 2; break;
+          case 4: minefieldPoints = 3; break;
+        }
+
+        // Ask player if they want to continue or cash out
+        setTimeout(() => {
+          const continueGame = confirm(`Safe tile! Current potential points: ${minefieldPoints}\nDo you want to continue?`);
+          if (!continueGame || minefieldCorrectCount === 4) {
+            minefieldActive = false;
+            pointsCounter += minefieldPoints;
+            updatePointsDisplay();
+            alert(`You cashed out ${minefieldPoints} points!`);
+          }
+        }, 100);
+      }
+    });
+  });
+}
+
+
+    // -----------------------------
+    // Disable tile after use
+    // -----------------------------
     function disableTileAfterUse() {
       const popoverID = window.lastPopoverID;
       if (!popoverID) return;

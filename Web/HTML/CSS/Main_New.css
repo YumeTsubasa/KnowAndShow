@@ -492,6 +492,61 @@ h2 {
     object-fit: contain;
 }
 
+/* Minefield */
+
+.popover_mine {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);  /* 4 columns */
+	grid-template-rows: repeat(3, 1fr);      /* 3 rows */
+    width: 1000px;
+    height: 210px;
+    position: absolute;
+    left: 195px;
+    top: 60px;
+	text-align: left;
+	border: 5px solid #40291A;
+	overflow: hidden;
+}
+.popover_mine > ol {
+  display: contents;   /* KEY: makes <li> become direct grid children */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.carousel-item_mine {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  /* Prevent resizing */
+  overflow: hidden;
+  /* enable container queries (font only) */
+  container-type: inline-size;
+  border: 2px solid #40291A;
+  cursor: pointer;       /* ← makes it clickable */
+  user-select: none;     /* optional: prevents text selection on click */
+  transition: background-color 0.25s ease;
+}
+
+.carousel-item_mine h1 {
+  margin: 0;
+  color: white;
+  font-family: 'MyCustomFont', Arial, sans-serif;
+  /* fit text better */
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  width: 100%;
+  /* autoresize text based on tile width */
+  font-size: clamp(30px, 7cqw, 36px);
+}
+
+
 /* Solo Game Challenge*/
 
 .popover_btnSolo2 {
