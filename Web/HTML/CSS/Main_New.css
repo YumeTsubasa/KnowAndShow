@@ -333,6 +333,34 @@ h2 {
     color: #FFFFFF;
 }
 
+/* QTE */
+
+.popover_item_display {
+    width: 300px;
+    height: 70px;
+    position: absolute;
+    bottom: 100px;
+    left: 460px;
+}
+
+.popover_item_display h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 50px;
+    color: #FFFFFF;
+}
+
+.popover_btnGo {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 100px;
+    left: 630px;
+}
+
+.popover_btnGo.hidden {
+    display: none;
+}
+
 /* Screenshot */
 
 .popover_screenshot {

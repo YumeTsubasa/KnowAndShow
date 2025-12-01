@@ -14,7 +14,8 @@
 	"answerA": "Wohoo",
 	"answerB": "Wohoo",
 	"answerC": "Wohoo",
-	"answerD": "Wohoo"
+	"answerD": "Wohoo",
+	"answer": "D: Woohoo"
   },
     {
     "id": "Question3",
@@ -26,12 +27,14 @@
     {
     "id": "Question4",
 	"type": "qte",
-    "question": "Dirty",
-	"img1": "img/questions/YT.png",
-	"img2": "img/questions/YT.png",
-	"img3": "img/questions/YT.png",
-	"img4": "img/questions/YT.png",
-	"img5": "img/questions/YT.png"
+    "question": "To Kart or Not To Kart? <br> Are these real kart names in Mario Kart: Double Dash?",
+	"qteItems": [
+		{ "text": "Turbo Yoshi", "correct": true },
+		{ "text": "Blue Fire", "correct": false },
+		{ "text": "Jet Star", "correct": false },
+		{ "text": "Toadette Kart", "correct": true },
+		{ "text": "Dragoon", "correct": false }
+	]
   },
     {
     "id": "Question5",
@@ -45,7 +48,7 @@
 	"type": "character",
     "question": "Who's this character?",
 	"img": "img/character/knuckles.jpg",
-	"answer": "Hub"
+	"answer": "&Knuckles"
   },
     {
     "id": "Question7",

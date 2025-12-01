@@ -19,6 +19,7 @@ const typeHandlers = {
   easy: createEasyContent,
   multi: createMultiContent,
   brutal: createBrutalContent,
+  qte: createQTEContent,
   screen: createScreenContent,
   jukebox: createJukeboxContent,    
   audio: createAudioContent,          
@@ -211,6 +212,63 @@ function createBrutalContent(data) {
   return wrapper;
 }
 
+
+// ====================
+// QTE type handler
+// ====================
+function createQTEContent(data) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("popover");
+  wrapper.id = data.id;
+
+  wrapper.innerHTML = `
+    <div class="popover_cat_body">
+      <img src="img/layout/catNormal_2.png" width="100%" height="100%">
+      <div class="popover_cat_img">
+        <img src="img/categories/qte.png" loading="lazy">
+      </div>
+    </div>
+
+    <div class="popover_question_body">
+      <img src="img/layout/textNormal.png" width="100%" height="100%">
+      <div class="popover_question_text">
+        <h1>${data.question || "No question found"}</h1>
+      </div>
+
+	  <div class="popover_btnGo">
+		<button class="qtegobtn" type="button">
+		 <img src="img/misc/go.png" width="100%" height="100%" loading="lazy">
+		</button>
+	  </div>
+	  <div class="popover_item_display">
+		<h2></h2>
+	  </div>
+	  <div class="popover_btnAnswer">
+		<button class="answerBtn" type="button">
+		 <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
+		</button>
+	  </div>			
+	  <div class="popover_btnRight">
+		<button class="rightBtn" type="button" popovertarget="${data.id}">
+		 <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		</button>
+	  </div>
+	  <div class="popover_btnWrong">
+		<button class="wrongBtn" type="button" popovertarget="${data.id}">
+		 <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		</button>
+	  </div>
+	  <div class="popover_btnSkip">
+	  <button class="skipBtn" type="button" popovertarget="${data.id}">
+	   <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
+	  </button>	
+			</div>
+      
+    </div>
+  `;
+  return wrapper;
+}
+
 // ====================
 // Screen type handler
 // ====================
@@ -293,6 +351,10 @@ function createJukeboxContent(data) {
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
+	  
+	  <div class="popover_answer">
+        <h1>${data.answer || "No answer provided"}</h1>
+      </div>
 
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
@@ -344,6 +406,10 @@ function createAudioContent(data) {
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
+      </div>
+	  
+	  <div class="popover_answer">
+        <h1>${data.answer || "No answer provided"}</h1>
       </div>
 
       <div class="popover_btnRight">
@@ -400,6 +466,10 @@ function createCharacterContent(data) {
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
+	  
+	  <div class="popover_answer">
+        <h1>${data.answer || "No answer provided"}</h1>
+      </div>
 
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
@@ -450,6 +520,10 @@ function createHintContent(data) {
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
+      </div>
+	  
+	  <div class="popover_answer">
+        <h1>${data.answer || "No answer provided"}</h1>
       </div>
 
       <div class="popover_btnRight">
