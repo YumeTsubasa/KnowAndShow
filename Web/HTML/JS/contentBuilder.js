@@ -33,7 +33,8 @@ const typeHandlers = {
   host: createHostContent,
   branch: createBranchContent,
   decision: createDecisionContent,
-  risky: createRiskyContent
+  risky: createRiskyContent,
+  gameover: createGameoverContent
 };
 
 // ====================
@@ -228,43 +229,42 @@ function createQTEContent(data) {
         <img src="img/categories/qte.png" loading="lazy">
       </div>
     </div>
-
-    <div class="popover_question_body">
-      <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
-        <h1>${data.question || "No question found"}</h1>
-      </div>
-
-	  <div class="popover_btnGo">
-		<button class="qtegobtn" type="button">
-		 <img src="img/misc/go.png" width="100%" height="100%" loading="lazy">
-		</button>
-	  </div>
-	  <div class="popover_item_display">
-		<h2></h2>
-	  </div>
-	  <div class="popover_btnAnswer">
-		<button class="answerBtn" type="button">
-		 <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
-		</button>
-	  </div>			
-	  <div class="popover_btnRight">
-		<button class="rightBtn" type="button" popovertarget="${data.id}">
-		 <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
-		</button>
-	  </div>
-	  <div class="popover_btnWrong">
-		<button class="wrongBtn" type="button" popovertarget="${data.id}">
-		 <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
-		</button>
-	  </div>
-	  <div class="popover_btnSkip">
-	  <button class="skipBtn" type="button" popovertarget="${data.id}">
-	   <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
-	  </button>	
+		<div class="popover_question_body">
+		<img src="img/layout/textNormal.png" width="100%" height="100%">
+			<div class="popover_question_text">
+				<h2>${data.question || "No question found"}</h2>
 			</div>
-      
-    </div>
+			<div class="popover_btnGo">
+				<button class="qtegobtn" type="button">
+					<img src="img/misc/go.png" width="100%" height="100%" loading="lazy">
+				</button>
+			</div>
+			<div class="popover_item_display">
+				<h2></h2>
+			</div>
+			<div class="popover_btnAnswerQTE">
+				<button class="answerqteBtn" type="button">
+					<img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
+				</button>
+			</div>	
+			<div class="popover_answerQTE">
+				<h1></h1>
+			</div>			
+			<div class="popover_btnRightQTE">
+				<button class="rightqteBtn" type="button" popovertarget="${data.id}">
+					<img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+				</button>
+			</div>
+			<div class="popover_btnWrongQTE">
+				<button class="wrongqteBtn" type="button" popovertarget="${data.id}">
+					<img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+				</button>
+			</div>
+			<div class="popover_btnSkip">
+				<button class="skipBtn" type="button" popovertarget="${data.id}">
+					<img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
+				</button>	
+			</div>
   `;
   return wrapper;
 }
@@ -1004,6 +1004,45 @@ function createRiskyContent(data) {
   return wrapper;
 }
 
+function createGameoverContent(data) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("popover");
+  wrapper.id = data.id;
+
+  wrapper.innerHTML = `
+	<div class="gameover_popover">
+		<div class="popover_cat_body">
+			<img src="img/layout/catNormal_2.png" width="100%" height="100%">
+				<div class="gameover_popover_header">
+					<h1>GAMEOVER</h1>
+				</div>
+				<div class="gameover_popover_score">
+					<h2>Player [playername] has scored [points] points</h2>
+				</div>
+		</div>
+		<div class="popover_question_body">
+			<img src="img/layout/textNormal.png" width="100%" height="100%">
+				<div class="gameover_popover_gameoverBtn">
+					<button class="restartBtn" type="button">
+						<img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+					</button>
+				</div>
+				<div class="gameover_popover_scoresBtn">
+					<button class="scoresBtn" type="button">
+						<img src="img/misc/score.png" width="100%" height="100%" loading="lazy">
+					</button>
+				</div>
+				<div class="popover_btnDismiss">
+					<button class="dismissBtn" type="button">
+						<img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
+					</button>
+				</div>
+		</div>
+	</div>
+  `;
+  return wrapper;
+}
+
 // ====================
 // Helper function to fade in screenshot after delay
 // ====================
@@ -1030,20 +1069,23 @@ function createDefaultContent(data) {
 }
 
 export {
-  createBranchContent,
-  createDecisionContent,
-  createRiskyContent,
   createEasyContent,
   createMultiContent,
   createBrutalContent,
+  createQTEContent,
   createScreenContent,
-  createJukeboxContent,
-  createAudioContent,
+  createJukeboxContent,    
+  createAudioContent,          
   createCharacterContent,
   createHintContent,
+  createMineContent,
   createSoloContent,
   createAudienceContent,
   createTeamContent,
   createTrustContent,
-  createHostContent
+  createHostContent,
+  createBranchContent,
+  createDecisionContent,
+  createRiskyContent,
+  createGameoverContent
 };

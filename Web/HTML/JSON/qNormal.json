@@ -178,6 +178,19 @@
     "img": "img/questions/YT.png",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },
+  
+    {
+    "id": "Question21",
+	"type": "qte",
+    "question": "To Kart or Not To Kart? <br> Are these real kart names in Mario Kart: Double Dash?",
+	"qteItems": [
+		{ "text": "Turbo Yoshi", "correct": true },
+		{ "text": "Blue Fire", "correct": false },
+		{ "text": "Jet Star", "correct": false },
+		{ "text": "Toadette Kart", "correct": true },
+		{ "text": "Dragoon", "correct": false }
+	]
+  },
   {
     "id": "Question101",
 	"type": "easy",

@@ -253,6 +253,71 @@ document.addEventListener('DOMContentLoaded', async () => {
     const riskyYesBtn = popover.querySelector('.riskyYesBtn');
     const riskyNoBtn = popover.querySelector('.riskyNoBtn');
 
+// -----------------------------
+// Minefield minigame state
+// -----------------------------
+let minefieldCorrectCount = 0;
+let minefieldPoints = 0;
+let minefieldActive = false;
+
+// Start minefield if this popover is a minefield
+if (popover.classList.contains('minefieldPopover')) {
+  minefieldCorrectCount = 0;
+  minefieldPoints = 0;
+  minefieldActive = true;
+
+  popover.querySelectorAll('.minefieldTile').forEach(tileBtn => {
+    tileBtn.disabled = false;
+    tileBtn.classList.remove('used-safe','used-mine');
+    tileBtn.style.backgroundColor = ""; // reset background
+
+    tileBtn.addEventListener('click', () => {
+      if (!minefieldActive) return;
+      const isMine = tileBtn.dataset.type === 'mine';
+      tileBtn.disabled = true;
+
+      if (isMine) {
+        tileBtn.classList.add('used-mine');
+        tileBtn.style.backgroundColor = "red"; // mark mine visually
+        minefieldActive = false;
+        livesCounter--;
+        updateLivesDisplay();
+		// delay the alert slightly so color renders first
+		setTimeout(() => {
+		alert("💥 Mine hit! Minigame over.");
+		}, 50);
+      } else {
+        tileBtn.classList.add('used-safe');
+        tileBtn.style.backgroundColor = "lime"; // mark safe visually
+        minefieldCorrectCount++;
+
+        // Update potential points
+        switch(minefieldCorrectCount) {
+          case 1: minefieldPoints = 0; break;
+          case 2: minefieldPoints = 1; break;
+          case 3: minefieldPoints = 2; break;
+          case 4: minefieldPoints = 3; break;
+        }
+
+        // Ask player if they want to continue or cash out
+        setTimeout(() => {
+          const continueGame = confirm(`Safe tile! Current potential points: ${minefieldPoints}\nDo you want to continue?`);
+          if (!continueGame || minefieldCorrectCount === 4) {
+            minefieldActive = false;
+            pointsCounter += minefieldPoints;
+            updatePointsDisplay();
+            alert(`You cashed out ${minefieldPoints} points!`);
+          }
+        }, 100);
+      }
+    });
+  });
+}
+
+
+    // -----------------------------
+    // Disable tile after use
+    // -----------------------------
     function disableTileAfterUse() {
       const popoverID = window.lastPopoverID;
       if (!popoverID) return;
@@ -356,7 +421,133 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
       }
     }
+	
+// -----------------------------
+// QTE DOM references
+// -----------------------------
+const qteGoContainer = popover.querySelector('.popover_btnGo'); // container of Go button
+const qtegobtn = popover.querySelector('.qtegobtn');
+const answerqteBtn = popover.querySelector('.answerqteBtn');
+const rightqteBtn = popover.querySelector('.rightqteBtn');
+const wrongqteBtn = popover.querySelector('.wrongqteBtn');
+const answerDivQTE = popover.querySelector('.popover_answerQTE'); // container for answer display
+const displayText = popover.querySelector('.popover_item_display h2'); // where JSON text appears
+const qteItems = getQuestionData(popover.id)?.qteItems || [];
+
+// -----------------------------
+// QTE state
+// -----------------------------
+let currentIndex = 0;
+let qteScore = 0;
+let qteResults = [];
+
+// -----------------------------
+// Helper: show next JSON item or hide display if done
+// -----------------------------
+function updateDisplayForNextItem() {
+  if (currentIndex < qteItems.length) {
+    displayText.textContent = qteItems[currentIndex].text;
+    answerDivQTE.classList.remove('show'); // hide answer container
+    if (answerqteBtn && answerqteBtn.parentElement) {
+      answerqteBtn.parentElement.classList.remove('hidden'); // show answer button
+    }
+  } else {
+    displayText.textContent = ""; // optional: hide text when finished
   }
+}
+
+// -----------------------------
+// Helper: check end-of-QTE and show results
+// -----------------------------
+function checkQTEEnd() {
+  if (currentIndex >= qteItems.length) {
+    let resultText = `You scored ${qteScore} points in the QTE minigame.\n`;
+
+    if (qteScore <= 2) {
+      livesCounter--;
+      updateLivesDisplay();
+      resultText += `You lost a life.\n`;
+    } else {
+      pointsCounter += 1;
+      updatePointsDisplay();
+      resultText += `You gained 1 point.\n`;
+    }
+
+    resultText += `Your answers: ${qteResults.join(", ")}`;
+
+    // Show alert first
+    alert(resultText);
+	
+	// --- NEW: disable the tile after QTE is over ---
+    disableTileAfterUse();
+
+    // --- Close the QTE popover ---
+    if (popover && popover.classList.contains('show')) {
+      popover.classList.remove('show');
+    }
+
+    // Optional: clear display text
+    if (displayText) displayText.textContent = "";
+  }
+}
+
+// -----------------------------
+// Go button: start QTE
+// -----------------------------
+if (qtegobtn && qteGoContainer && displayText && qteItems.length > 0) {
+  qtegobtn.addEventListener('click', () => {
+    qteGoContainer.classList.add('hidden'); // hide Go container
+    currentIndex = 0; // reset index
+    displayText.classList.remove('hidden'); // reveal display
+    displayText.textContent = qteItems[currentIndex].text; // show first item
+  });
+}
+
+// -----------------------------
+// Answer button: shows Right/Wrong from JSON
+// -----------------------------
+if (answerqteBtn) {
+  answerqteBtn.addEventListener('click', () => {
+    const item = qteItems[currentIndex];
+    if (item && answerDivQTE) {
+      answerDivQTE.textContent = item.correct ? "Right" : "Wrong";
+      answerDivQTE.classList.add('show');
+    }
+    if (answerqteBtn && answerqteBtn.parentElement) {
+      answerqteBtn.parentElement.classList.add('hidden'); // hide Answer button after use
+    }
+  });
+}
+
+// -----------------------------
+// Right button: manual choice
+// -----------------------------
+if (rightqteBtn) {
+  rightqteBtn.addEventListener('click', () => {
+    qteScore++;
+    qteResults.push("Right");
+    currentIndex++;
+    updateDisplayForNextItem();
+    checkQTEEnd();
+  });
+}
+
+// -----------------------------
+// Wrong button: manual choice
+// -----------------------------
+if (wrongqteBtn) {
+  wrongqteBtn.addEventListener('click', () => {
+    qteResults.push("Wrong");
+    currentIndex++;
+    updateDisplayForNextItem();
+    checkQTEEnd();
+  });
+}
+
+  }
+
+
+
 
   // -----------------------------
   // Player name input logic
