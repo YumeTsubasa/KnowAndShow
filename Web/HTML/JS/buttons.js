@@ -256,6 +256,8 @@ function showGameOver() {
     const answerBtn = popover.querySelector('.answerBtn');
     const skipBtn = popover.querySelector('.skipBtn');
     const answerDiv = popover.querySelector('.popover_answer');
+	const hint1Div = popover.querySelector('.popover_hint1');
+    const hint1Btn = popover.querySelector('.hint1Btn');
     const hint2Div = popover.querySelector('.popover_hint2');
     const hint2Btn = popover.querySelector('.hint2Btn');
     const hint3Div = popover.querySelector('.popover_hint3');
@@ -266,10 +268,14 @@ function showGameOver() {
     const host1Btn = popover.querySelector('.host1Btn');
     const host2Div = popover.querySelector('.popover_host2');
     const host2Btn = popover.querySelector('.host2Btn');
+	const host3Div = popover.querySelector('.popover_host3');
+    const host3Btn = popover.querySelector('.host3Btn');
     const decision1Div = popover.querySelector('.popover_decision1');
     const decision1Btn = popover.querySelector('.decision1Btn');
     const decision2Div = popover.querySelector('.popover_decision2');
     const decision2Btn = popover.querySelector('.decision2Btn');
+	const decision3Div = popover.querySelector('.popover_decision3');
+    const decision3Btn = popover.querySelector('.decision3Btn');
     const riskyYesBtn = popover.querySelector('.riskyYesBtn');
     const riskyNoBtn = popover.querySelector('.riskyNoBtn');
 
@@ -378,6 +384,14 @@ if (popover.classList.contains('minefieldPopover')) {
       popover.classList.remove('show'); 
     });
 
+
+	// Hint System specific buttons
+	
+	if (hint1Btn && hint1Div) hint1Btn.addEventListener('click', () => { 
+      hint1Div.classList.add('show'); 
+      hint1Btn.parentElement.classList.add('hidden'); 
+    });
+	
     if (hint2Btn && hint2Div) hint2Btn.addEventListener('click', () => { 
       hint2Div.classList.add('show'); 
       hint2Btn.parentElement.classList.add('hidden'); 
@@ -388,33 +402,57 @@ if (popover.classList.contains('minefieldPopover')) {
       hint3Btn.parentElement.classList.add('hidden'); 
     });
 
+	// Solo System specific buttons
+	
     if (solo2Btn && solo2Div) solo2Btn.addEventListener('click', () => { 
       solo2Div.classList.add('show'); 
       solo2Btn.parentElement.classList.add('hidden'); 
     });
 
-    if (host1Btn && host2Btn && host1Div) host1Btn.addEventListener('click', () => { 
+	// Host System specific buttons
+
+    if (host1Btn && host2Btn && host3Btn && host1Div) host1Btn.addEventListener('click', () => { 
       host1Div.classList.add('show');
       host1Btn.parentElement.classList.add('hidden');
-      host2Btn.parentElement.classList.add('hidden'); 
+      host2Btn.parentElement.classList.add('hidden');
+	  host3Btn.parentElement.classList.add('hidden');
     });
 
-    if (host1Btn && host2Btn && host2Div) host2Btn.addEventListener('click', () => { 
+    if (host1Btn && host2Btn && host3Btn && host2Div) host2Btn.addEventListener('click', () => { 
       host2Div.classList.add('show'); 
       host1Btn.parentElement.classList.add('hidden');
       host2Btn.parentElement.classList.add('hidden'); 
+	  host3Btn.parentElement.classList.add('hidden');
+    });
+	
+	if (host1Btn && host2Btn && host3Btn && host3Div) host3Btn.addEventListener('click', () => { 
+      host3Div.classList.add('show'); 
+      host1Btn.parentElement.classList.add('hidden');
+      host2Btn.parentElement.classList.add('hidden');
+	  host3Btn.parentElement.classList.add('hidden');
     });
 
-    if (decision1Btn && decision2Btn && decision1Div) decision1Btn.addEventListener('click', () => { 
+	// Decision System specific buttons
+
+    if (decision1Btn && decision2Btn && decision3Btn && decision1Div) decision1Btn.addEventListener('click', () => { 
       decision1Div.classList.add('show');
       decision1Btn.parentElement.classList.add('hidden');
       decision2Btn.parentElement.classList.add('hidden'); 
+	  decision3Btn.parentElement.classList.add('hidden'); 
     });
 
-    if (decision1Btn && decision2Btn && decision2Div) decision2Btn.addEventListener('click', () => { 
+    if (decision1Btn && decision2Btn && decision3Btn && decision2Div) decision2Btn.addEventListener('click', () => { 
       decision2Div.classList.add('show'); 
       decision1Btn.parentElement.classList.add('hidden');
+      decision2Btn.parentElement.classList.add('hidden');
+	  decision3Btn.parentElement.classList.add('hidden');
+    });
+	
+	if (decision1Btn && decision2Btn && decision3Btn && decision1Div) decision3Btn.addEventListener('click', () => { 
+      decision3Div.classList.add('show');
+      decision1Btn.parentElement.classList.add('hidden');
       decision2Btn.parentElement.classList.add('hidden'); 
+	  decision3Btn.parentElement.classList.add('hidden'); 
     });
 
     if (riskyYesBtn) {
@@ -594,14 +632,16 @@ if (wrongqteBtn) {
   document.addEventListener("keydown", (event) => {
     const key = event.key.toLowerCase();
     const currentPopover = document.querySelector(".popover.show");
-    if (!currentPopover) return;
+	if (!currentPopover) return;
 
-    switch (key) {
-      case "r": const rightBtn = currentPopover.querySelector(".rightBtn"); if (rightBtn) rightBtn.click(); break;
-      case "w": const wrongBtn = currentPopover.querySelector(".wrongBtn"); if (wrongBtn) wrongBtn.click(); break;
-      case "a": case " ": const answerBtn = currentPopover.querySelector(".answerBtn"); if (answerBtn) answerBtn.click(); break;
-    }
-  });
+	switch (key) {
+    case "r": const rightBtn = currentPopover.querySelector(".rightBtn"); if (rightBtn) rightBtn.click(); break;
+	case "w": const wrongBtn = currentPopover.querySelector(".wrongBtn"); if (wrongBtn) wrongBtn.click(); break;
+	case "a": case " ": const answerBtn = currentPopover.querySelector(".answerBtn"); if (answerBtn) answerBtn.click(); break;
+	case "s": const skipBtn = currentPopover.querySelector(".skipBtn"); if (skipBtn) skipBtn.click(); break;
+	}
+});
+
 
   document.addEventListener("keydown", (event) => {
     const key = event.key.toLowerCase();

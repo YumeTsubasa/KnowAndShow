@@ -38,13 +38,48 @@ const typeHandlers = {
 };
 
 // ====================
-// Easy type handler
+// Typewriter behaviour handler
 // ====================
-function createEasyContent(data) {
+
+/**
+ * Typewriter effect for any text element.
+ *
+ * @param {HTMLElement} element - The target element to type into.
+ * @param {string} text - The text to type.
+ * @param {number} speed - Delay per character in milliseconds.
+ */
+function typeWriter(element, text, speed = 20) {
+  if (!element) return; // Safety check
+
+  element.textContent = "";                  // Clear any existing text
+  element.classList.add("typewriter-cursor"); // Add blinking cursor
+
+  let i = 0; // character index
+
+  function type() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    } else {
+      element.classList.remove("typewriter-cursor"); // Stop cursor at the end
+    }
+  }
+
+  type();
+}
+
+
+// ====================
+// EASY type handler
+// ====================
+
+function createEasyContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
 
+  // Insert inner HTML
   wrapper.innerHTML = `
     <div class="popover_cat_body">
       <img src="img/layout/catNormal_2.png" width="100%" height="100%">
@@ -56,13 +91,13 @@ function createEasyContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h1>${data.question || "No question found"}</h1>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
-        
+      
       <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
@@ -88,13 +123,26 @@ function createEasyContent(data) {
       </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
+
+
 // ====================
-// Multi type handler
+// MULTI type handler
 // ====================
-function createMultiContent(data) {
+
+function createMultiContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -110,7 +158,7 @@ function createMultiContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || "No question found"}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_answer_multiA">
@@ -155,13 +203,23 @@ function createMultiContent(data) {
       </div>
     </div>
   `;
+    document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
 // ====================
-// Brutal type handler
+// BRUTAL type handler
 // ====================
-function createBrutalContent(data) {
+
+function createBrutalContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -177,11 +235,11 @@ function createBrutalContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h1>${data.question || "No question found"}</h1>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
 
       <div class="popover_btnAnswer">
@@ -210,6 +268,16 @@ function createBrutalContent(data) {
       
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
@@ -217,7 +285,8 @@ function createBrutalContent(data) {
 // ====================
 // QTE type handler
 // ====================
-function createQTEContent(data) {
+
+function createQTEContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -232,7 +301,7 @@ function createQTEContent(data) {
 		<div class="popover_question_body">
 		<img src="img/layout/textNormal.png" width="100%" height="100%">
 			<div class="popover_question_text">
-				<h2>${data.question || "No question found"}</h2>
+				<h1 class="typewriter-target"></h1>
 			</div>
 			<div class="popover_btnGo">
 				<button class="qtegobtn" type="button">
@@ -266,17 +335,28 @@ function createQTEContent(data) {
 				</button>	
 			</div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
 // ====================
-// Screen type handler
+// SCREEN type handler
 // ====================
-function createScreenContent(data) {
+function createScreenContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
 
+  // Insert inner HTML
   wrapper.innerHTML = `
     <div class="popover_cat_body">
       <img src="img/layout/catNormal_2.png" width="100%" height="100%">
@@ -288,11 +368,11 @@ function createScreenContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || "No question found"}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
 
       <div class="popover_btnAnswer">
@@ -324,10 +404,24 @@ function createScreenContent(data) {
       <img src="${data.img || ''}">
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createJukeboxContent(data) {
+// ====================
+// JUKEBOX type handler
+// ====================
+
+function createJukeboxContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -343,7 +437,7 @@ function createJukeboxContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || "Audio"}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnAnswer">
@@ -353,7 +447,7 @@ function createJukeboxContent(data) {
       </div>
 	  
 	  <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
 
       <div class="popover_btnRight">
@@ -380,10 +474,25 @@ function createJukeboxContent(data) {
       </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createAudioContent(data) {
+
+// ====================
+// AUDIO type handler
+// ====================
+
+function createAudioContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -399,7 +508,7 @@ function createAudioContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || "Audio"}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnAnswer">
@@ -409,7 +518,7 @@ function createAudioContent(data) {
       </div>
 	  
 	  <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
 
       <div class="popover_btnRight">
@@ -436,13 +545,23 @@ function createAudioContent(data) {
       </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
 // ====================
-// 🔥 CHARACTER type handler (NEW)
+// CHARACTER type handler
 // ====================
-function createCharacterContent(data) {
+function createCharacterContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -458,7 +577,7 @@ function createCharacterContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnAnswer">
@@ -468,7 +587,7 @@ function createCharacterContent(data) {
       </div>
 	  
 	  <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
 
       <div class="popover_btnRight">
@@ -494,10 +613,24 @@ function createCharacterContent(data) {
       <img src="${data.img || ''}">
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createHintContent(data) {
+// ====================
+// HINT SYSTEM type handler
+// ====================
+
+function createHintContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -513,7 +646,7 @@ function createHintContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnAnswer">
@@ -523,7 +656,7 @@ function createHintContent(data) {
       </div>
 	  
 	  <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
 
       <div class="popover_btnRight">
@@ -543,12 +676,17 @@ function createHintContent(data) {
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
+	  <div class="popover_btnHint1">
+		<button class="hint1Btn" type="button" popovertarget="${data.id}">
+		 <h2>Hint 1</h2>
+		</button>
+	  </div>
 	  <div class="popover_hint1">
 		<h2>${data.hint1 || ""}</h2>
 	  </div>
 	  <div class="popover_btnHint2">
 		<button class="hint2Btn" type="button" popovertarget="${data.id}">
-		 <img src="img/misc/hint.png" width="100%" height="100%" loading="lazy">
+		 <h2>Hint 2</h2>
 		</button>
 	  </div>
 	  <div class="popover_hint2">
@@ -556,7 +694,7 @@ function createHintContent(data) {
 	  </div>
 	  <div class="popover_btnHint3">
 		<button class="hint3Btn" type="button" popovertarget="${data.id}">
-		 <img src="img/misc/hint.png" width="100%" height="100%" loading="lazy">
+		 <h2>Hint 3</h2>
 		</button>
 	  </div>
 	  <div class="popover_hint3">
@@ -566,10 +704,20 @@ function createHintContent(data) {
 
 
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createMineContent(data) {
+function createMineContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover", "minefieldPopover"); // Minefield popover
   wrapper.id = data.id;
@@ -585,7 +733,7 @@ function createMineContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_mine"></div>
@@ -624,11 +772,21 @@ for (let i = 0; i < rowCount; i++) {
 }
 
 
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
 
-function createSoloContent(data) {
+function createSoloContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -644,7 +802,7 @@ function createSoloContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.challengePart1 || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
@@ -671,10 +829,20 @@ function createSoloContent(data) {
 	  </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.challengePart1 || "No challenge found", speed);
+
   return wrapper;
 }
 
-function createAudienceContent(data) {
+function createAudienceContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -690,7 +858,7 @@ function createAudienceContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnRight">
@@ -715,10 +883,20 @@ function createAudienceContent(data) {
 	  </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createTeamContent(data) {
+function createTeamContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -734,7 +912,7 @@ function createTeamContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnRight">
@@ -759,10 +937,20 @@ function createTeamContent(data) {
 	  </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createTrustContent(data) {
+function createTrustContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -778,7 +966,7 @@ function createTrustContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnRight">
@@ -803,10 +991,20 @@ function createTrustContent(data) {
 	  </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createHostContent(data) {
+function createHostContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -822,7 +1020,7 @@ function createHostContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h2>${data.question || ""}</h2>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnRight">
@@ -846,24 +1044,42 @@ function createHostContent(data) {
 		<h2>Dubbel Challenge: ${data.DoubleDubbel || ""}</h2>
 	  </div>
 	  <div class="popover_host2">
-		<h2>Box Challenge: ${data.Boxmeister || ""}</h2>
+		<h2>Boxy Challenge: ${data.Boxy || ""}</h2>
+      </div>
+	  <div class="popover_host3">
+		<h2>Yatogami Challenge: ${data.Yatogami || ""}</h2>
       </div>
 	  <div class="popover_btnHost1">
 		<button class="host1Btn" type="button" popovertarget="${data.id}">
-		 <img src="img/misc/host.png" width="100%" height="100%" loading="lazy">
+		 <h1>DoubleDubbel</h1>
 		</button>
 	  </div>
 	  <div class="popover_btnHost2">
 		<button class="host2Btn" type="button" popovertarget="${data.id}">
-		 <img src="img/misc/host.png" width="100%" height="100%" loading="lazy">
+		 <h1>Boxy</h1>
+		</button>
+	  </div>
+	  <div class="popover_btnHost3">
+		<button class="host3Btn" type="button" popovertarget="${data.id}">
+		 <h1>Yatogami</h1>
 		</button>
 	  </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createBranchContent(data) {
+function createBranchContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -879,7 +1095,7 @@ function createBranchContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h1>${data.question || ""}</h1>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnRight">
@@ -893,12 +1109,6 @@ function createBranchContent(data) {
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
-      <div class="popover_btnSkip">
-        <button class="skipBtn" type="button" popovertarget="${data.id}">
-          <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
-        </button>
-      </div>
 	  <div class="popover_btnBranchA">
 		<button class="branchABtn" type="button" popovertarget="${data.id}">
 		 <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
@@ -909,12 +1119,27 @@ function createBranchContent(data) {
 		 <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
 		</button>
 	  </div>	
+	  <div class="popover_btnSkip">
+        <button class="skipBtn" type="button" popovertarget="${data.id}">
+          <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
+        </button>
+      </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createDecisionContent(data) {
+function createDecisionContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -930,7 +1155,7 @@ function createDecisionContent(data) {
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h1>${data.question || ""}</h1>
+        <h1 class="typewriter-target"></h1>
       </div>
 
       <div class="popover_btnRight">
@@ -956,6 +1181,10 @@ function createDecisionContent(data) {
 	  <div class="popover_decision2">
 		<h2>${data.game2desc || ""}</h2>
 	  </div>
+	  /div>
+	  <div class="popover_decision3">
+		<h2>${data.game3desc || ""}</h2>
+	  </div>
 	  <div class="popover_btnDecision1">
 		<button class="decision1Btn" type="button" popovertarget="Question21">
 		 <h2>${data.game1 || ""}</h2>
@@ -966,12 +1195,27 @@ function createDecisionContent(data) {
 		 <h2>${data.game2 || ""}</h2>
 		</button>
 	  </div>
+	  <div class="popover_btnDecision3">
+		<button class="decision3Btn" type="button" popovertarget="Question21">
+		 <h2>${data.game3 || ""}</h2>
+		</button>
+	  </div>
     </div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 
-function createRiskyContent(data) {
+function createRiskyContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
@@ -987,7 +1231,7 @@ function createRiskyContent(data) {
 	<div class="popover_question_body">
      <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
-        <h1>${data.question || ""}</h1>
+        <h1 class="typewriter-target"></h1>
       </div>
 	 <div class="popover_btnRiskyYes">
 	  <button class="riskyYesBtn" type="button" popovertarget="Question21">
@@ -1001,6 +1245,16 @@ function createRiskyContent(data) {
 	 </div>
 	</div>
   `;
+
+  document.body.appendChild(wrapper);
+
+  // Force render
+  wrapper.offsetHeight;
+
+  // Apply typewriter
+  const h1 = wrapper.querySelector(".typewriter-target");
+  typeWriter(h1, data.question || "No question found", speed);
+
   return wrapper;
 }
 

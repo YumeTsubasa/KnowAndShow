@@ -1,12 +1,12 @@
 [
   {
-    "id": "Question1",
+    "id": "QuestionR1",
 	"type": "easy",
     "question": "Lorem",
 	"answer": "Ipsum"
   },
 {
-  "id": "Question2",
+  "id": "QuestionR2",
   "type": "multi",
   "question": "Ducktales",
   "answers": [
@@ -17,13 +17,13 @@
   ]
 },
     {
-    "id": "Question3",
+    "id": "QuestionR3",
 	"type": "brutal",
     "question": "Silk",
 	"answer": "Song"
   },
     {
-    "id": "Question4",
+    "id": "QuestionR4",
 	"type": "qte",
     "question": "To Kart or Not To Kart? <br> Are these real kart names in Mario Kart: Double Dash?",
 	"qteItems": [
@@ -35,35 +35,35 @@
 	]
   },
     {
-    "id": "Question5",
+    "id": "QuestionR5",
 	"type": "screen",
     "img": "img/screenshot/snore.jpg",
 	"question": "What game is the following screenshot from?",
 	"answer": "Philosophers Stone"
   },
     {
-    "id": "Question6",
+    "id": "QuestionR6",
 	"type": "character",
     "question": "Who's this character?",
 	"img": "img/character/knuckles.jpg",
 	"answer": "&Knuckles"
   },
     {
-    "id": "Question7",
+    "id": "QuestionR7",
 	"type": "jukebox",
     "audio": "audio/jukebox/kirby.mp3",
     "question": "Unstable",
 	"answer": "Unicorns"
   },
     {
-    "id": "Question8",
+    "id": "QuestionR8",
 	"type": "audio",
     "audio": "audio/audio/knuckles.mp3",
     "question": "Do not go peepee",
 	"answer": "In the ocean"
   },
     {
-    "id": "Question9",
+    "id": "QuestionR9",
 	"type": "hint",
 	"question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
     "hint1": "Red",
@@ -72,7 +72,7 @@
 	"answer": "Pokemon"
   },
     {
-    "id": "Question10",
+    "id": "QuestionR10",
 	"type": "mine",
     "question": "Which of these items are NOT in The Legend of Zelda: A Link to the Past?",
 	"tiles": [
@@ -97,31 +97,31 @@
    ]
   },
     {
-    "id": "Question11",
+    "id": "QuestionR11",
 	"type": "solo",
     "challengePart1": "Han",
 	"challengePart2": "Solo"
   },
     {
-    "id": "Question12",
+    "id": "QuestionR12",
 	"type": "audience",
 	"question": "Take on an audience member in a head-to-head challenge!",
     "challenge": "OhNo"
   },
     {
-    "id": "Question13",
+    "id": "QuestionR13",
 	"type": "team",
 	"question": "Complete this challenge with the aid of an audience member",
     "challenge": "Your Team Effort Challenge!"
   },
     {
-    "id": "Question14",
+    "id": "QuestionR14",
 	"type": "trust",
 	"question": "Choose an audience member to take on a challenge for you!",
     "challenge": "Your Sign of Trust Challenge"
   },
     {
-    "id": "Question15",
+    "id": "QuestionR15",
 	"type": "host",
 	"question": "Choose a host and take on their challenge!",
     "Boxy": "Survive 5 minutes of puns from Box",
@@ -129,36 +129,36 @@
 	"Yatogami": "Try to not make any big donation announcements you cannot hold true to (Impossible)"
   },
     {
-    "id": "Question16",
+    "id": "QuestionR16",
 	"question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
 	"type": "branch",
     "branchA": {
-		"id": "Question16_A",
+		"id": "QuestionR16_A",
 		"type": "host",
 		"question": "Choose a host and take on their challenge!",
 		"Boxmeister": "Survive 5 minutes of puns from Box",
 		"DoubleDubbel": "Mario Kart Double Dash baby!"
 	},
 	"branchC": {
-		"id": "Question16_B",
+		"id": "QuestionR16_B",
 		"type": "trust",
 		"question": "Choose an audience member to take on a challenge for you!",
 		"challenge": "Your Sign of Trust Challenge"
 	}
   },
     {
-    "id": "Question17",
+    "id": "QuestionR17",
 	"type": "decision",
 	"question": "Two games to choose from, but you will not know what the challenge is. Time to make a decision…",
     "game1": "Mario Kart 8",
 	"game2": "Kirby's Dream Land",
-	"game3": "Test",
+	"game3": "Kirby's Dream Land",
 	"game1desc": "Time Trials: Get a time of xx:xx on the XXXXXX Circuit",
 	"game2desc": "Beat the first boss",
-	"game3desc": "Test"
+	"game3desc": "Beat the first boss"
   },
     {
-    "id": "Question18",
+    "id": "QuestionR18",
 	"type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   }

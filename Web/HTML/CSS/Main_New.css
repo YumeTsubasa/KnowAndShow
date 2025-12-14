@@ -8,6 +8,7 @@
     src: url('../font/The Rift Shop.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+	color: #40291A;
 }
 
 body {
@@ -19,13 +20,13 @@ body {
 h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 15px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 10px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* body container */
@@ -125,7 +126,7 @@ h2 {
 /* Category Box */
 
 .popover_cat_body {
-    width: 100%;
+    width: 1400px;
     height: 550px;
     background-color: #000;
     position: absolute;
@@ -148,10 +149,10 @@ h2 {
 
 
 .popover_cat_img {
-    width: 1380px;
-    height: 530px;
-	top: 10px;
-	left: 10px;
+    width: 980px;
+    height: 370px;
+	top: 90px;
+	left: 210px;
     /* border: 5px solid #00FF00; */
 	display: flex;
     justify-content: center;   /* horizontal center */
@@ -170,7 +171,7 @@ h2 {
 /* Main */
 
 .popover_question_body {
-    width: 100%;
+    width: 1400px;
     height: 305px;
     background-color: #000;
     position: absolute;
@@ -184,41 +185,40 @@ h2 {
 }
 
 .popover_question_text {
-    width: 97%;
-    height: 170px;
+    width: 1380px;
+    height: 100px;
     position: absolute;
-	/* border: 5px solid #00FF00;
-    background-color: #000; */
-    top: 7px;
-	left: 15px;
+    top: 10px;
+	left: 10px;
 }
 
 .popover_question_text h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 60px;
-    color: #FFFFFF;
+	display: flex;
+	justify-content: left;
+    align-items: left; 
+    font-size: 35px;
+	text-align: left; 
 }
 
-.popover_question_text h2 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-	display: flex;
-	justify-content: center;
-    align-items: center; 
-    font-size: 40px;
-    color: #FFFFFF;
-	text-align: center; 
+.typewriter-cursor {
+  border-right: 2px solid currentColor;
+  animation: blink 0.6s steps(1) infinite;
 }
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
 
 /* Popover buttons */
 
 .popover_answer {
-    width: 560px;
+    width: 1380px;
     height: 70px;
-	/* border: 5px solid #00FF00;
-    background-color: #000; */
     position: absolute;
-    left: 420px;
-    bottom: 20px;
+    left: 10px;
+    bottom: 13px;
     display: none;
 	text-align: center;
 }
@@ -226,7 +226,7 @@ h2 {
 .popover_answer h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 60px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_answer.show {
@@ -239,6 +239,7 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 630px;
+	display:none;
 }
 
 .popover_btnAnswer.hidden {
@@ -251,6 +252,7 @@ h2 {
     position: absolute;
     bottom: 120px;
     right: 40px;
+	display:none;
 }
 
 .popover_btnRight {
@@ -259,6 +261,7 @@ h2 {
     position: absolute;
     bottom: 20px;
     right: 40px;
+	display:none;
 }
 
 .popover_btnWrong {
@@ -267,6 +270,7 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 40px;
+	display:none;
 }
 
 .popover_btnAnswer,
@@ -330,7 +334,7 @@ h2 {
 .popover_answer_multiD h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 50px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* QTE */
@@ -348,7 +352,7 @@ h2 {
 .popover_item_display h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 50px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_item_display.hidden {
@@ -394,7 +398,7 @@ h2 {
 .popover_answerQTE h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 60px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_answerQTE.show{
@@ -441,16 +445,14 @@ h2 {
 /* Screenshot */
 
 .popover_screenshot {
-    width: 500px;
+    width: 1200px;
     height: 500px;
-    background-color: #000;
     position: absolute;
     top: 25px;
-    left: 450px;
+    left: 100px;
 	opacity:1; 
 	transition: opacity 1s ease;
 	z-index: 9999;
-	background:none;
 }
 
 .popover_screenshot img {
@@ -470,16 +472,14 @@ h2 {
 /* Character Spotlight */
 
 .popover_character {
-    width: 500px;
+    width: 1200px;
     height: 500px;
-    background-color: #000;
     position: absolute;
     top: 25px;
-    left: 450px;
+    left: 100px;
 	opacity:1; 
 	transition: opacity 1s ease;
 	z-index: 9999;
-	background:none;
 }
 
 .popover_character img {
@@ -519,8 +519,13 @@ h2 {
     height: 50px;
     position: absolute;
     left: 30px;
-    top: 60px;
+    top: 110px;
 	text-align: left;
+	display: none;
+}
+
+.popover_hint1.show {
+    display: block;
 }
 
 .popover_hint2 {
@@ -528,7 +533,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 30px;
-    top: 110px;
+    top: 160px;
 	text-align: left;
 	display: none;
 }
@@ -542,7 +547,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 30px;
-    top: 160px;
+    top: 210px;
 	text-align: left;
 	display: none;
 }
@@ -556,7 +561,19 @@ h2 {
 .popover_hint3 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
+}
+
+.popover_btnHint1 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 110px;
+}
+.popover_btnHint1.hidden {
+    display: none;
 }
 
 .popover_btnHint2 {
@@ -565,7 +582,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 30px;
-    top: 110px;
+    top: 160px;
 }
 .popover_btnHint2.hidden {
     display: none;
@@ -584,7 +601,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 30px;
-    top: 160px;
+    top: 210px;
 }
 
 .popover_btnHint3.hidden {
@@ -597,17 +614,25 @@ h2 {
     object-fit: contain;
 }
 
+.popover_btnhint1 h1,
+.popover_btnhint2 h1,
+.popover_btnhint3 h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #40291A;
+}
+
 /* Minefield */
 
 .popover_mine {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);  /* 4 columns */
 	grid-template-rows: repeat(3, 1fr);      /* 3 rows */
-    width: 1000px;
-    height: 210px;
+    width: 1378px;
+    height: 175px;
     position: absolute;
-    left: 195px;
-    top: 60px;
+    left: 11px;
+    bottom: 11px;
 	text-align: left;
 	border: 5px solid #40291A;
 	overflow: hidden;
@@ -640,7 +665,7 @@ h2 {
 
 .carousel-item_mine h1 {
   margin: 0;
-  color: white;
+  color: #40291A;
   font-family: 'MyCustomFont', Arial, sans-serif;
   /* fit text better */
   text-align: center;
@@ -691,7 +716,7 @@ h2 {
 .popover_solo2 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Audience Game Challenge */
@@ -709,7 +734,7 @@ h2 {
 .popover_audience h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Team Effort */
@@ -727,7 +752,7 @@ h2 {
 .popover_team h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Sign of Trust */
@@ -745,7 +770,7 @@ h2 {
 .popover_trust h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Host Challenge */
@@ -788,33 +813,57 @@ h2 {
 	display: none;
 }
 
+.popover_btnHost3 {
+    width: 100px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 180px;
+}
+
+.popover_host3 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
 .popover_host1.show,
-.popover_host2.show {
+.popover_host2.show,
+.popover_host3.show {
     display: block;
 }
 
 .popover_host1.hidden,
-.popover_host2.hidden {
+.popover_host2.hidden,
+.popover_host3.hidden {
     display: none;
 }
 
 .popover_btnHost1.hidden,
-.popover_btnHost2.hidden {
+.popover_btnHost2.hidden,
+.popover_btnHost3.hidden {
     display: none;
 }
 
 .popover_host1,
-.popover_host2, h2 {
+.popover_host2,
+.popover_host3, h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
-.popover_btnHost1_btn,
-.popover_btnHost2_btn, img {
-	width: 100%;
-    height: 100%;
-    object-fit: contain;
+.popover_btnHost1,
+.popover_btnHost2,
+.popover_btnHost3, h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #40291A;
 }
 
 /* Branching Paths */
@@ -839,9 +888,9 @@ h2 {
 
 .popover_question_text h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 35px;
-    color: #FFFFFF;
-	text-align: center;
+    font-size: 40px;
+    color: #40291A;
+	text-align: left;
 }
 
 .popover_btnDecision1 {
@@ -882,18 +931,40 @@ h2 {
 	display: none;
 }
 
+.popover_btnDecision3 {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+	display: block;
+    left: 30px;
+    top: 180px;
+}
+
+.popover_decision3 {
+    width: 1160px;
+    height: 50px;
+    position: absolute;
+    left: 30px;
+    top: 60px;
+	text-align: left;
+	display: none;
+}
+
 .popover_decision1.show,
- .popover_decision2.show {
+.popover_decision2.show,
+.popover_decision3.show {
     display: block;
 }
 
 .popover_decision1.hidden,
-.popover_decision2.hidden {
+.popover_decision2.hidden,
+.popover_decision3.hidden {
     display: none;
 }
 
 .popover_btnDecision1.hidden,
-.popover_btnDecision2.hidden {
+.popover_btnDecision2.hidden,
+.popover_btnDecision3.hidden {
     display: none;
 } 
 
@@ -908,7 +979,7 @@ h2 {
 .popover_decision2 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Risky Strat */
@@ -946,22 +1017,18 @@ h2 {
 
 .gameover_popover_header {
     width: 1000px;
-    height: 200px;
-    background: black;
+    height: 100px;
     position: absolute;
     top: 50px;
     left: 200px;
-	border: 1px solid black;
 }
 
 .gameover_popover_score {
     width: 1000px;
-    height: 200px;
-    background: black;
+    height: 100px;
     position: absolute;
-    top: 250px;
+    top: 150px;
     left: 200px;
-	border: 1px solid black;
 }
 
 .gameover_popover_gameoverBtn {
@@ -1005,13 +1072,13 @@ gameover_popover_gameoverBtn img {
 .gameover_popover_header h1 {
 	font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .gameover_popover_score h2 {
 	font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Buttons */

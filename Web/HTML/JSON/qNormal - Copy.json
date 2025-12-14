@@ -2,23 +2,25 @@
   {
     "id": "Question1",
 	"type": "easy",
+    "img": "img/questions/YT.png",
     "question": "Lorem",
 	"answer": "Ipsum"
   },
-{
-  "id": "Question2",
-  "type": "multi",
-  "question": "Ducktales",
-  "answers": [
-    { "text": "Wohoo", "correct": true },
-    { "text": "Wohoo", "correct": false },
-    { "text": "Wohoo", "correct": false },
-    { "text": "Wohoo", "correct": false }
-  ]
-},
+    {
+    "id": "Question2",
+	"type": "multi",
+    "img": "img/questions/YT.png",
+    "question": "Ducktales",
+	"answerA": "Wohoo",
+	"answerB": "Wohoo",
+	"answerC": "Wohoo",
+	"answerD": "Wohoo",
+	"answer": "D: Woohoo"
+  },
     {
     "id": "Question3",
 	"type": "brutal",
+    "img": "img/questions/YT.png",
     "question": "Silk",
 	"answer": "Song"
   },
@@ -51,7 +53,7 @@
     {
     "id": "Question7",
 	"type": "jukebox",
-    "audio": "audio/jukebox/kirby.mp3",
+    "audio": "audio/audio/kirby.mp3",
     "question": "Unstable",
 	"answer": "Unicorns"
   },
@@ -65,6 +67,7 @@
     {
     "id": "Question9",
 	"type": "hint",
+    "img": "img/questions/YT.png",
 	"question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
     "hint1": "Red",
 	"hint2": "Green",
@@ -124,9 +127,8 @@
     "id": "Question15",
 	"type": "host",
 	"question": "Choose a host and take on their challenge!",
-    "Boxy": "Survive 5 minutes of puns from Box",
-	"DoubleDubbel": "Mario Kart Double Dash baby!",
-	"Yatogami": "Try to not make any big donation announcements you cannot hold true to (Impossible)"
+    "Boxmeister": "Survive 5 minutes of puns from Box",
+	"DoubleDubbel": "Mario Kart Double Dash baby!"
   },
     {
     "id": "Question16",
@@ -139,7 +141,7 @@
 		"Boxmeister": "Survive 5 minutes of puns from Box",
 		"DoubleDubbel": "Mario Kart Double Dash baby!"
 	},
-	"branchC": {
+	"branchB": {
 		"id": "Question16_B",
 		"type": "trust",
 		"question": "Choose an audience member to take on a challenge for you!",
@@ -150,16 +152,51 @@
     "id": "Question17",
 	"type": "decision",
 	"question": "Two games to choose from, but you will not know what the challenge is. Time to make a decision…",
+    "img": "img/questions/YT.png",
     "game1": "Mario Kart 8",
 	"game2": "Kirby's Dream Land",
-	"game3": "Test",
 	"game1desc": "Time Trials: Get a time of xx:xx on the XXXXXX Circuit",
-	"game2desc": "Beat the first boss",
-	"game3desc": "Test"
+	"game2desc": "Beat the first boss"
   },
     {
     "id": "Question18",
 	"type": "risky",
+    "img": "img/questions/YT.png",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+  
+    {
+    "id": "Question19",
+	"type": "risky",
+    "img": "img/questions/YT.png",
+    "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+
+    {
+    "id": "Question20",
+	"type": "risky",
+    "img": "img/questions/YT.png",
+    "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+  
+    {
+    "id": "Question21",
+	"type": "qte",
+    "question": "To Kart or Not To Kart? <br> Are these real kart names in Mario Kart: Double Dash?",
+	"qteItems": [
+		{ "text": "Turbo Yoshi", "correct": true },
+		{ "text": "Blue Fire", "correct": false },
+		{ "text": "Jet Star", "correct": false },
+		{ "text": "Toadette Kart", "correct": true },
+		{ "text": "Dragoon", "correct": false }
+	]
+  },
+  {
+    "id": "Question101",
+	"type": "easy",
+    "img": "img/questions/YT.png",
+    "question": "Lorem",
+	"answer": "Ipsum"
   }
+
 ]

@@ -1,0 +1,322 @@
+[
+  {
+    "id": "Question1",
+    "type": "screen",
+    "img": "img/screenshot/agarest.jpg",
+    "question": "What game is the following screenshot from?",
+    "answer": "Correct answer: Agarest: Generations of war"
+  },
+  {
+    "id": "Question2",
+    "type": "easy",
+    "question": "What's the name of the device Mario uses in Super Mario Sunshine?",
+    "answer": "FLUDD"
+  },
+  {
+    "id": "Question3",
+    "type": "mine",
+    "question": "Which of these items are in The Legend of Zelda: A Link to the Past?",
+    "tiles": [
+      [
+        { "text": "bomb bag", "correct": false },
+        { "text": "Big Goron Sword", "correct": false },
+        { "text": "flute", "correct": true },
+        { "text": "gold sword", "correct": true }
+      ],
+      [
+        { "text": "gust jar", "correct": false },
+        { "text": "zora mask", "correct": false },
+        { "text": "bombos medallion", "correct": true },
+        { "text": "diving suit", "correct": false }
+      ],
+      [
+        { "text": "harp", "correct": false },
+        { "text": "goron shield", "correct": false },
+        { "text": "silver arrows", "correct": true },
+        { "text": "staff of seasons", "correct": false }
+      ]
+    ]
+  },
+  {
+    "id": "Question4",
+    "type": "multi",
+    "question": "Who is the first companion you meet in Paper Mario?",
+    "answerA": "Goombette",
+    "answerB": "Spike",
+    "answerC": "Goombario",
+    "answerD": "Paratrooper",
+    "answer": "C: Goombario"
+  },
+  {
+    "id": "Question5",
+    "type": "easy",
+    "question": "What is the name of the spiritual predecessor of the Souls series?",
+    "answer": "King's Field"
+  },
+  {
+    "id": "Question6",
+    "type": "character",
+    "question": "Who's this character?",
+    "img": "img/character/knuckles.jpg",
+    "answer": "Knuckles the Echidna"
+  },
+  {
+    "id": "Question7",
+    "type": "audio",
+    "audio": "audio/audio/greenpath.mp3",
+    "question": "What game is the following audio from?",
+    "answer": "Hollowknight - Greenpath"
+  },
+  {
+    "id": "Question8",
+    "type": "hint",
+    "question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
+    "hint1": "Purple",
+    "hint2": "Big",
+    "hint3": "Cat",
+    "answer": "Big the cat (Sonic Series)"
+  },
+  {
+    "id": "Question9",
+    "type": "jukebox",
+    "audio": "audio/jukebox/Skyclad_Observer.mp3",
+    "question": "What game is the following song from?",
+    "answer": "Steins;Gate"
+  },
+  {
+    "id": "Question10",
+    "type": "screen",
+    "img": "img/screenshot/MHW.jpg",
+    "question": "What game is the following screenshot from?",
+    "answer": "Monster Hunter World"
+  },
+  {
+    "id": "Question11",
+    "type": "easy",
+    "question": "What did Nintendo produce when the company started?",
+    "answer": "(Hanafuda) Cards"
+  },
+  {
+    "id": "Question12",
+    "type": "character",
+    "question": "Who's this character?",
+    "img": "img/character/arle.jpg",
+    "answer": "Arle Nadja"
+  },
+  {
+    "id": "Question13",
+    "type": "jukebox",
+    "audio": "audio/jukebox/gfp.mp3",
+    "question": "What game is the following song from?",
+    "answer": "The Guided Fate Paradox"
+  },
+  {
+    "id": "Question14",
+    "type": "mine",
+    "question": "Which of these are magic skills in the game Blasphemous?",
+    "tiles": [
+      [
+        { "text": "Cantina of the Blue Rose", "correct": true },
+        { "text": "Lament of the Hollowed Vessel", "correct": false },
+        { "text": "Benediction of the Withered Palms", "correct": false },
+        { "text": "Toll of the Penurious Bell", "correct": false }
+      ],
+      [
+        { "text": "Supplication of the Nameless Choir", "correct": false },
+        { "text": "Lorquiana", "correct": true },
+        { "text": "Song of the Gilded Ache", "correct": false },
+        { "text": "Taranto to My Sister", "correct": true }
+      ],
+      [
+        { "text": "Romance to the Crimson Mist", "correct": true },
+        { "text": "Cry of the Sorrow-Made Clay", "correct": false },
+        { "text": "Oath of the Severed Dawn", "correct": false },
+        { "text": "Dirge of the Quiet Marrow", "correct": false }
+      ]
+    ]
+  },
+  {
+    "id": "Question15",
+    "type": "brutal",
+    "question": "How many playable classes exist in Agarest: Generations of war 2?",
+    "answer": "3"
+  },
+  {
+    "id": "Question16",
+    "type": "audio",
+    "audio": "audio/audio/momoyo.mp3",
+    "question": "What game is the following audio from?",
+    "answer": "Touhou 18 - Unconnected Marketeers"
+  },
+  {
+    "id": "Question17",
+    "type": "screen",
+    "img": "img/screenshot/lollipop.jpg",
+    "question": "What game is the following screenshot from?",
+    "answer": "Lollipop Chainsaw RePOP"
+  },
+  {
+    "id": "Question18",
+    "type": "brutal",
+    "question": "How many colony cities of Homs do you visit in Xenoblade Chronicles?",
+    "answer": "2 (Colony 6 and 9)"
+  },
+  {
+    "id": "Question19",
+    "type": "multi",
+    "question": "Which of these Eeveelutions was introduced in Generation 2?",
+    "answerA": "Leafeon",
+    "answerB": "Umbreon",
+    "answerC": "Vaporeon",
+    "answerD": "Sylveon",
+    "answer": "B: Umbreon"
+  },
+  {
+    "id": "Question20",
+    "type": "audio",
+    "audio": "audio/audio/breach.mp3",
+    "question": "What game is the following audio from?",
+    "answer": "Into the Breach"
+  },
+  {
+    "id": "Question21",
+    "type": "qte",
+    "question": "To Kart or Not To Kart? <br> Are these real kart names in Mario Kart: Double Dash?",
+    "qteItems": [
+      { "text": "Turbo Yoshi", "correct": true },
+      { "text": "Blue Fire", "correct": false },
+      { "text": "Jet Star", "correct": false },
+      { "text": "Toadette Kart", "correct": true },
+      { "text": "Dragoon", "correct": false }
+    ]
+  },
+  {
+    "id": "Question22",
+    "type": "easy",
+    "question": "In which game do you train horse girls and compete in horse girl races?",
+    "answer": "Umamusume (Pretty Derby)"
+  },
+  {
+    "id": "Question23",
+    "type": "mine",
+    "question": "Which of these card of the Watcher class in Slay the Spire?",
+    "tiles": [
+      [
+        { "text": "Lotus Guard", "correct": false },
+        { "text": "Inner Lattice", "correct": false },
+        { "text": "Empty Mind", "correct": true },
+        { "text": "Echoing Ki", "correct": false }
+      ],
+      [
+        { "text": "Signature Move", "correct": true },
+        { "text": "Foreign Influence", "correct": true },
+        { "text": "Wrathful Petals", "correct": false },
+        { "text": "Pray", "correct": true }
+      ],
+      [
+        { "text": "Mirror of Intent", "correct": false },
+        { "text": "Flicker Palm", "correct": false },
+        { "text": "Shifting Prayer", "correct": false },
+        { "text": "Serene Orbit", "correct": false }
+      ]
+    ]
+  },
+  {
+    "id": "Question24",
+    "type": "screen",
+    "img": "img/screenshot/hoh.jpg",
+    "question": "What game is the following screenshot from?",
+    "answer": "Guild Wars 1 - Hall of Heroes"
+  },
+  {
+    "id": "Question25",
+    "type": "audio",
+    "audio": "audio/audio/onett.mp3",
+    "question": "What game is the following audio from?",
+    "answer": "Mother / Earthbound 2"
+  },
+  {
+    "id": "Question26",
+    "type": "brutal",
+    "question": "How many new Pokémon were added in Generation 5?",
+    "answer": "156"
+  },
+  {
+    "id": "Question27",
+    "type": "brutal",
+    "question": "How many standard copy abilities exist in the Kirby franchise?",
+    "answer": "Poyo Poyo (71)"
+  },
+  {
+    "id": "Question28",
+    "type": "easy",
+    "question": "Who hides behind the alter ego 'Shadow Mario'?",
+    "answer": "Bowser Jr."
+  },
+  {
+    "id": "Question29",
+    "type": "screen",
+    "img": "img/screenshot/snap.jpg",
+    "question": "What game is the following screenshot from?",
+    "answer": "New Pokémon Snap"
+  },
+  {
+    "id": "Question30",
+    "type": "audio",
+    "audio": "audio/audio/sleuth.mp3",
+    "question": "What game is the following audio from?",
+    "answer": "Digimon Story - Cyber Sleuth"
+  },
+  {
+    "id": "Question31",
+    "type": "character",
+    "question": "Who's this character?",
+    "img": "img/character/waluigi.jpg",
+    "answer": "Waluigi"
+  },
+  {
+    "id": "Question32",
+    "type": "mine",
+    "question": "Which of these are playable cars in F-Zero for the SNES?",
+    "tiles": [
+      [
+        { "text": "Thunder Mantis", "correct": false },
+        { "text": "Wild Goose", "correct": true },
+        { "text": "Silver Osprey", "correct": false },
+        { "text": "Blaze Condor", "correct": false }
+      ],
+      [
+        { "text": "Iron Lynx", "correct": false },
+        { "text": "Phantom Jackal", "correct": false },
+        { "text": "Blue Falcon", "correct": true },
+        { "text": "Fire Stingray", "correct": true }
+      ],
+      [
+        { "text": "Emerald Raptor", "correct": false },
+        { "text": "Chrome Hornet", "correct": false },
+        { "text": "Golden Fox", "correct": true },
+        { "text": "Crimson Viper", "correct": false }
+      ]
+    ]
+  },
+  {
+    "id": "Question33",
+    "type": "easy",
+    "question": "How is the newest franchise of Atlus called that plays in the style of Shin Megami Tensei?",
+    "answer": "Metaphor: ReFantazio"
+  },
+  {
+    "id": "Question34",
+    "type": "audio",
+    "audio": "audio/audio/persona5.mp3",
+    "question": "What game is the following audio from?",
+    "answer": "Persona 5"
+  },
+  {
+    "id": "Question35",
+    "type": "character",
+    "question": "Who's this character?",
+    "img": "img/character/gruntilda.png",
+    "answer": "Gruntilda"
+  }
+]
