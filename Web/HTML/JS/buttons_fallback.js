@@ -2,7 +2,8 @@
 // Main game logic, popover handling, lives/points
 
 import { loadQuestions, getQuestionData } from "./data.js";
-import { buildQuestionContent, createBranchContent } from "./contentBuilder.js";
+import { buildQuestionContent, createBranchContent, createGameoverContent } from "./contentBuilder.js";
+
 
 console.log("🟢 buttons.js loaded");
 
@@ -26,7 +27,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const livesImages = { 1: "img/misc/safe.png", 0: "img/misc/danger.png" };
 
   // Load JSON questions first
-  await loadQuestions();
+if (window.location.href.includes("Risky.html")) {
+  window.GAME_MODE = "risky";
+  await loadQuestions("JSON/qRisky.json"); // <-- different file
+} else {
+  window.GAME_MODE = "normal";
+  await loadQuestions("JSON/qNormal.json");
+}
+
 
   // -----------------------------
   // Restore disabled tiles (global)
@@ -68,54 +76,73 @@ document.addEventListener('DOMContentLoaded', async () => {
     localStorage.setItem('disabledTiles', JSON.stringify(disabledTiles));
   }
 
-  // -----------------------------
-  // Game over handling
-  // -----------------------------
-  function showGameOver() {
-    if (!gameoverPopover) return;
-
-    const gameoverText = gameoverPopover.querySelector('h2');
-    if (gameoverText) gameoverText.textContent = `Player ${playerName} scored ${pointsCounter} points`;
-
-    // Save the score
-    let scores = JSON.parse(localStorage.getItem('scores')) || [];
-    const existingIndex = scores.findIndex(s => s.player === playerName);
-    if (existingIndex >= 0) { 
-      scores[existingIndex].points = pointsCounter; 
-    } else { 
-      scores.push({ player: playerName, points: pointsCounter }); 
-    }
-    localStorage.setItem('scores', JSON.stringify(scores));
-
-    // --- RESET GAME STATE ---
-    localStorage.removeItem('livesCounter');
-    localStorage.removeItem('pointsCounter');
-
-    livesCounter = 1;
-    pointsCounter = 0;
-
-    gameoverPopover.classList.add('show');
-
-    const restartBtn = gameoverPopover.querySelector('.restartBtn');
-    if (restartBtn) restartBtn.addEventListener('click', () => window.location.href = 'Name.html');
-    const scoresBtn = gameoverPopover.querySelector('.scoresBtn');
-    if (scoresBtn) scoresBtn.addEventListener('click', () => window.location.href = 'Scores.html');
-    const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
-    if (dismissBtn) dismissBtn.addEventListener('click', () => gameoverPopover.classList.remove('show'));
-  }
-
-  updateLivesDisplay();
-  updatePointsDisplay();
-
-  // -----------------------------
-  // Popover container
-  // -----------------------------
-  let popoverContainer = document.getElementById("popoverContainer");
-  if (!popoverContainer) {
+// -----------------------------
+// Popover container
+// -----------------------------
+let popoverContainer = document.getElementById("popoverContainer");
+if (!popoverContainer) {
     popoverContainer = document.createElement("div");
     popoverContainer.id = "popoverContainer";
     document.body.appendChild(popoverContainer);
-  }
+}
+
+  // -----------------------------
+  // Game over handling
+  // -----------------------------
+function showGameOver() {
+    if (!popoverContainer) return;
+
+    let gameoverPopover = document.getElementById('gameoverPopover');
+    if (!gameoverPopover) {
+        gameoverPopover = createGameoverContent({ id: 'gameoverPopover' });
+        popoverContainer.appendChild(gameoverPopover);
+    }
+
+    // Inject dynamic content directly
+    const scoreDiv = gameoverPopover.querySelector('.gameover_popover_score h2');
+    if (scoreDiv) {
+        scoreDiv.textContent = `Player ${playerName} has scored ${pointsCounter} points`;
+    }
+
+    // Make sure the popover itself is visible
+    gameoverPopover.classList.add('show');
+
+
+    // Save the score in localStorage
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    const existingIndex = scores.findIndex(s => s.player === playerName);
+    if (existingIndex >= 0) {
+        scores[existingIndex].points = pointsCounter;
+    } else {
+        scores.push({ player: playerName, points: pointsCounter });
+    }
+    localStorage.setItem('scores', JSON.stringify(scores));
+
+    // Reset counters
+    localStorage.removeItem('livesCounter');
+    localStorage.removeItem('pointsCounter');
+    livesCounter = 1;
+    pointsCounter = 0;
+
+    // Show the popover
+    gameoverPopover.classList.add('show');
+
+    // Add button event listeners
+    const restartBtn = gameoverPopover.querySelector('.restartBtn');
+    if (restartBtn) restartBtn.addEventListener('click', () => window.location.href = 'Name.html');
+
+    const scoresBtn = gameoverPopover.querySelector('.scoresBtn');
+    if (scoresBtn) scoresBtn.addEventListener('click', () => window.location.href = 'Scores.html');
+
+    const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
+    if (dismissBtn) dismissBtn.addEventListener('click', () => gameoverPopover.classList.remove('show'));
+}
+
+
+
+
+  updateLivesDisplay();
+  updatePointsDisplay();
 
   // -----------------------------
   // Tile buttons (dynamic popovers)
@@ -227,6 +254,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
+  // Simple redirect function
+function goToPage(url) {
+  window.location.href = url;
+}
+
+  // Redirect button (DOM already ready here)
+const board2Btn = document.getElementById("board2Btn");
+
+if (board2Btn) {
+  board2Btn.addEventListener("click", () => {
+    goToPage("Normal2.html");
+  });
+}
+
   // -----------------------------
   // Popover buttons
   // -----------------------------
@@ -236,6 +277,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const answerBtn = popover.querySelector('.answerBtn');
     const skipBtn = popover.querySelector('.skipBtn');
     const answerDiv = popover.querySelector('.popover_answer');
+	const hint1Div = popover.querySelector('.popover_hint1');
+    const hint1Btn = popover.querySelector('.hint1Btn');
     const hint2Div = popover.querySelector('.popover_hint2');
     const hint2Btn = popover.querySelector('.hint2Btn');
     const hint3Div = popover.querySelector('.popover_hint3');
@@ -246,10 +289,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const host1Btn = popover.querySelector('.host1Btn');
     const host2Div = popover.querySelector('.popover_host2');
     const host2Btn = popover.querySelector('.host2Btn');
+	const host3Div = popover.querySelector('.popover_host3');
+    const host3Btn = popover.querySelector('.host3Btn');
     const decision1Div = popover.querySelector('.popover_decision1');
     const decision1Btn = popover.querySelector('.decision1Btn');
     const decision2Div = popover.querySelector('.popover_decision2');
     const decision2Btn = popover.querySelector('.decision2Btn');
+	const decision3Div = popover.querySelector('.popover_decision3');
+    const decision3Btn = popover.querySelector('.decision3Btn');
     const riskyYesBtn = popover.querySelector('.riskyYesBtn');
     const riskyNoBtn = popover.querySelector('.riskyNoBtn');
 
@@ -265,6 +312,20 @@ if (popover.classList.contains('minefieldPopover')) {
   minefieldCorrectCount = 0;
   minefieldPoints = 0;
   minefieldActive = true;
+
+  // Helper: reveal all tiles
+  function revealMinefieldTiles() {
+    popover.querySelectorAll('.minefieldTile').forEach(tileBtn => {
+      if (tileBtn.dataset.type === 'mine') {
+        tileBtn.classList.add('used-mine');
+        tileBtn.style.backgroundColor = "red";
+      } else {
+        tileBtn.classList.add('used-safe');
+        tileBtn.style.backgroundColor = "lime";
+      }
+      tileBtn.disabled = true; // disable all tiles
+    });
+  }
 
   popover.querySelectorAll('.minefieldTile').forEach(tileBtn => {
     tileBtn.disabled = false;
@@ -282,10 +343,15 @@ if (popover.classList.contains('minefieldPopover')) {
         minefieldActive = false;
         livesCounter--;
         updateLivesDisplay();
-		// delay the alert slightly so color renders first
-		setTimeout(() => {
-		alert("💥 Mine hit! Minigame over.");
-		}, 50);
+
+        // reveal all tiles
+        revealMinefieldTiles();
+
+        // delay the alert slightly so color renders first
+        setTimeout(() => {
+          alert("💥 Mine hit! Minigame over.");
+        }, 50);
+
       } else {
         tileBtn.classList.add('used-safe');
         tileBtn.style.backgroundColor = "lime"; // mark safe visually
@@ -306,6 +372,10 @@ if (popover.classList.contains('minefieldPopover')) {
             minefieldActive = false;
             pointsCounter += minefieldPoints;
             updatePointsDisplay();
+
+            // reveal all tiles
+            revealMinefieldTiles();
+
             alert(`You cashed out ${minefieldPoints} points!`);
           }
         }, 100);
@@ -313,6 +383,7 @@ if (popover.classList.contains('minefieldPopover')) {
     });
   });
 }
+
 
 
     // -----------------------------
@@ -358,6 +429,14 @@ if (popover.classList.contains('minefieldPopover')) {
       popover.classList.remove('show'); 
     });
 
+
+	// Hint System specific buttons
+	
+	if (hint1Btn && hint1Div) hint1Btn.addEventListener('click', () => { 
+      hint1Div.classList.add('show'); 
+      hint1Btn.parentElement.classList.add('hidden'); 
+    });
+	
     if (hint2Btn && hint2Div) hint2Btn.addEventListener('click', () => { 
       hint2Div.classList.add('show'); 
       hint2Btn.parentElement.classList.add('hidden'); 
@@ -368,33 +447,57 @@ if (popover.classList.contains('minefieldPopover')) {
       hint3Btn.parentElement.classList.add('hidden'); 
     });
 
+	// Solo System specific buttons
+	
     if (solo2Btn && solo2Div) solo2Btn.addEventListener('click', () => { 
       solo2Div.classList.add('show'); 
       solo2Btn.parentElement.classList.add('hidden'); 
     });
 
-    if (host1Btn && host2Btn && host1Div) host1Btn.addEventListener('click', () => { 
+	// Host System specific buttons
+
+    if (host1Btn && host2Btn && host3Btn && host1Div) host1Btn.addEventListener('click', () => { 
       host1Div.classList.add('show');
       host1Btn.parentElement.classList.add('hidden');
-      host2Btn.parentElement.classList.add('hidden'); 
+      host2Btn.parentElement.classList.add('hidden');
+	  host3Btn.parentElement.classList.add('hidden');
     });
 
-    if (host1Btn && host2Btn && host2Div) host2Btn.addEventListener('click', () => { 
+    if (host1Btn && host2Btn && host3Btn && host2Div) host2Btn.addEventListener('click', () => { 
       host2Div.classList.add('show'); 
       host1Btn.parentElement.classList.add('hidden');
       host2Btn.parentElement.classList.add('hidden'); 
+	  host3Btn.parentElement.classList.add('hidden');
+    });
+	
+	if (host1Btn && host2Btn && host3Btn && host3Div) host3Btn.addEventListener('click', () => { 
+      host3Div.classList.add('show'); 
+      host1Btn.parentElement.classList.add('hidden');
+      host2Btn.parentElement.classList.add('hidden');
+	  host3Btn.parentElement.classList.add('hidden');
     });
 
-    if (decision1Btn && decision2Btn && decision1Div) decision1Btn.addEventListener('click', () => { 
+	// Decision System specific buttons
+
+    if (decision1Btn && decision2Btn && decision3Btn && decision1Div) decision1Btn.addEventListener('click', () => { 
       decision1Div.classList.add('show');
       decision1Btn.parentElement.classList.add('hidden');
       decision2Btn.parentElement.classList.add('hidden'); 
+	  decision3Btn.parentElement.classList.add('hidden'); 
     });
 
-    if (decision1Btn && decision2Btn && decision2Div) decision2Btn.addEventListener('click', () => { 
+    if (decision1Btn && decision2Btn && decision3Btn && decision2Div) decision2Btn.addEventListener('click', () => { 
       decision2Div.classList.add('show'); 
       decision1Btn.parentElement.classList.add('hidden');
+      decision2Btn.parentElement.classList.add('hidden');
+	  decision3Btn.parentElement.classList.add('hidden');
+    });
+	
+	if (decision1Btn && decision2Btn && decision3Btn && decision1Div) decision3Btn.addEventListener('click', () => { 
+      decision3Div.classList.add('show');
+      decision1Btn.parentElement.classList.add('hidden');
       decision2Btn.parentElement.classList.add('hidden'); 
+	  decision3Btn.parentElement.classList.add('hidden'); 
     });
 
     if (riskyYesBtn) {
@@ -564,24 +667,42 @@ if (wrongqteBtn) {
     btnCheck.addEventListener('click', () => {
       playerName = playerInput.value.trim();
       localStorage.setItem('playerName', playerName);
-      window.location.href = 'Main_New.html';
+      window.location.href = 'Normal.html';
     });
   }
 
-  // -----------------------------
-  // Keyboard shortcuts
-  // -----------------------------
-  document.addEventListener("keydown", (event) => {
-    const key = event.key.toLowerCase();
-    const currentPopover = document.querySelector(".popover.show");
-    if (!currentPopover) return;
+// -----------------------------
+// Keyboard shortcuts
+// -----------------------------
+document.addEventListener("keydown", (event) => {
+  const key = event.key.toLowerCase();
+  const currentPopover = document.querySelector(".popover.show");
+  if (!currentPopover) return;
 
+  if (currentPopover.dataset.type === "qte") {
+    // QTE popover shortcuts
     switch (key) {
-      case "r": const rightBtn = currentPopover.querySelector(".rightBtn"); if (rightBtn) rightBtn.click(); break;
-      case "w": const wrongBtn = currentPopover.querySelector(".wrongBtn"); if (wrongBtn) wrongBtn.click(); break;
-      case "a": case " ": const answerBtn = currentPopover.querySelector(".answerBtn"); if (answerBtn) answerBtn.click(); break;
+      case "r": currentPopover.querySelector(".rightqteBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongqteBtn")?.click(); break;
+      case "a": currentPopover.querySelector(".answerqteBtn")?.click(); break;
+      case "g": currentPopover.querySelector(".qtegobtn")?.click(); break;
     }
-  });
+  } else {
+    // Normal popover shortcuts
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "a":
+      case " ": currentPopover.querySelector(".answerBtn")?.click(); break;
+      case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
+    }
+  }
+});
+
+
+
+
+
 
   document.addEventListener("keydown", (event) => {
     const key = event.key.toLowerCase();

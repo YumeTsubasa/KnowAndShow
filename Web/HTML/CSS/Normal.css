@@ -8,7 +8,7 @@
     src: url('../font/The Rift Shop.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-	color: #FFFFFF;
+	color: #40291A;
 }
 
 body {
@@ -20,13 +20,13 @@ body {
 h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 15px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 10px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* body container */
@@ -62,7 +62,7 @@ h2 {
     margin: 0;
     font-size: 85px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #40291A;
     text-align: center;
 }
 
@@ -73,6 +73,25 @@ h2 {
     position: absolute;
     top: 60px;
     left: 250px;
+}
+
+/* Board 2 button */
+
+.btnBoard2 {
+    width: 150px;
+    height: 105px;
+    position: absolute;
+    top: 60px;
+    right: 213px;
+}
+
+.btnBoard2 h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+	display: flex;
+	justify-content: left;
+    align-items: left; 
+    font-size: 25px;
+	text-align: left; 
 }
 
 /* Carousel container */
@@ -145,7 +164,6 @@ h2 {
 }
 */
 
-
 .popover_cat_img {
     width: 1050px;
     height: 400px;
@@ -164,7 +182,6 @@ h2 {
     height: 100%;
 	object-fit: contain;
 }
-
 
 /* Question/Interactive boxes */
 
@@ -226,7 +243,7 @@ h2 {
 .popover_answer h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 60px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_answer.show {
@@ -334,7 +351,7 @@ h2 {
 .popover_answer_multiD h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 50px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* QTE */
@@ -352,7 +369,7 @@ h2 {
 .popover_item_display h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 50px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_item_display.hidden {
@@ -384,13 +401,11 @@ h2 {
 }
 
 .popover_answerQTE {
-    width: 560px;
+    width: 1380px;
     height: 70px;
-	/* border: 5px solid #00FF00;
-    background-color: #000; */
     position: absolute;
-    left: 420px;
-    bottom: 20px;
+    left: 10px;
+    bottom: 13px;
     display: none;
 	text-align: center;
 }
@@ -398,7 +413,7 @@ h2 {
 .popover_answerQTE h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 60px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_answerQTE.show{
@@ -561,7 +576,7 @@ h2 {
 .popover_hint3 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_btnHint1 {
@@ -619,7 +634,7 @@ h2 {
 .popover_btnhint3 h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Minefield */
@@ -634,7 +649,7 @@ h2 {
     left: 11px;
     bottom: 11px;
 	text-align: left;
-	border: 5px solid #FFFFFF;
+	border: 5px solid #40291A;
 	overflow: hidden;
 }
 .popover_mine > ol {
@@ -657,7 +672,7 @@ h2 {
   overflow: hidden;
   /* enable container queries (font only) */
   container-type: inline-size;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #40291A;
   cursor: pointer;       /* ← makes it clickable */
   user-select: none;     /* optional: prevents text selection on click */
   transition: background-color 0.25s ease;
@@ -665,7 +680,7 @@ h2 {
 
 .carousel-item_mine h1 {
   margin: 0;
-  color: #FFFFFF;
+  color: #40291A;
   font-family: 'MyCustomFont', Arial, sans-serif;
   /* fit text better */
   text-align: center;
@@ -716,7 +731,7 @@ h2 {
 .popover_solo2 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Audience Game Challenge */
@@ -734,7 +749,7 @@ h2 {
 .popover_audience h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Team Effort */
@@ -752,7 +767,7 @@ h2 {
 .popover_team h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Sign of Trust */
@@ -770,7 +785,7 @@ h2 {
 .popover_trust h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Host Challenge */
@@ -855,7 +870,7 @@ h2 {
 .popover_host3, h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .popover_btnHost1,
@@ -863,7 +878,7 @@ h2 {
 .popover_btnHost3, h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Branching Paths */
@@ -889,7 +904,7 @@ h2 {
 .popover_question_text h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 	text-align: left;
 }
 
@@ -979,7 +994,7 @@ h2 {
 .popover_decision2 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Risky Strat */
@@ -1072,13 +1087,13 @@ gameover_popover_gameoverBtn img {
 .gameover_popover_header h1 {
 	font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 .gameover_popover_score h2 {
 	font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #40291A;
 }
 
 /* Buttons */

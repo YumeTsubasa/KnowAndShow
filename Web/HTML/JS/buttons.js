@@ -27,7 +27,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   const livesImages = { 1: "img/misc/safe.png", 0: "img/misc/danger.png" };
 
   // Load JSON questions first
-  await loadQuestions();
+if (window.location.href.includes("Risky.html")) {
+  window.GAME_MODE = "risky";
+  await loadQuestions("JSON/qRisky.json"); // <-- different file
+} else {
+  window.GAME_MODE = "normal";
+  await loadQuestions("JSON/qNormal.json");
+}
+
 
   // -----------------------------
   // Restore disabled tiles (global)
@@ -247,6 +254,20 @@ function showGameOver() {
     });
   });
 
+  // Simple redirect function
+function goToPage(url) {
+  window.location.href = url;
+}
+
+  // Redirect button (DOM already ready here)
+const board2Btn = document.getElementById("board2Btn");
+
+if (board2Btn) {
+  board2Btn.addEventListener("click", () => {
+    goToPage("Normal2.html");
+  });
+}
+
   // -----------------------------
   // Popover buttons
   // -----------------------------
@@ -287,59 +308,102 @@ let minefieldPoints = 0;
 let minefieldActive = false;
 
 // Start minefield if this popover is a minefield
-if (popover.classList.contains('minefieldPopover')) {
-  minefieldCorrectCount = 0;
-  minefieldPoints = 0;
-  minefieldActive = true;
+let selectedTiles = [];
+minefieldPoints = 0;
+minefieldActive = true;
 
-  popover.querySelectorAll('.minefieldTile').forEach(tileBtn => {
-    tileBtn.disabled = false;
-    tileBtn.classList.remove('used-safe','used-mine');
-    tileBtn.style.backgroundColor = ""; // reset background
+// Collect all minefield tiles
+const tiles = Array.from(popover.querySelectorAll('.minefieldTile'));
 
-    tileBtn.addEventListener('click', () => {
-      if (!minefieldActive) return;
-      const isMine = tileBtn.dataset.type === 'mine';
-      tileBtn.disabled = true;
+// Reset all tiles
+tiles.forEach(tileBtn => {
+  tileBtn.disabled = false;
+  tileBtn.classList.remove('used-safe', 'used-mine', 'selected', 'last-selected');
+  tileBtn.style.backgroundColor = "";
+});
 
-      if (isMine) {
-        tileBtn.classList.add('used-mine');
-        tileBtn.style.backgroundColor = "red"; // mark mine visually
+// Tile click handler
+tiles.forEach(tileBtn => {
+  tileBtn.addEventListener('click', () => {
+    if (!minefieldActive) return;
+
+    // Remove last-selected class from all tiles
+    tiles.forEach(t => t.classList.remove('last-selected'));
+
+    // Toggle selection
+    if (selectedTiles.includes(tileBtn)) {
+      tileBtn.classList.remove('selected');
+      tileBtn.style.backgroundColor = "";
+      selectedTiles = selectedTiles.filter(t => t !== tileBtn);
+    } else if (selectedTiles.length < 4) {
+      selectedTiles.push(tileBtn);
+      tileBtn.classList.add('selected');
+      tileBtn.classList.add('last-selected'); // mark as last selected
+      tileBtn.style.backgroundColor = "#4dd0e1"; // teal-ish
+    }
+
+    // Once 4 tiles are selected, confirm
+    if (selectedTiles.length === 4) {
+      // Highlight last tile before prompt
+      const lastTile = selectedTiles[selectedTiles.length - 1];
+      lastTile.classList.add('last-selected');
+      lastTile.style.backgroundColor = "#4dd0e1";
+
+      // Tiny delay to render last tile highlight
+      setTimeout(() => {
+        const confirmSelection = confirm("You selected 4 tiles. Do you want to reveal them?");
+        if (!confirmSelection) return;
+
         minefieldActive = false;
-        livesCounter--;
-        updateLivesDisplay();
-		// delay the alert slightly so color renders first
-		setTimeout(() => {
-		alert("💥 Mine hit! Minigame over.");
-		}, 50);
-      } else {
-        tileBtn.classList.add('used-safe');
-        tileBtn.style.backgroundColor = "lime"; // mark safe visually
-        minefieldCorrectCount++;
 
-        // Update potential points
-        switch(minefieldCorrectCount) {
-          case 1: minefieldPoints = 0; break;
-          case 2: minefieldPoints = 1; break;
-          case 3: minefieldPoints = 2; break;
-          case 4: minefieldPoints = 3; break;
+        // Disable all tiles
+        tiles.forEach(t => t.disabled = true);
+
+        // Separate non-selected tiles
+        let nonSelectedTiles = tiles.filter(t => !selectedTiles.includes(t));
+        nonSelectedTiles = nonSelectedTiles.sort(() => Math.random() - 0.5); // shuffle
+
+        // --- Reveal chosen tiles first ---
+        let selIdx = 0;
+        function revealSelected() {
+          if (selIdx >= selectedTiles.length) {
+            // After chosen tiles, reveal non-selected tiles
+            let idx = 0;
+            function revealNonSelected() {
+              if (idx >= nonSelectedTiles.length) {
+                // All tiles revealed, calculate points
+                const safeCount = selectedTiles.filter(t => t.dataset.type !== 'mine').length;
+                minefieldPoints = safeCount;
+                pointsCounter += minefieldPoints;
+                updatePointsDisplay();
+
+                alert(`You revealed ${safeCount} safe tiles and earned ${minefieldPoints} points!`);
+                return;
+              }
+
+              const tile = nonSelectedTiles[idx];
+              tile.style.backgroundColor = tile.dataset.type === 'mine' ? "red" : "lime";
+              tile.classList.add(tile.dataset.type === 'mine' ? 'used-mine' : 'used-safe');
+              idx++;
+              setTimeout(revealNonSelected, 300); // 0.3s delay for non-selected tiles
+            }
+            revealNonSelected();
+            return;
+          }
+
+          const tile = selectedTiles[selIdx];
+          tile.style.backgroundColor = tile.dataset.type === 'mine' ? "red" : "lime";
+          tile.classList.add(tile.dataset.type === 'mine' ? 'used-mine' : 'used-safe');
+          selIdx++;
+          setTimeout(revealSelected, 750); // 0.75s delay for chosen tiles
         }
 
-        // Ask player if they want to continue or cash out
-        setTimeout(() => {
-          const continueGame = confirm(`Safe tile! Current potential points: ${minefieldPoints}\nDo you want to continue?`);
-          if (!continueGame || minefieldCorrectCount === 4) {
-            minefieldActive = false;
-            pointsCounter += minefieldPoints;
-            updatePointsDisplay();
-            alert(`You cashed out ${minefieldPoints} points!`);
-          }
-        }, 100);
-      }
-    });
-  });
-}
+        revealSelected(); // start revealing chosen tiles
 
+      }, 50); // tiny delay before prompt
+    }
+  });
+});
 
     // -----------------------------
     // Disable tile after use
@@ -622,25 +686,41 @@ if (wrongqteBtn) {
     btnCheck.addEventListener('click', () => {
       playerName = playerInput.value.trim();
       localStorage.setItem('playerName', playerName);
-      window.location.href = 'Main_New.html';
+      window.location.href = 'Normal.html';
     });
   }
 
-  // -----------------------------
-  // Keyboard shortcuts
-  // -----------------------------
-  document.addEventListener("keydown", (event) => {
-    const key = event.key.toLowerCase();
-    const currentPopover = document.querySelector(".popover.show");
-	if (!currentPopover) return;
+// -----------------------------
+// Keyboard shortcuts
+// -----------------------------
+document.addEventListener("keydown", (event) => {
+  const key = event.key.toLowerCase();
+  const currentPopover = document.querySelector(".popover.show");
+  if (!currentPopover) return;
 
-	switch (key) {
-    case "r": const rightBtn = currentPopover.querySelector(".rightBtn"); if (rightBtn) rightBtn.click(); break;
-	case "w": const wrongBtn = currentPopover.querySelector(".wrongBtn"); if (wrongBtn) wrongBtn.click(); break;
-	case "a": case " ": const answerBtn = currentPopover.querySelector(".answerBtn"); if (answerBtn) answerBtn.click(); break;
-	case "s": const skipBtn = currentPopover.querySelector(".skipBtn"); if (skipBtn) skipBtn.click(); break;
-	}
+  if (currentPopover.dataset.type === "qte") {
+    // QTE popover shortcuts
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightqteBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongqteBtn")?.click(); break;
+      case "a": currentPopover.querySelector(".answerqteBtn")?.click(); break;
+      case "g": currentPopover.querySelector(".qtegobtn")?.click(); break;
+    }
+  } else {
+    // Normal popover shortcuts
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "a":
+      case " ": currentPopover.querySelector(".answerBtn")?.click(); break;
+      case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
+    }
+  }
 });
+
+
+
+
 
 
   document.addEventListener("keydown", (event) => {

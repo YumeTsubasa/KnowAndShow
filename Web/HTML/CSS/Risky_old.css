@@ -8,7 +8,6 @@
     src: url('../font/The Rift Shop.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-	color: #FFFFFF;
 }
 
 body {
@@ -20,13 +19,13 @@ body {
 h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 15px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 10px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 /* body container */
@@ -62,7 +61,7 @@ h2 {
     margin: 0;
     font-size: 85px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #CE773B;
     text-align: center;
 }
 
@@ -124,7 +123,7 @@ h2 {
 /* Category Box */
 
 .popover_cat_body {
-    width: 1400px;
+    width: 100%;
     height: 550px;
     background-color: #000;
     position: absolute;
@@ -147,10 +146,11 @@ h2 {
 
 
 .popover_cat_img {
-    width: 1050px;
-    height: 400px;
-	top: 75px;
-	left: 175px;
+    width: 1380px;
+    height: 530px;
+	top: 10px;
+	left: 10px;
+    /* border: 5px solid #00FF00; */
 	display: flex;
     justify-content: center;   /* horizontal center */
     align-items: center;       /* vertical center */
@@ -160,9 +160,6 @@ h2 {
 .popover_cat_img img {
 	display:block;
 	margin: 0 auto;
-	width: 100%;
-    height: 100%;
-	object-fit: contain;
 }
 
 
@@ -171,7 +168,7 @@ h2 {
 /* Main */
 
 .popover_question_body {
-    width: 1400px;
+    width: 100%;
     height: 305px;
     background-color: #000;
     position: absolute;
@@ -185,40 +182,41 @@ h2 {
 }
 
 .popover_question_text {
-    width: 1380px;
-    height: 100px;
+    width: 97%;
+    height: 170px;
     position: absolute;
-    top: 10px;
-	left: 10px;
+	/* border: 5px solid #00FF00;
+    background-color: #000; */
+    top: 7px;
+	left: 15px;
 }
 
 .popover_question_text h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 60px;
+    color: #CE773B;
+}
+
+.popover_question_text h2 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
 	display: flex;
-	justify-content: left;
-    align-items: left; 
-    font-size: 35px;
-	text-align: left; 
+	justify-content: center;
+    align-items: center; 
+    font-size: 40px;
+    color: #CE773B;
+	text-align: center; 
 }
-
-.typewriter-cursor {
-  border-right: 2px solid currentColor;
-  animation: blink 0.6s steps(1) infinite;
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
 
 /* Popover buttons */
 
 .popover_answer {
-    width: 1380px;
+    width: 560px;
     height: 70px;
+	/* border: 5px solid #00FF00;
+    background-color: #000; */
     position: absolute;
-    left: 10px;
-    bottom: 13px;
+    left: 420px;
+    bottom: 20px;
     display: none;
 	text-align: center;
 }
@@ -226,7 +224,7 @@ h2 {
 .popover_answer h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 60px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 .popover_answer.show {
@@ -239,7 +237,6 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 630px;
-	display:none;
 }
 
 .popover_btnAnswer.hidden {
@@ -252,7 +249,6 @@ h2 {
     position: absolute;
     bottom: 120px;
     right: 40px;
-	display:none;
 }
 
 .popover_btnRight {
@@ -261,7 +257,6 @@ h2 {
     position: absolute;
     bottom: 20px;
     right: 40px;
-	display:none;
 }
 
 .popover_btnWrong {
@@ -270,7 +265,6 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 40px;
-	display:none;
 }
 
 .popover_btnAnswer,
@@ -334,125 +328,22 @@ h2 {
 .popover_answer_multiD h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 50px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
-
-/* QTE */
-
-.popover_item_display {
-    width: 300px;
-    height: 70px;
-    position: absolute;
-    bottom: 100px;
-    left: 550px;
-	z-index: 9999;
-	display:block;
-}
-
-.popover_item_display h2 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 50px;
-    color: #FFFFFF;
-}
-
-.popover_item_display.hidden {
-	display:none;
-}
-
-.popover_btnGo {
-    width: 141px;
-    height: 70px;
-    position: absolute;
-    bottom: 100px;
-    left: 630px;
-	pointer-events: auto;
-	z-index: 99999;
-}
-
-.popover_btnGo.hidden {
-    display: none;
-}
-.popover_btnGo img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.popover_btnGo button {
-    width: 100%;
-    height: 100%;
-}
-
-.popover_answerQTE {
-    width: 560px;
-    height: 70px;
-	/* border: 5px solid #00FF00;
-    background-color: #000; */
-    position: absolute;
-    left: 420px;
-    bottom: 20px;
-    display: none;
-	text-align: center;
-}
-
-.popover_answerQTE h1 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 60px;
-    color: #FFFFFF;
-}
-
-.popover_answerQTE.show{
-    display: block;
-}
-
-.popover_btnAnswerQTE {
-    width: 141px;
-    height: 70px;
-    position: absolute;
-    bottom: 20px;
-    left: 630px;
-}
-
-.popover_btnAnswerQTE.hidden {
-    display: none;
-}
-
-.popover_btnRightQTE {
-    width: 141px;
-    height: 70px;
-    position: absolute;
-    bottom: 20px;
-    right: 40px;
-}
-
-.popover_btnWrongQTE {
-    width: 141px;
-    height: 70px;
-    position: absolute;
-    bottom: 20px;
-    left: 40px;
-}
-
-.popover_btnAnswerQTE,
-.popover_btnRightQTE,
-.popover_btnWrongQTE	{
-    /* border: 5px solid #00FF00;
-    background-color: #000; */
-    object-fit: contain;
-}
-
 
 /* Screenshot */
 
 .popover_screenshot {
-    width: 1200px;
+    width: 500px;
     height: 500px;
+    background-color: #000;
     position: absolute;
     top: 25px;
-    left: 100px;
+    left: 450px;
 	opacity:1; 
 	transition: opacity 1s ease;
 	z-index: 9999;
+	background:none;
 }
 
 .popover_screenshot img {
@@ -472,14 +363,16 @@ h2 {
 /* Character Spotlight */
 
 .popover_character {
-    width: 1200px;
+    width: 500px;
     height: 500px;
+    background-color: #000;
     position: absolute;
     top: 25px;
-    left: 100px;
+    left: 450px;
 	opacity:1; 
 	transition: opacity 1s ease;
 	z-index: 9999;
+	background:none;
 }
 
 .popover_character img {
@@ -519,13 +412,8 @@ h2 {
     height: 50px;
     position: absolute;
     left: 30px;
-    top: 110px;
+    top: 60px;
 	text-align: left;
-	display: none;
-}
-
-.popover_hint1.show {
-    display: block;
 }
 
 .popover_hint2 {
@@ -533,7 +421,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 30px;
-    top: 160px;
+    top: 110px;
 	text-align: left;
 	display: none;
 }
@@ -547,7 +435,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 30px;
-    top: 210px;
+    top: 160px;
 	text-align: left;
 	display: none;
 }
@@ -561,19 +449,7 @@ h2 {
 .popover_hint3 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
-}
-
-.popover_btnHint1 {
-    width: 100px;
-    height: 50px;
-    position: absolute;
-	display: block;
-    left: 30px;
-    top: 110px;
-}
-.popover_btnHint1.hidden {
-    display: none;
+    color: #CE773B;
 }
 
 .popover_btnHint2 {
@@ -582,7 +458,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 30px;
-    top: 160px;
+    top: 110px;
 }
 .popover_btnHint2.hidden {
     display: none;
@@ -601,7 +477,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 30px;
-    top: 210px;
+    top: 160px;
 }
 
 .popover_btnHint3.hidden {
@@ -613,69 +489,6 @@ h2 {
     height: 100%;
     object-fit: contain;
 }
-
-.popover_btnhint1 h1,
-.popover_btnhint2 h1,
-.popover_btnhint3 h1 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #FFFFFF;
-}
-
-/* Minefield */
-
-.popover_mine {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);  /* 4 columns */
-	grid-template-rows: repeat(3, 1fr);      /* 3 rows */
-    width: 1378px;
-    height: 175px;
-    position: absolute;
-    left: 11px;
-    bottom: 11px;
-	text-align: left;
-	border: 5px solid #FFFFFF;
-	overflow: hidden;
-}
-.popover_mine > ol {
-  display: contents;   /* KEY: makes <li> become direct grid children */
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.carousel-item_mine {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 8px;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  /* Prevent resizing */
-  overflow: hidden;
-  /* enable container queries (font only) */
-  container-type: inline-size;
-  border: 2px solid #FFFFFF;
-  cursor: pointer;       /* ← makes it clickable */
-  user-select: none;     /* optional: prevents text selection on click */
-  transition: background-color 0.25s ease;
-}
-
-.carousel-item_mine h1 {
-  margin: 0;
-  color: #FFFFFF;
-  font-family: 'MyCustomFont', Arial, sans-serif;
-  /* fit text better */
-  text-align: center;
-  text-wrap: balance;
-  overflow-wrap: break-word;
-  width: 100%;
-  /* autoresize text based on tile width */
-  font-size: clamp(30px, 7cqw, 36px);
-}
-
 
 /* Solo Game Challenge*/
 
@@ -716,7 +529,7 @@ h2 {
 .popover_solo2 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 /* Audience Game Challenge */
@@ -734,7 +547,7 @@ h2 {
 .popover_audience h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 /* Team Effort */
@@ -752,7 +565,7 @@ h2 {
 .popover_team h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 /* Sign of Trust */
@@ -770,7 +583,7 @@ h2 {
 .popover_trust h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 /* Host Challenge */
@@ -813,57 +626,33 @@ h2 {
 	display: none;
 }
 
-.popover_btnHost3 {
-    width: 100px;
-    height: 50px;
-    position: absolute;
-	display: block;
-    left: 30px;
-    top: 180px;
-}
-
-.popover_host3 {
-    width: 1160px;
-    height: 50px;
-    position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: none;
-}
-
 .popover_host1.show,
-.popover_host2.show,
-.popover_host3.show {
+.popover_host2.show {
     display: block;
 }
 
 .popover_host1.hidden,
-.popover_host2.hidden,
-.popover_host3.hidden {
+.popover_host2.hidden {
     display: none;
 }
 
 .popover_btnHost1.hidden,
-.popover_btnHost2.hidden,
-.popover_btnHost3.hidden {
+.popover_btnHost2.hidden {
     display: none;
 }
 
 .popover_host1,
-.popover_host2,
-.popover_host3, h2 {
+.popover_host2, h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
-.popover_btnHost1,
-.popover_btnHost2,
-.popover_btnHost3, h1 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #FFFFFF;
+.popover_btnHost1_btn,
+.popover_btnHost2_btn, img {
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* Branching Paths */
@@ -888,9 +677,9 @@ h2 {
 
 .popover_question_text h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #FFFFFF;
-	text-align: left;
+    font-size: 35px;
+    color: #CE773B;
+	text-align: center;
 }
 
 .popover_btnDecision1 {
@@ -931,40 +720,18 @@ h2 {
 	display: none;
 }
 
-.popover_btnDecision3 {
-    width: 300px;
-    height: 50px;
-    position: absolute;
-	display: block;
-    left: 30px;
-    top: 180px;
-}
-
-.popover_decision3 {
-    width: 1160px;
-    height: 50px;
-    position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: none;
-}
-
 .popover_decision1.show,
-.popover_decision2.show,
-.popover_decision3.show {
+ .popover_decision2.show {
     display: block;
 }
 
 .popover_decision1.hidden,
-.popover_decision2.hidden,
-.popover_decision3.hidden {
+.popover_decision2.hidden {
     display: none;
 }
 
 .popover_btnDecision1.hidden,
-.popover_btnDecision2.hidden,
-.popover_btnDecision3.hidden {
+.popover_btnDecision2.hidden {
     display: none;
 } 
 
@@ -979,7 +746,7 @@ h2 {
 .popover_decision2 h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 40px;
-    color: #FFFFFF;
+    color: #CE773B;
 }
 
 /* Risky Strat */
@@ -1002,9 +769,16 @@ h2 {
 
 /* Gameover popover */
 .gameover_popover {
+    display: none;
     width: 1400px;
     height: 855px;
+    background: black;
     position: absolute;
+    top: 185px;
+    left: 250px;
+    bottom: 40px;
+    right: 40px;
+    transform: translateY(10px);
     transition: opacity 1s ease, transform 1s ease;
     pointer-events: auto;
     z-index: 999;
@@ -1013,22 +787,6 @@ h2 {
 
 .gameover_popover.show {
     display: flex;
-}
-
-.gameover_popover_header {
-    width: 1000px;
-    height: 100px;
-    position: absolute;
-    top: 50px;
-    left: 200px;
-}
-
-.gameover_popover_score {
-    width: 1000px;
-    height: 100px;
-    position: absolute;
-    top: 150px;
-    left: 200px;
 }
 
 .gameover_popover_gameoverBtn {
@@ -1067,18 +825,6 @@ gameover_popover_gameoverBtn img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-}
-
-.gameover_popover_header h1 {
-	font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #FFFFFF;
-}
-
-.gameover_popover_score h2 {
-	font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #FFFFFF;
 }
 
 /* Buttons */

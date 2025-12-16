@@ -147,13 +147,11 @@ h2 {
 }
 */
 
-
 .popover_cat_img {
-    width: 980px;
-    height: 370px;
-	top: 90px;
-	left: 210px;
-    /* border: 5px solid #00FF00; */
+    width: 1050px;
+    height: 400px;
+	top: 75px;
+	left: 175px;
 	display: flex;
     justify-content: center;   /* horizontal center */
     align-items: center;       /* vertical center */
@@ -163,8 +161,10 @@ h2 {
 .popover_cat_img img {
 	display:block;
 	margin: 0 auto;
+	width: 100%;
+    height: 100%;
+	object-fit: contain;
 }
-
 
 /* Question/Interactive boxes */
 
@@ -367,6 +367,7 @@ h2 {
     left: 630px;
 	pointer-events: auto;
 	z-index: 99999;
+	display:none;
 }
 
 .popover_btnGo.hidden {
@@ -393,6 +394,7 @@ h2 {
     bottom: 20px;
     display: none;
 	text-align: center;
+	display:none;
 }
 
 .popover_answerQTE h1 {
@@ -411,11 +413,13 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 630px;
+	display:none;
 }
-
+/*
 .popover_btnAnswerQTE.hidden {
     display: none;
 }
+*/
 
 .popover_btnRightQTE {
     width: 141px;
@@ -423,6 +427,7 @@ h2 {
     position: absolute;
     bottom: 20px;
     right: 40px;
+	display:none;
 }
 
 .popover_btnWrongQTE {
@@ -431,6 +436,7 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 40px;
+	display:none;
 }
 
 .popover_btnAnswerQTE,
