@@ -290,6 +290,15 @@ h2 {
 	display:none;
 }
 
+.popover_btnClose {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+	display:none;
+}
+
 .popover_btnAnswer,
 .popover_btnRight,
 .popover_btnWrong,
@@ -301,68 +310,42 @@ h2 {
 
 /* Multiple Choice */
 
-.popover_answer_multiA {
-    width: 670px;
-    height: 70px;
+.popover_multi_answers {
+    width: 1380px;
+    height: 150px;
 	/*border: 5px solid #00FF00;
     background-color: #000; */
     position: absolute;
-    left: 30px;
-    top: 70px;
+    left: 10px;
+    bottom: 20px;
 	text-align: left;
 }
 
-.popover_answer_multiB {
-    width: 670px;
-    height: 70px;
-	/*border: 5px solid #00FF00;
-    background-color: #000; */
-    position: absolute;
-    right: 30px;
-    top: 70px;
-	text-align: left;
-}
-
-.popover_answer_multiC {
-    width: 670px;
-    height: 70px;
-	/*border: 5px solid #00FF00;
-    background-color: #000; */
-    position: absolute;
-    left: 30px;
-    bottom: 100px;
-	text-align: left;
-}
-
-.popover_answer_multiD {
-    width: 670px;
-    height: 70px;
-	/*border: 5px solid #00FF00;
-    background-color: #000; */
-    position: absolute;
-    right: 30px;
-    bottom: 100px;
-	text-align: left;
-}
-
-.popover_answer_multiA h2,
-.popover_answer_multiB h2,
-.popover_answer_multiC h2,
-.popover_answer_multiD h2 {
+.popover_multi_answers h2 {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 50px;
     color: #40291A;
 }
 
+.popover_multi_btnAnswer {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+	display:none;
+}
+
 /* QTE */
 
 .popover_item_display {
-    width: 300px;
+    width: 1380px;
     height: 70px;
     position: absolute;
     bottom: 100px;
-    left: 550px;
+    left: 10px;
 	z-index: 9999;
+	text-align: center;
 	display:block;
 }
 
@@ -398,6 +381,7 @@ h2 {
 .popover_btnGo button {
     width: 100%;
     height: 100%;
+	display:none;
 }
 
 .popover_answerQTE {
@@ -412,7 +396,7 @@ h2 {
 
 .popover_answerQTE h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 60px;
+    font-size: 50px;
     color: #40291A;
 }
 
@@ -446,6 +430,16 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 40px;
+	
+}
+
+.popover_btnSkipQTE {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 120px;
+    right: 40px;
+	display:none;
 }
 
 .popover_btnAnswerQTE,
@@ -454,8 +448,124 @@ h2 {
     /* border: 5px solid #00FF00;
     background-color: #000; */
     object-fit: contain;
+	display:none;
 }
 
+.popover_resultQTE {
+    width: 1400px;
+    height: 550px;
+    position: absolute;
+    top: 0;
+    left: 0;
+	display:none;	
+}
+
+.popover_resultA1QTE {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 300px;
+    left: 100px;	
+}
+
+.popover_resultA2QTE {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 300px;
+    left: 350px;
+}
+
+.popover_resultA3QTE {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 300px;
+    left: 600px;	
+}
+
+.popover_resultA4QTE {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 300px;
+    left: 850px;	
+}
+
+.popover_resultA5QTE {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 300px;
+    left: 1100px;	
+}
+
+.popover_resultA1QTE img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_resultA2QTE img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_resultA3QTE img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_resultA4QTE img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_resultA5QTE img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popover_resultQTE.show {
+	display:block;
+}
+
+.popover_resultTextQTE {
+    width: 500px;
+    height: 200px;
+    position: absolute;
+    top: 50px;
+    left: 450px;
+	display:none;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.popover_resultTextQTE.show {
+	display:block;
+}
+
+.popover_resultTextQTE h2 {
+	font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 60px;
+    color: #40291A;
+}
+
+.popover_resultTextQTE p {
+	font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #40291A;
+}
 
 /* Screenshot */
 
@@ -691,6 +801,51 @@ h2 {
   font-size: clamp(30px, 7cqw, 36px);
 }
 
+.popover_btnMineProceed {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+	display:none;
+}
+
+.popover_resultMine {
+    width: 1400px;
+    height: 550px;
+    position: absolute;
+    top: 0;
+    left: 0;
+	display:none;	
+}
+
+.popover_resultMine.show {
+	display:block;
+}
+
+.popover_resultTextMine {
+    width: 500px;
+    height: 250px;
+    position: absolute;
+    top: 150px;
+    left: 450px;
+	display:block;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.popover_resultTextMine h2 {
+	font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 60px;
+    color: #40291A;
+}
+
+.popover_resultTextMine p {
+	font-family: 'MyCustomFont', Arial, sans-serif;
+    font-size: 40px;
+    color: #40291A;
+}
 
 /* Solo Game Challenge*/
 

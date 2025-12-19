@@ -27,11 +27,11 @@
 	"type": "qte",
     "question": "To Kart or Not To Kart? <br> Are these real kart names in Mario Kart: Double Dash?",
 	"qteItems": [
-		{ "text": "Kart1", "correct": true },
-		{ "text": "Kart2", "correct": false },
-		{ "text": "Kart3", "correct": false },
-		{ "text": "Kart4", "correct": true },
-		{ "text": "Kart5", "correct": false }
+		{ "text": "Kart1", "display": "test1" },
+		{ "text": "Kart2", "display": "test2" },
+		{ "text": "Kart3", "display": "test2" },
+		{ "text": "Kart4", "display": "test2" },
+		{ "text": "Kart5", "display": "test5" }
 	]
   },
     {

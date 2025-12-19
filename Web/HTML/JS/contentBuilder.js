@@ -222,6 +222,8 @@ function createMultiContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "multi";
+
 
   wrapper.innerHTML = `
     <div class="popover_cat_body">
@@ -230,48 +232,29 @@ function createMultiContent(data, speed = 30) {
         <img src="img/categories/multi.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text">
         <h1 class="typewriter-target"></h1>
       </div>
-
-      <div class="popover_answer_multiA">
-        <h2>A: ${data.answerA || "No answer provided"}</h2>
+      <div class="popover_multi_answers">
+        <h2></h2>
       </div>
-      <div class="popover_answer_multiB">
-        <h2>B: ${data.answerB || "No answer provided"}</h2>
-      </div>
-      <div class="popover_answer_multiC">
-        <h2>C: ${data.answerC || "No answer provided"}</h2>
-      </div>
-      <div class="popover_answer_multiD">
-        <h2>D: ${data.answerD || "No answer provided"}</h2>
-      </div>
-      
-      <div class="popover_answer">
-        <h1>${data.answer || "No answer provided"}</h1>
-      </div>
-
-      <div class="popover_btnAnswer">
-        <button class="answerBtn" type="button">
+      <div class="popover_multi_btnAnswer">
+        <button class="answerMultiBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
         </button>
-      </div>
-      
+      </div>      
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
@@ -526,6 +509,33 @@ function createQTEContent(data, speed = 30) {
       <div class="popover_cat_img">
         <img src="img/categories/qte.png" loading="lazy">
       </div>
+      <div class="popover_resultQTE">
+	    <img src="img/layout/catNormal.png" width="100%" height="100%">
+		<div class="popover_resultTextQTE">
+			<h2 class="qte-result-title"></h2>
+			<p class="qte-result-text"></p>
+		</div>
+		<div class="popover_resultA1QTE">
+			<img src="img/misc/qteBlank.png" loading="lazy">
+		</div>
+		<div class="popover_resultA2QTE">
+			<img src="img/misc/qteBlank.png" loading="lazy">
+		</div>
+		<div class="popover_resultA3QTE">
+			<img src="img/misc/qteBlank.png" loading="lazy">
+		</div>
+		<div class="popover_resultA4QTE">
+			<img src="img/misc/qteBlank.png" loading="lazy">
+		</div>
+		<div class="popover_resultA5QTE">
+			<img src="img/misc/qteBlank.png" loading="lazy">
+		</div>
+		<div class="popover_btnClose">
+			<button class="closeBtn" type="button">
+			</button>
+		</div>
+	  </div>
+	  
     </div>
 		<div class="popover_question_body">
 		<img src="img/layout/textNormal.png" width="100%" height="100%">
@@ -558,10 +568,9 @@ function createQTEContent(data, speed = 30) {
 					<img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
 				</button>
 			</div>
-			<div class="popover_btnSkip">
-				<button class="skipBtn" type="button" popovertarget="${data.id}">
-					<img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
-				</button>	
+			<div class="popover_btnClose">
+				<button class="closeBtn" type="button">
+				</button>
 			</div>
 		</div>
   `;
@@ -1412,6 +1421,7 @@ function createMineContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover", "minefieldPopover"); // Minefield popover
   wrapper.id = data.id;
+  wrapper.dataset.type = "mine";
 
   wrapper.innerHTML = `
     <div class="popover_cat_body">
@@ -1419,6 +1429,13 @@ function createMineContent(data, speed = 30) {
       <div class="popover_cat_img">
         <img src="img/categories/mine.png" loading="lazy">
       </div>
+	  <div class="popover_resultMine">
+	    <img src="img/layout/catNormal.png" width="100%" height="100%">
+			<div class="popover_resultTextMine">
+				<h2 class="mine-result-title"></h2>
+				<p class="mine-result-text"></p>
+			</div>
+	  </div>
     </div>
 
     <div class="popover_question_body">
@@ -1434,6 +1451,14 @@ function createMineContent(data, speed = 30) {
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
+	  <div class="popover_btnMineProceed">
+        <button class="proceedMineBtn" type="button" popovertarget="${data.id}" disabled>
+        </button>
+      </div>
+	  <div class="popover_btnClose">
+			<button class="closeBtn" type="button">
+			</button>
+	  </div>
     </div>
   `;
 
