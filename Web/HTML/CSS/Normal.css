@@ -183,6 +183,81 @@ h2 {
 	object-fit: contain;
 }
 
+.popover_success {
+    width: 1658px;
+    height: 700px;
+	top: 77px;
+	left: -129px;
+	display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    position: absolute;
+	display:none;
+	z-index:9999999;
+}
+
+.popover_success.show {
+	display:block;
+}
+
+.popover_success img {
+	display:block;
+	margin: 0 auto;
+	width: 100%;
+    height: 100%;
+	object-fit: contain;
+}
+
+.popover_failure {
+    width: 1677px;
+    height: 702px;
+	top: 77px;
+	left: -139px;
+	display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    position: absolute;
+	display:none;
+	z-index:9999999;
+}
+
+.popover_failure.show {
+	display:block;
+}
+
+.popover_failure img {
+	display:block;
+	margin: 0 auto;
+	width: 100%;
+    height: 100%;
+	object-fit: contain;
+}
+
+.popover_flawless {
+    width: 1154px;
+    height: 254px;
+	top: 148px;
+	left: 123px;
+	display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    position: absolute;
+	display:none;
+	z-index:9999999;
+}
+
+.popover_flawless.show {
+	display:block;
+}
+
+.popover_flawless img {
+	display:block;
+	margin: 0 auto;
+	width: 100%;
+    height: 100%;
+	object-fit: contain;
+}
+
 /* Question/Interactive boxes */
 
 /* Main */
@@ -218,6 +293,76 @@ h2 {
 	text-align: left; 
 }
 
+.popover_question_text_long {
+    width: 1380px;
+    height: 205px;
+    position: absolute;
+    top: 10px;
+	left: 10px;
+}
+
+.popover_question_text_long h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+	display: flex;
+	justify-content: left;
+    align-items: left; 
+    font-size: 40px;
+	text-align: left; 
+}
+
+.popover_question_text_short {
+    width: 1380px;
+    height: 90px;
+    position: absolute;
+    top: 10px;
+	left: 10px;
+}
+
+.popover_question_text_short h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+	display: flex;
+	justify-content: left;
+    align-items: left; 
+    font-size: 40px;
+	text-align: left; 
+}
+
+.popover_question_text_short2 {
+    width: 1380px;
+    height: 90px;
+    position: absolute;
+    top: 100px;
+	left: 10px;
+	display:none;
+}
+
+.popover_question_text_short2.show {
+	display:block;
+}
+
+.popover_question_text_short2 h1 {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+	display: flex;
+	justify-content: left;
+    align-items: left; 
+    font-size: 40px;
+	text-align: left; 
+}
+
+.popover_btnShort2 {
+    width: 1380px;
+    height: 90px;
+    position: absolute;
+    top: 100px;
+	left: 10px;
+	display:none;
+}
+
+
+.popover_answer.show {
+    display: block;
+}
+
 .typewriter-cursor {
   border-right: 2px solid currentColor;
   animation: blink 0.6s steps(1) infinite;
@@ -232,7 +377,7 @@ h2 {
 
 .popover_answer {
     width: 1380px;
-    height: 70px;
+    height: 50px;
     position: absolute;
     left: 10px;
     bottom: 13px;
@@ -605,6 +750,27 @@ h2 {
 	opacity:1; 
 	transition: opacity 1s ease;
 	z-index: 9999;
+	display:none;
+}
+
+.popover_character.show {
+	display:block;
+}
+
+.popover_character_reveal {
+    width: 1200px;
+    height: 500px;
+    position: absolute;
+    top: 25px;
+    left: 100px;
+	opacity:1; 
+	transition: opacity 1s ease;
+	z-index: 99999;
+	display:none;
+}
+
+.popover_character_reveal.show {
+	display:block;
 }
 
 .popover_character img {
@@ -640,11 +806,11 @@ h2 {
 /* Hint System */
 
 .popover_hint1 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 110px;
+    left: 10px;
+    top: 100px;
 	text-align: left;
 	display: none;
 }
@@ -654,11 +820,11 @@ h2 {
 }
 
 .popover_hint2 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 160px;
+    left: 10px;
+    top: 150px;
 	text-align: left;
 	display: none;
 }
@@ -668,11 +834,11 @@ h2 {
 }
 
 .popover_hint3 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 210px;
+    left: 10px;
+    top: 200px;
 	text-align: left;
 	display: none;
 }
@@ -694,8 +860,8 @@ h2 {
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 110px;
+    left: 10px;
+    top: 100px;
 }
 .popover_btnHint1.hidden {
     display: none;
@@ -706,8 +872,8 @@ h2 {
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 160px;
+    left: 10px;
+    top: 150px;
 }
 .popover_btnHint2.hidden {
     display: none;
@@ -725,8 +891,8 @@ h2 {
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 210px;
+    left: 10px;
+    top: 200px;
 }
 
 .popover_btnHint3.hidden {
@@ -849,99 +1015,11 @@ h2 {
 
 /* Solo Game Challenge*/
 
-.popover_btnSolo2 {
-    width: 100px;
-    height: 50px;
-    position: absolute;
-	display: block;
-    left: 30px;
-    top: 60px;
-}
-
-.popover_btnSolo2.hidden {
-    display: none;
-}
-
-.popover_btnSolo2_btn img {
-	width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.popover_solo2 {
-    width: 1160px;
-    height: 50px;
-    position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: none;
-}
-
-.popover_solo2.show {
-    display: block;
-}
-
-
-.popover_solo2 h2 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #40291A;
-}
-
 /* Audience Game Challenge */
-
-.popover_audience {
-    width: 1160px;
-    height: 150px;
-    position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: block;
-}
-
-.popover_audience h2 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #40291A;
-}
 
 /* Team Effort */
 
-.popover_team {
-    width: 1160px;
-    height: 150px;
-    position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: block;
-}
-
-.popover_team h2 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #40291A;
-}
-
 /* Sign of Trust */
-
-.popover_trust {
-    width: 1160px;
-    height: 150px;
-    position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: block;
-}
-
-.popover_trust h2 {
-    font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 40px;
-    color: #40291A;
-}
 
 /* Host Challenge */
 
@@ -950,18 +1028,18 @@ h2 {
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 60px;
+    left: 10px;
+    top: 100px;
 }
 
 .popover_host1 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: none;
+	display: block;
+    left: 10px;
+    top: 100px;
+	display:none;
 }
 
 .popover_btnHost2 {
@@ -969,18 +1047,18 @@ h2 {
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 120px;
+    left: 10px;
+    top: 150px;
 }
 
 .popover_host2 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: none;
+	display: block;
+    left: 10px;
+    top: 100px;
+	display:none;
 }
 
 .popover_btnHost3 {
@@ -988,18 +1066,18 @@ h2 {
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 180px;
+    left: 10px;
+    top: 200px;
 }
 
 .popover_host3 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 60px;
-	text-align: left;
-	display: none;
+	display: block;
+    left: 10px;
+    top: 100px;
+	display:none;
 }
 
 .popover_host1.show,
@@ -1039,19 +1117,86 @@ h2 {
 /* Branching Paths */
 
 .popover_btnBranchA {
-    width: 141px;
-    height: 70px;
+    width: 455px;
+    height: 90px;
     position: absolute;
-    bottom: 20px;
-    right: 40px;
+	border: 1px sold brown;
+    top: 115px;
+	left: 14px;
 }
 
 .popover_btnBranchB {
-    width: 141px;
-    height: 70px;
+    width: 455px;
+    height: 90px;
     position: absolute;
-    bottom: 20px;
-    left: 40px;
+	border: 1px sold brown;
+    top: 115px;
+	left: 472px;
+}
+
+.popover_btnBranchC {
+    width: 455px;
+    height: 110px;
+    position: absolute;
+    top: 115px;
+	left: 930px;
+	display: block;
+}
+
+.popover_btnBranchD {
+    width: 455px;
+    height: 90px;
+    position: absolute;
+    top: 205px;
+	left: 244px;
+}
+
+.popover_btnBranchE {
+    width: 455px;
+    height: 90px;
+    position: absolute;
+    top: 205px;
+	left: 702px;
+}
+
+.popover_btnBranchA img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+	display: block;
+}
+
+.popover_btnBranchB img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+	display: block;
+}
+
+.popover_btnBranchC img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+	display: block;
+}
+
+.popover_btnBranchD img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+	display: block;
+}
+
+.popover_btnBranchE img {
+    opacity: 1;
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+	display: block;
 }
 
 /* Decision Time */
@@ -1064,58 +1209,58 @@ h2 {
 }
 
 .popover_btnDecision1 {
-    width: 300px;
+    width: 1380px;
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 60px;
+    left: 10px;
+    top: 100px;
 }
 
 .popover_decision1 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 60px;
+    left: 10px;
+    top: 100px;
 	text-align: left;
 	display: none;
 }
 
 .popover_btnDecision2 {
-    width: 300px;
+    width: 1380px;
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 120px;
+    left: 10px;
+    top: 150px;
 }
 
 .popover_decision2 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 60px;
+    left: 10px;
+    top: 100px;
 	text-align: left;
 	display: none;
 }
 
 .popover_btnDecision3 {
-    width: 300px;
+    width: 1380px;
     height: 50px;
     position: absolute;
 	display: block;
-    left: 30px;
-    top: 180px;
+    left: 10px;
+    top: 200px;
 }
 
 .popover_decision3 {
-    width: 1160px;
+    width: 1380px;
     height: 50px;
     position: absolute;
-    left: 30px;
-    top: 60px;
+    left: 10px;
+    top: 100px;
 	text-align: left;
 	display: none;
 }
@@ -1160,6 +1305,7 @@ h2 {
     position: absolute;
     bottom: 20px;
     right: 40px;
+	display:none;
 }
 
 .popover_btnRiskyNo {
@@ -1168,6 +1314,7 @@ h2 {
     position: absolute;
     bottom: 20px;
     left: 40px;
+	display:none;
 }
 
 /* Gameover popover */

@@ -8,6 +8,11 @@
   <link rel="stylesheet" type="text/css" href="CSS/Name.css">
 </head>
 <body>
+<audio id="bgName" src="audio/main/name_input.mp3" autoplay loop preload="auto"></audio>
+<script>
+const bg = document.getElementById('bgName');
+bg.volume = 0.5; // MUST be JS, not HTML attribute
+</script>
 <!-- popover target confirmation of name -->
 <div id="InputOK" class="popover_name" data-type="name">
 	<div class="popover_text">

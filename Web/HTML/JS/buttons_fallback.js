@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const livesImages = { 1: "img/misc/safe.png", 0: "img/misc/danger.png" };
 
+  const mainBGM = document.getElementById('bgMain'); // <audio id="bgMain" src="...">
+  if (mainBGM) mainBGM.loop = true;
+  mainBGM?.play().catch(() => {});
+
+
   // Load JSON questions first
 if (window.location.href.includes("Risky.html")) {
   window.GAME_MODE = "risky";
@@ -33,7 +38,6 @@ if (window.location.href.includes("Risky.html")) {
   window.GAME_MODE = "normal";
   await loadQuestions("JSON/qNormal.json");
 }
-
 
   // -----------------------------
   // Restore disabled tiles (global)
@@ -58,7 +62,12 @@ if (window.location.href.includes("Risky.html")) {
     if (livesCounter < -1) livesCounter = -1;
     if (livesDisplay) livesDisplay.src = livesImages[livesCounter > 0 ? 1 : 0];
     localStorage.setItem('livesCounter', livesCounter);
-    if (livesCounter === -1) showGameOver();
+    if (livesCounter === -1) {
+		setTimeout(() => {
+			showGameOver();
+		}, 1750); // delay in ms, same as your feedback delay
+}
+
   }
 
   function updatePointsDisplay() {
@@ -170,6 +179,9 @@ function showGameOver() {
 
           const branchABtn = branchPopover.querySelector('.branchABtn');
           const branchBBtn = branchPopover.querySelector('.branchBBtn');
+          const branchCBtn = branchPopover.querySelector('.branchCBtn');
+          const branchDBtn = branchPopover.querySelector('.branchDBtn');
+          const branchEBtn = branchPopover.querySelector('.branchEBtn');
 
           if (branchABtn) branchABtn.addEventListener('click', () => {
             branchPopover.classList.remove('show');
@@ -188,6 +200,42 @@ function showGameOver() {
             popoverContainer.innerHTML = '';
 
             const newPopover = buildQuestionContent(questionData.branchB);
+            popoverContainer.appendChild(newPopover);
+            setupPopoverButtons(newPopover);
+
+            newPopover.classList.add('show');
+            window.lastPopoverID = tileId;
+          });
+		  
+		    if (branchCBtn) branchCBtn.addEventListener('click', () => {
+            branchPopover.classList.remove('show');
+            popoverContainer.innerHTML = '';
+
+            const newPopover = buildQuestionContent(questionData.branchC);
+            popoverContainer.appendChild(newPopover);
+            setupPopoverButtons(newPopover);
+
+            newPopover.classList.add('show');
+            window.lastPopoverID = tileId;
+          });
+		  
+		  if (branchDBtn) branchDBtn.addEventListener('click', () => {
+            branchPopover.classList.remove('show');
+            popoverContainer.innerHTML = '';
+
+            const newPopover = buildQuestionContent(questionData.branchD);
+            popoverContainer.appendChild(newPopover);
+            setupPopoverButtons(newPopover);
+
+            newPopover.classList.add('show');
+            window.lastPopoverID = tileId;
+          });
+		  
+		  if (branchEBtn) branchEBtn.addEventListener('click', () => {
+            branchPopover.classList.remove('show');
+            popoverContainer.innerHTML = '';
+
+            const newPopover = buildQuestionContent(questionData.branchE);
             popoverContainer.appendChild(newPopover);
             setupPopoverButtons(newPopover);
 
@@ -223,6 +271,17 @@ function showGameOver() {
 
       document.querySelectorAll(".popover.show").forEach(p => { if (p !== popover) p.classList.remove("show"); });
       popover.classList.add('show');
+	  
+	  // Pause main BGM
+		if (mainBGM && !mainBGM.paused) mainBGM.pause();
+
+		// Play question-specific music (if any)
+	const qAudio = popover.querySelector('.qAudio'); // <audio class="qMusic" src="...">
+		if (qAudio) {
+		qAudio.currentTime = 0;
+		qAudio.play().catch(() => {});
+	}
+
       window.lastPopoverID = tileId;
 
       setupPopoverButtons(popover);
@@ -275,7 +334,10 @@ if (board2Btn) {
     const rightBtn = popover.querySelector('.rightBtn');
     const answerBtn = popover.querySelector('.answerBtn');
     const skipBtn = popover.querySelector('.skipBtn');
-    const answerDiv = popover.querySelector('.popover_answer');
+	const successDiv = popover.querySelector('.popover_success');
+    const failureDiv = popover.querySelector('.popover_failure');
+    const answerMultiBtn = popover.querySelector('.answerMultiBtn');
+	const answerDiv = popover.querySelector('.popover_answer');
 	const hint1Div = popover.querySelector('.popover_hint1');
     const hint1Btn = popover.querySelector('.hint1Btn');
     const hint2Div = popover.querySelector('.popover_hint2');
@@ -299,6 +361,159 @@ if (board2Btn) {
     const riskyYesBtn = popover.querySelector('.riskyYesBtn');
     const riskyNoBtn = popover.querySelector('.riskyNoBtn');
 	const closeBtn = popover.querySelector('.closeBtn');
+	const shortBtn = popover.querySelector('.shortBtn');
+	const shortDiv = popover.querySelector('.popover_question_text_short2');
+
+    // -----------------------------
+    // Disable tile after use
+    // -----------------------------
+    function disableTileAfterUse() {
+      const popoverID = window.lastPopoverID;
+      if (!popoverID) return;
+      const tileBtn = document.querySelector(`.tileBtn[popovertarget="${popoverID}"]`);
+      if (tileBtn && !tileBtn.disabled) {
+        tileBtn.disabled = true;
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);pointer-events:none;';
+        tileBtn.style.position = 'relative';
+        tileBtn.appendChild(overlay);
+        saveDisabledTiles(popoverID); // ← pass ID here
+      }
+      window.lastPopoverID = null;
+    }
+
+    // --- Attach standard button events ---
+    if (answerBtn && answerDiv) answerBtn.addEventListener('click', () => { 
+      answerDiv.classList.add('show'); 
+      answerBtn.parentElement.classList.add('hidden'); 
+    });
+	
+	if (shortBtn && shortDiv) shortBtn.addEventListener('click', () => { 
+      shortDiv.classList.add('show');
+    });
+
+    if (skipBtn) skipBtn.addEventListener('click', () => { 
+      disableTileAfterUse(); 
+      popover.classList.remove('show'); 
+    });
+
+	if (wrongBtn) wrongBtn.addEventListener('click', () => {
+	// 1️⃣ Apply game consequence immediately
+		livesCounter--;
+		updateLivesDisplay();
+		disableTileAfterUse();
+		failureDiv.classList.add('show');
+		const audio = wrongBtn.querySelector('audio');
+			if (audio) {
+			audio.currentTime = 0;
+			audio.volume = 0.5;
+			audio.play().catch(() => {});
+			}
+		if (qAudio && !qAudio.paused) {
+			qAudio.pause();
+			qAudio.currentTime = 0;
+			}
+  
+	// 3️⃣ Delay popover close so feedback + sound can play
+  
+setTimeout(() => {
+  // Only resume main BGM if the player still has lives left
+  if (livesCounter >= 0 && mainBGM && mainBGM.paused) {
+    mainBGM.play().catch(() => {});
+  }
+
+  popover.classList.remove('show');
+
+  // Optionally show game over after removing popover
+  if (livesCounter === -1) {
+    showGameOver();
+  }
+}, 1700);
+
+	});
+
+
+    if (rightBtn) rightBtn.addEventListener('click', () => { 
+      pointsCounter++; 
+      updatePointsDisplay(); 
+      disableTileAfterUse();
+	  successDiv.classList.add('show');
+	  const audio = rightBtn.querySelector('audio');
+		if (audio) {
+		audio.currentTime = 0;
+		audio.volume = 0.5;
+		audio.play().catch(() => {});
+		}
+	  if (qAudio && !qAudio.paused) {
+		qAudio.pause();
+		qAudio.currentTime = 0;
+		}
+
+	// 3️⃣ Delay popover close so feedback + sound can play
+	setTimeout(() => {
+
+if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
+		popover.classList.remove('show');
+		}, 2500); // 2.5 seconds
+    });
+
+// -----------------------------
+// Multi-choice question handling (2x2 layout, non-clickable, borderless)
+// -----------------------------
+function setupMultiChoice(popover) {
+  if (!popover) return;
+
+  // Grab container and answer button
+  const answersContainer = popover.querySelector('.popover_multi_answers h2');
+  const answerBtn = popover.querySelector('.answerMultiBtn');
+  if (!answersContainer || !answerBtn) return;
+
+  // Get question data from JSON
+  const questionData = getQuestionData(popover.id);
+  if (!questionData || !questionData.answers) return;
+
+  const answers = questionData.answers;
+
+  // Clear previous content
+  answersContainer.innerHTML = "";
+
+  // Wrapper for 2x2 grid
+  const wrapper = document.createElement("div");
+  wrapper.style.display = "grid";
+  wrapper.style.gridTemplateColumns = "1fr 1fr"; // 2 columns
+  wrapper.style.gridGap = "10px";               // spacing
+  answersContainer.appendChild(wrapper);
+
+  // Populate answers dynamically
+  answers.forEach((ans, i) => {
+    const ansDiv = document.createElement("div");
+    ansDiv.textContent = `${String.fromCharCode(65 + i)}: ${ans.text || "No answer provided"}`;
+    ansDiv.dataset.correct = ans.correct; // track correctness
+    ansDiv.style.color = "";               // reset color
+    ansDiv.style.textAlign = "left";     // center text
+    wrapper.appendChild(ansDiv);
+  });
+
+  // Answer button: highlight correct answer
+  answerBtn.onclick = () => {
+    wrapper.querySelectorAll("div").forEach(ansDiv => {
+      if (ansDiv.dataset.correct === "true") {
+        ansDiv.style.color = "green";
+      } //else {
+        //ansDiv.style.color = "red"; // optional
+		//}
+    });
+
+    // Hide button after press
+    answerBtn.style.display = "none";
+  };
+}
+
+// -----------------------------
+// Initialize multi-choice popover
+// -----------------------------
+const multiPopover = document.getElementById('Question2'); // adapt for your popover IDs
+if (multiPopover) setupMultiChoice(multiPopover);
 
 // ---------------------------------
 // Minefield minigame state
@@ -354,6 +569,8 @@ if (closeBtn) {
 
     // Disable all tiles
     tiles.forEach(t => (t.disabled = true));
+	
+	if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
 
 	disableTileAfterUse(); 
     // Hide popover
@@ -416,6 +633,11 @@ if (proceedMineBtn) {
     let nonSelectedTiles = tiles.filter(t => !selectedTiles.includes(t));
     nonSelectedTiles.sort(() => Math.random() - 0.5);
 
+    // 🔊 Minefield reveal sound (one instance, reused)
+    const mineRevealSound = new Audio("audio/main/mine_reveal.wav");
+    mineRevealSound.preload = "auto";
+    mineRevealSound.volume = 0.25;
+
     // -----------------------------
     // Reveal selected tiles first
     // -----------------------------
@@ -433,8 +655,12 @@ if (proceedMineBtn) {
         tile.dataset.type === 'mine' ? 'used-mine' : 'used-safe'
       );
 
+      // 🔊 Play reveal sound
+      mineRevealSound.currentTime = 0;
+      mineRevealSound.play().catch(() => {});
+
       selIdx++;
-      setTimeout(revealSelected, 750);
+      setTimeout(revealSelected, 1000);
     }
 
     // -----------------------------
@@ -454,13 +680,18 @@ if (proceedMineBtn) {
         tile.dataset.type === 'mine' ? 'used-mine' : 'used-safe'
       );
 
+      // 🔊 Play reveal sound
+      mineRevealSound.currentTime = 0;
+      mineRevealSound.play().catch(() => {});
+
       idx++;
-      setTimeout(revealNonSelected, 300);
+      setTimeout(revealNonSelected, 750);
     }
 
     revealSelected();
   });
 }
+
 
 
 
@@ -539,56 +770,60 @@ function showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType }) 
 
   // Show the popover
   resultBox.classList.add('show');
+  
+// -----------------------------
+// Delayed result audio handling
+// -----------------------------
+setTimeout(() => {
+
+  // Stop Minefield BGM
+  const qAudio = document.querySelector('#qAudio');
+  if (qAudio) {
+    qAudio.pause();
+    qAudio.currentTime = 0;
+  }
+
+  // Decide result sound
+  let resultSound = "";
+  let showSuccess = false;
+
+  if (resultType === "lifeLost") {
+    resultSound = "audio/main/failure.mp3";
+    showSuccess = false;
+  }
+
+  if (resultType === "smallWin") {
+    resultSound = "audio/main/success.mp3";
+    showSuccess = true;
+  }
+
+  if (resultType === "bigWin") {
+    resultSound = "audio/main/qte_perfect.mp3";
+    showSuccess = true;
+  }
+
+  // Play result sound
+  if (resultSound) {
+    const resultAudio = new Audio(resultSound);
+    resultAudio.volume = 0.4;
+    resultAudio.play().catch(() => {});
+  }
+
+  // --- Show result graphic ---
+  const successDiv = popover.querySelector('.popover_success');
+  const failureDiv = popover.querySelector('.popover_failure');
+
+  if (showSuccess && successDiv) {
+    successDiv.classList.add('show');
+  }
+
+  if (!showSuccess && failureDiv) {
+    failureDiv.classList.add('show');
+  }
+
+}, 2000); // ⏱ 2 second delay
+
 }
-
-
-
-
-
-
-    // -----------------------------
-    // Disable tile after use
-    // -----------------------------
-    function disableTileAfterUse() {
-      const popoverID = window.lastPopoverID;
-      if (!popoverID) return;
-      const tileBtn = document.querySelector(`.tileBtn[popovertarget="${popoverID}"]`);
-      if (tileBtn && !tileBtn.disabled) {
-        tileBtn.disabled = true;
-        const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);pointer-events:none;';
-        tileBtn.style.position = 'relative';
-        tileBtn.appendChild(overlay);
-        saveDisabledTiles(popoverID); // ← pass ID here
-      }
-      window.lastPopoverID = null;
-    }
-
-    // --- Attach standard button events ---
-    if (answerBtn && answerDiv) answerBtn.addEventListener('click', () => { 
-      answerDiv.classList.add('show'); 
-      answerBtn.parentElement.classList.add('hidden'); 
-    });
-
-    if (skipBtn) skipBtn.addEventListener('click', () => { 
-      disableTileAfterUse(); 
-      popover.classList.remove('show'); 
-    });
-
-    if (wrongBtn) wrongBtn.addEventListener('click', () => { 
-      livesCounter--; 
-      updateLivesDisplay(); 
-      disableTileAfterUse(); 
-      popover.classList.remove('show'); 
-    });
-
-    if (rightBtn) rightBtn.addEventListener('click', () => { 
-      pointsCounter++; 
-      updatePointsDisplay(); 
-      disableTileAfterUse(); 
-      popover.classList.remove('show'); 
-    });
-
 
 	// Hint System specific buttons
 	
@@ -738,20 +973,36 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
   // --- Wait 1 second before starting sequential reveal ---
   await new Promise(resolve => setTimeout(resolve, 1000));
 
-  // --- Reveal each placeholder sequentially ---
-  for (let i = 0; i < placeholders.length; i++) {
-    const img = placeholders[i];
-    if (!img) continue;
+const qteSound = new Audio();
+qteSound.preload = "auto";
 
-    const isRight = qteResults[i] === "Right";
-    img.src = isRight ? "img/misc/qteRight.png" : "img/misc/qteWrong.png";
+// --- Reveal each placeholder sequentially ---
+for (let i = 0; i < placeholders.length; i++) {
+  const img = placeholders[i];
+  if (!img) continue;
 
-    // Wait 0.5s before next
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
+  const isRight = qteResults[i] === "Right";
+
+  img.src = isRight
+    ? "img/misc/qteRight.png"
+    : "img/misc/qteWrong.png";
+
+  // 🔊 Play sound
+  qteSound.src = isRight
+    ? "audio/main/qte_right.wav"
+    : "audio/main/qte_wrong.wav";
+
+  qteSound.currentTime = 0;
+  qteSound.volume = 0.2;
+  qteSound.play().catch(() => {});
+
+  // Wait before next reveal
+  await new Promise(resolve => setTimeout(resolve, 1000));
+}
+
 
   // --- Wait 0.5s after last placeholder ---
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await new Promise(resolve => setTimeout(resolve, 1000));
 
   // --- Fill in text feedback (without listing answers) ---
   if (titleEl) {
@@ -766,7 +1017,57 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
 
   // --- Show complete text ---
   if (qteCompleteText) qteCompleteText.classList.add('show');
+  
+  // --- Wait 2s before final result audio ---
+  await new Promise(resolve => setTimeout(resolve, 2000));
+
+  // --- Stop QTE background audio ---
+  const qAudio = popover.querySelector('#qAudio');
+  if (qAudio) {
+    qAudio.pause();
+    qAudio.currentTime = 0;
+  }
+
+  // --- Decide result ---
+  let resultSound = "";
+  let showSuccess = false;
+
+  if (score <= 2) {
+    resultSound = "audio/main/failure.mp3";
+    showSuccess = false;
+  }
+
+  if (score === 3 || score === 4) {
+    resultSound = "audio/main/success.mp3";
+    showSuccess = true;
+  }
+
+  if (score === 5) {
+    resultSound = "audio/main/qte_perfect.mp3";
+    showSuccess = true;
+  }
+
+  // --- Play result sound ---
+  if (resultSound) {
+    const resultAudio = new Audio(resultSound);
+    resultAudio.volume = 0.4;
+    resultAudio.play().catch(() => {});
+  }
+
+  // --- Show result graphic ---
+  const successDiv = popover.querySelector('.popover_success');
+  const failureDiv = popover.querySelector('.popover_failure');
+
+  if (showSuccess && successDiv) {
+    successDiv.classList.add('show');
+  }
+
+  if (!showSuccess && failureDiv) {
+    failureDiv.classList.add('show');
+  }
 }
+
+
 
 // -----------------------------
 // Helper: show next JSON item or hide display if done
@@ -892,19 +1193,9 @@ if (closeBtn) {
   closeBtn.addEventListener('click', () => {
     minefieldActive = false;
     tiles.forEach(t => (t.disabled = true));
-    disableTileAfterUse();
-    if (popover) popover.classList.remove('show');
-  });
-}
-
-
-// -----------------------------
-// Global close button
-// -----------------------------
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    minefieldActive = false;
-    tiles.forEach(t => (t.disabled = true));
+	
+	if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
+		
     disableTileAfterUse();
     if (popover) popover.classList.remove('show');
   });
@@ -946,19 +1237,79 @@ switch (currentType) {
 	
 case "mine": // fallback for normal popovers without data-type
     switch (key) {
-      case "p": currentPopover.querySelector(".proceedMineBtn")?.click(); break;
 	  case "c": currentPopover.querySelector(".closeBtn")?.click(); break;
+	  case "p": currentPopover.querySelector(".proceedMineBtn")?.click(); break;
       default: break;
     }
     break;
-  
- case "name":
+
+ case "audio":
       switch (key) {
-        case "r": currentPopover.querySelector(".checkBtn")?.click(); break;
-        case "w": currentPopover.querySelector(".crossBtn")?.click(); break;
-        default: break;
-      }
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "a": currentPopover.querySelector(".answerBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
+	  case "m": currentPopover.querySelector(".audioBtn")?.click(); break;
+      default: break;
+    }
       break;
+ 
+  case "jukebox":
+      switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "a": currentPopover.querySelector(".answerBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
+	  case "m": currentPopover.querySelector(".audioBtn")?.click(); break;
+      default: break;
+    }
+      break;
+ 
+  case "multi":
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "a": currentPopover.querySelector(".answerMultiBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
+      default: break;
+    }
+    break;
+
+  case "solo":
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+      default: break;
+    }
+    break;
+	
+  case "audience":
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+      default: break;
+    }
+    break;
+
+  case "team":
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+      default: break;
+    }
+    break;
+
+  case "trust":
+    switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+      default: break;
+    }
+    break;
 
     default:
       break;

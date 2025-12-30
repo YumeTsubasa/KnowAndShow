@@ -99,8 +99,8 @@
     {
     "id": "Question11",
 	"type": "solo",
-    "challengePart1": "Han",
-	"challengePart2": "Solo"
+    "challengePart1": "This is a placeholder text for testing",
+	"challengePart2": "This should also proceed to be printed with the typewriter function in mind"
   },
     {
     "id": "Question12",
@@ -139,11 +139,31 @@
 		"Boxmeister": "Survive 5 minutes of puns from Box",
 		"DoubleDubbel": "Mario Kart Double Dash baby!"
 	},
-	"branchC": {
+	"branchB": {
 		"id": "Question16_B",
 		"type": "trust",
 		"question": "Choose an audience member to take on a challenge for you!",
 		"challenge": "Your Sign of Trust Challenge"
+	},
+	"branchC": {
+		"id": "Question16_C",
+		"type": "brutal",
+		"question": "Choose a host and take on their challenge!",
+		"Boxmeister": "Survive 5 minutes of puns from Box",
+		"DoubleDubbel": "Mario Kart Double Dash baby!"
+	},
+	"branchD": {
+		"id": "Question16_D",
+		"type": "audio",
+		"question": "Choose an audience member to take on a challenge for you!",
+		"challenge": "Your Sign of Trust Challenge"
+	},
+	"branchE": {
+		"id": "Question16_E",
+		"type": "easy",
+		"question": "Choose a host and take on their challenge!",
+		"Boxmeister": "Survive 5 minutes of puns from Box",
+		"DoubleDubbel": "Mario Kart Double Dash baby!"
 	}
   },
     {
@@ -161,5 +181,29 @@
     "id": "Question18",
 	"type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+    {
+    "id": "Question21",
+	"type": "easy",
+    "question": "Lorem",
+	"answer": "Ipsum"
+  },
+    {
+    "id": "Question22",
+	"type": "easy",
+    "question": "Lorem",
+	"answer": "Ipsum"
+  },
+    {
+    "id": "Question23",
+	"type": "easy",
+    "question": "Lorem",
+	"answer": "Ipsum"
+  },
+    {
+    "id": "Question24",
+	"type": "easy",
+    "question": "Lorem",
+	"answer": "Ipsum"
   }
 ]

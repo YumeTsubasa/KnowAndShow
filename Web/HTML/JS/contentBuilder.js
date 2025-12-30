@@ -16,6 +16,28 @@ export function buildQuestionContent(data) {
   return handler(data, mode);
 }
 
+// -----------------------------
+// Question type → display images
+// -----------------------------
+const QUESTION_TYPE_IMAGES = {
+  easy: "img/branches/easy.png",
+  multi: "img/branches/multi.png",
+  brutal: "img/branches/brutal.png",
+  qte: "img/branches/qte.png",
+  screen: "img/branches/screen.png",
+  character: "img/branches/character.png",
+  jukebox: "img/branches/jukebox.png",    
+  audio: "img/branches/audio.png",          
+  hint: "img/branches/hint.png",
+  mine: "img/branches/mine.png",
+  solo: "img/branches/solo.png",
+  audience: "img/branches/audience.png",
+  team: "img/branches/team.png",
+  trust: "img/branches/trust.png",
+  host: "img/branches/host.png",
+  branch: "img/branches/branch.png",
+  decision: "img/branches/decision.png",
+};
 
 // Define handlers for question types
 const typeHandlers = {
@@ -90,6 +112,7 @@ function createEasyContent(data, speed = 30) {
 
   // Insert inner HTML
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/easy_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -99,7 +122,7 @@ function createEasyContent(data, speed = 30) {
 
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_long">
         <h1 class="typewriter-target"></h1>
       </div>
 
@@ -116,12 +139,14 @@ function createEasyContent(data, speed = 30) {
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
 
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
 
@@ -131,10 +156,24 @@ function createEasyContent(data, speed = 30) {
         </button>
       </div>
     </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
+    </div>
   `;
 
   document.body.appendChild(wrapper);
 
+  // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
+  
   // Force render
   wrapper.offsetHeight;
 
@@ -226,6 +265,7 @@ function createMultiContent(data, speed = 30) {
 
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/multi_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -234,7 +274,7 @@ function createMultiContent(data, speed = 30) {
     </div>
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
       <div class="popover_multi_answers">
@@ -248,22 +288,39 @@ function createMultiContent(data, speed = 30) {
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
-      </div>      
+      </div>   
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
+	</div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
     document.body.appendChild(wrapper);
 
+
+	// --- Reference the audio element and set JS attributes ---
+	const bg = wrapper.querySelector("#qAudio");
+		if (bg) {
+		bg.volume = 0.5; // works now
+		bg.currentTime = 0;
+		bg.play().catch(() => {}); // just in case
+	}
+	
   // Force render
   wrapper.offsetHeight;
 
@@ -364,6 +421,8 @@ function createBrutalContent(data, speed = 30) {
   wrapper.id = data.id;
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
+	<audio id="introAudio" src="audio/main/brutal_intro.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -373,43 +432,65 @@ function createBrutalContent(data, speed = 30) {
 
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_long">
         <h1 class="typewriter-target"></h1>
       </div>
-
-      <div class="popover_answer">
-        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
-      </div>
-
-      <div class="popover_btnAnswer">
+	  <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
+      <div class="popover_answer">
+        <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
+      </div>
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-      
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
-      </div>
-      
+      </div>      
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
-  document.body.appendChild(wrapper);
+	document.body.appendChild(wrapper);  // must come first
 
+	const bg = wrapper.querySelector("#qAudio");
+	const intro = wrapper.querySelector("#introAudio");
+
+	if (intro) {
+	  intro.volume = 0.3;
+	  intro.currentTime = 0;
+	  intro.play().catch(() => {});
+
+	  // Start main BGM after a fixed delay
+	  if (bg) {
+		setTimeout(() => {
+		  bg.volume = 0.2;
+		  bg.currentTime = 0;
+		  bg.play().catch(() => {});
+		}, 5000); // delay in ms — adjust to intro length
+	  }
+	}
+
+
+	
   // Force render
   wrapper.offsetHeight;
 
@@ -497,13 +578,11 @@ function createQTEContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
-  
-  // -----------------------------
-  // Mark this popover as a QTE type
-  // -----------------------------
   wrapper.dataset.type = "qte";
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/qte_bgm.mp3" loop preload="auto"></audio>
+	<audio id="introAudio" src="audio/main/qte_intro.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -530,16 +609,12 @@ function createQTEContent(data, speed = 30) {
 		<div class="popover_resultA5QTE">
 			<img src="img/misc/qteBlank.png" loading="lazy">
 		</div>
-		<div class="popover_btnClose">
-			<button class="closeBtn" type="button">
-			</button>
-		</div>
 	  </div>
 	  
     </div>
-		<div class="popover_question_body">
+	<div class="popover_question_body">
 		<img src="img/layout/textNormal.png" width="100%" height="100%">
-			<div class="popover_question_text">
+			<div class="popover_question_text_short">
 				<h1 class="typewriter-target"></h1>
 			</div>
 			<div class="popover_btnGo">
@@ -572,11 +647,38 @@ function createQTEContent(data, speed = 30) {
 				<button class="closeBtn" type="button">
 				</button>
 			</div>
-		</div>
+	</div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
+    </div>
+	<div class="popover_flawless">
+      <img src="img/misc/flawless.png" loading="lazy">
+    </div>
   `;
 
   document.body.appendChild(wrapper);
 
+
+	const bg = wrapper.querySelector("#qAudio");
+	const intro = wrapper.querySelector("#introAudio");
+
+	if (intro) {
+	  intro.volume = 0.3;
+	  intro.currentTime = 0;
+	  intro.play().catch(() => {});
+
+	  // Start main BGM after a fixed delay
+	  if (bg) {
+		setTimeout(() => {
+		  bg.volume = 0.2;
+		  bg.currentTime = 0;
+		  bg.play().catch(() => {});
+		}, 2500); // delay in ms — adjust to intro length
+	  }
+	}
   // Force render
   wrapper.offsetHeight;
 
@@ -672,6 +774,8 @@ function createScreenContent(data, speed = 30) {
 
   // Insert inner HTML
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/screen_bgm.mp3" loop preload="auto"></audio>
+	<audio id="introAudio" src="audio/main/screen_sfx.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -681,46 +785,70 @@ function createScreenContent(data, speed = 30) {
 
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_long">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_answer">
         <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
-
       <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
+      </div>
+	    <div class="popover_btnSkip">
+			<button class="skipBtn" type="button" popovertarget="${data.id}">
+			  <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
+			</button>
+		</div>
     </div>
     
-    <div class="popover_btnSkip">
-        <button class="skipBtn" type="button" popovertarget="${data.id}">
-          <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
-        </button>
-    </div>
+
 
     <div class="popover_screenshot">
       <img src="${data.img || ''}">
+    </div>
+	
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
 
+	const bg = wrapper.querySelector("#qAudio");
+	const intro = wrapper.querySelector("#introAudio");
+
+	if (intro) {
+	  intro.volume = 0.3;
+	  intro.currentTime = 0;
+	  intro.play().catch(() => {});
+
+	  // Start main BGM after a fixed delay
+	  if (bg) {
+		setTimeout(() => {
+		  bg.volume = 0.2;
+		  bg.currentTime = 0;
+		  bg.play().catch(() => {});
+		}, 5000); // delay in ms — adjust to intro length
+	  }
+	}
   // Force render
   wrapper.offsetHeight;
 
@@ -812,55 +940,75 @@ function createCharacterContent(data, speed = 30) {
   wrapper.id = data.id;
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/character_bgm.mp3" loop preload="auto"></audio>
+	<audio id="introAudio" src="audio/main/character_intro.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/character.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_long">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
-      </div>
-	  
+      </div>	  
 	  <div class="popover_answer">
         <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
     </div>
-
     <div class="popover_character">
       <img src="${data.img || ''}">
+    </div>	
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
 
+	const bg = wrapper.querySelector("#qAudio");
+	const intro = wrapper.querySelector("#introAudio");
+
+	if (intro) {
+	  intro.volume = 0.3;
+	  intro.currentTime = 0;
+	  intro.play().catch(() => {});
+
+	  // Start main BGM after a fixed delay
+	  if (bg) {
+		setTimeout(() => {
+		  bg.volume = 0.2;
+		  bg.currentTime = 0;
+		  bg.play().catch(() => {});
+		}, 5000); // delay in ms — adjust to intro length
+	  }
+	}
   // Force render
   wrapper.offsetHeight;
 
@@ -950,58 +1098,70 @@ function createJukeboxContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "jukebox";
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/jukebox_intro.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/jukebox.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_long">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
-      </div>
-	  
+      </div>	  
 	  <div class="popover_answer">
         <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
       <div class="popover_audio_btn">
-        <img src="img/misc/audio.png" width="100%" height="100%" loading="lazy">
-        <audio src="${data.audio || ''}"></audio>
-      </div>
+		<button class="audioBtn" type="button" popovertarget="${data.id}">
+            <img src="img/misc/audio.png" width="100%" height="100%" loading="lazy">
+			<audio src="${data.audio || ''}"></audio>
+        </button>
+	  </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
-
+ // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
+  
   // Force render
   wrapper.offsetHeight;
 
@@ -1013,7 +1173,7 @@ function createJukeboxContent(data, speed = 30) {
 }
 
 // ====================
-// JUKEBOX type handler
+// JUKEBOX RISKY type handler
 // ====================
 
 function createRJukeboxContent(data, speed = 30) {
@@ -1028,45 +1188,48 @@ function createRJukeboxContent(data, speed = 30) {
         <img src="img/categories/jukebox.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textRisky.png" width="100%" height="100%">
       <div class="popover_question_text">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
-      </div>
-	  
+      </div>	  
 	  <div class="popover_answer">
         <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
       <div class="popover_audio_btn">
-        <img src="img/misc/audio.png" width="100%" height="100%" loading="lazy">
-        <audio src="${data.audio || ''}"></audio>
+		<button class="audioBtn" type="button" popovertarget="${data.id}">
+            <img src="img/misc/audio.png" width="100%" height="100%" loading="lazy">
+			<audio src="${data.audio || ''}"></audio>
+        </button>
       </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
@@ -1093,57 +1256,70 @@ function createAudioContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "audio";
 
   wrapper.innerHTML = `
+  <audio id="qAudio" src="audio/main/audio_intro.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/audio.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_long">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
-      </div>
-	  
+      </div>	  
 	  <div class="popover_answer">
         <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-
       <div class="popover_audio_btn">
-        <img src="img/misc/audio.png" width="100%" height="100%" loading="lazy">
-        <audio src="${data.audio || ''}"></audio>
-      </div>
+		<button class="audioBtn" type="button" popovertarget="${data.id}">
+            <img src="img/misc/audio.png" width="100%" height="100%" loading="lazy">
+			<audio src="${data.audio || ''}"></audio>
+        </button>
+	  </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
+  
+   // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
 
   // Force render
   wrapper.offsetHeight;
@@ -1238,41 +1414,39 @@ function createHintContent(data, speed = 30) {
   wrapper.id = data.id;
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/hint_bgm.mp3" loop preload="auto"></audio>
+	<audio id="introAudio" src="audio/main/hint_intro.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/hint.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_btnAnswer">
         <button class="answerBtn" type="button">
           <img src="img/questions/act.png" width="100%" height="100%" loading="lazy">
         </button>
-      </div>
-	  
+      </div>	  
 	  <div class="popover_answer">
         <h2>Correct answer: ${data.answer || "No answer provided"}</h2>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
@@ -1303,11 +1477,46 @@ function createHintContent(data, speed = 30) {
 		<h2>${data.hint3 || ""}</h2>
 	  </div>
     </div>
-
-
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
+    </div>
   `;
 
   document.body.appendChild(wrapper);
+
+const intro = wrapper.querySelector("#introAudio");
+const hint1Btn = wrapper.querySelector('.hint1Btn'); // or #hint1Btn if you have an ID
+
+if (intro) {
+  intro.volume = 0.3;
+  intro.currentTime = 0;
+  intro.play().catch(() => {});
+}
+
+if (hint1Btn) {
+  hint1Btn.addEventListener('click', () => {
+    // --- Stop intro music immediately ---
+    const intro = wrapper.querySelector('#introAudio');
+    if (intro && !intro.paused) {
+      intro.pause();
+      intro.currentTime = 0;
+    }
+
+    // --- Start main hint music ---
+    const bg = wrapper.querySelector('#qAudio');
+    if (bg) {
+      bg.currentTime = 0;
+      bg.volume = 0.3;
+      bg.play().catch(() => {});
+    }
+
+    // 🔽 existing hint logic continues below
+  });
+}
+
 
   // Force render
   wrapper.offsetHeight;
@@ -1424,6 +1633,8 @@ function createMineContent(data, speed = 30) {
   wrapper.dataset.type = "mine";
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/mine_bgm.mp3" loop preload="auto"></audio>
+	<audio id="introAudio" src="audio/main/mine_intro.mp3" preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -1437,28 +1648,34 @@ function createMineContent(data, speed = 30) {
 			</div>
 	  </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_mine"></div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
 	  <div class="popover_btnMineProceed">
-        <button class="proceedMineBtn" type="button" popovertarget="${data.id}" disabled>
+        <button class="proceedMineBtn" type="button" popovertarget="${data.id}">
         </button>
       </div>
 	  <div class="popover_btnClose">
-			<button class="closeBtn" type="button">
-			</button>
-	  </div>
+        <button class="closeBtn" type="button" popovertarget="${data.id}">
+        </button>
+      </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
+    </div>
+	<div class="popover_flawless">
+      <img src="img/misc/flawless.png" loading="lazy">
     </div>
   `;
 
@@ -1490,6 +1707,24 @@ for (let i = 0; i < rowCount; i++) {
 
 
   document.body.appendChild(wrapper);
+
+	const bg = wrapper.querySelector("#qAudio");
+	const intro = wrapper.querySelector("#introAudio");
+
+	if (intro) {
+	  intro.volume = 0.3;
+	  intro.currentTime = 0;
+	  intro.play().catch(() => {});
+
+	  // Start main BGM after a fixed delay
+	  if (bg) {
+		setTimeout(() => {
+		  bg.volume = 0.2;
+		  bg.currentTime = 0;
+		  bg.play().catch(() => {});
+		}, 1700); // delay in ms — adjust to intro length
+	  }
+	}
 
   // Force render
   wrapper.offsetHeight;
@@ -1584,28 +1819,38 @@ function createSoloContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "solo";
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/solo_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/solo.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
+      </div>
+	  <div class="popover_question_text_short2">
+		<h2>${data.challengePart2 || ""}</h2>
+	  </div>
+	  <div class="popover_btnShort2">
+        <button class="shortBtn" type="button" popovertarget="${data.id}">
+        </button>
       </div>
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
       <div class="popover_btnSkip">
@@ -1613,19 +1858,25 @@ function createSoloContent(data, speed = 30) {
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-	  <div class="popover_solo2">
-		<h2>${data.challengePart2 || ""}</h2>
-	  </div>
-	  <div class="popover_btnSolo2">
-		<button class="solo2Btn" type="button" popovertarget="Question21">
-		 <img src="img/misc/solo.png" width="100%" height="100%" loading="lazy">
-		</button>
-	  </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
 
+
+ // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
   // Force render
   wrapper.offsetHeight;
 
@@ -1661,11 +1912,13 @@ function createRSoloContent(data, speed = 30) {
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
       <div class="popover_btnSkip">
@@ -1681,6 +1934,12 @@ function createRSoloContent(data, speed = 30) {
 		 <img src="img/misc/solo.png" width="100%" height="100%" loading="lazy">
 		</button>
 	  </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
@@ -1707,8 +1966,10 @@ function createAudienceContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "audience";
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/audience_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -1718,35 +1979,52 @@ function createAudienceContent(data, speed = 30) {
 
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
-
+	  <div class="popover_question_text_short2">
+		<h2>${data.challenge || ""}</h2>
+	  </div>
+	  <div class="popover_btnShort2">
+        <button class="shortBtn" type="button" popovertarget="${data.id}">
+        </button>
+      </div>
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-	  <div class="popover_audience">
-		<h2>${data.challenge || ""}</h2>
-	  </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
 
+
+ // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
   // Force render
   wrapper.offsetHeight;
 
@@ -1801,6 +2079,12 @@ function createRAudienceContent(data, speed = 30) {
 		<h2>${data.challenge || ""}</h2>
 	  </div>
     </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
+    </div>
   `;
 
   document.body.appendChild(wrapper);
@@ -1826,8 +2110,10 @@ function createTeamContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "team";
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/team_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -1837,35 +2123,52 @@ function createTeamContent(data, speed = 30) {
 
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
-
+	  <div class="popover_question_text_short2">
+		<h2>${data.challenge || ""}</h2>
+	  </div>
+	  <div class="popover_btnShort2">
+        <button class="shortBtn" type="button" popovertarget="${data.id}">
+        </button>
+      </div>
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-	  <div class="popover_team">
-		<h2>${data.challenge || ""}</h2>
-	  </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
 
+
+ // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
   // Force render
   wrapper.offsetHeight;
 
@@ -1945,8 +2248,10 @@ function createTrustContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "trust";
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/trust_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -1956,34 +2261,55 @@ function createTrustContent(data, speed = 30) {
 
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
-
+	  <div class="popover_question_text_short2">
+		<h2>${data.challenge || ""}</h2>
+	  </div>
+      <div class="popover_btnShort2">
+        <button class="shortBtn" type="button" popovertarget="${data.id}">
+        </button>
+      </div>
+	  <div class="popover_btnShort2">
+        <button class="shortBtn" type="button" popovertarget="${data.id}">
+        </button>
+      </div>
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
         </button>
       </div>
-	  <div class="popover_trust">
-		<h2>${data.challenge || ""}</h2>
-	  </div>
+    </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
 
   document.body.appendChild(wrapper);
+  
+   // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
 
   // Force render
   wrapper.offsetHeight;
@@ -2066,31 +2392,30 @@ function createHostContent(data, speed = 30) {
   wrapper.id = data.id;
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/host_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/host.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
@@ -2121,10 +2446,23 @@ function createHostContent(data, speed = 30) {
 		</button>
 	  </div>
     </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
+    </div>
   `;
 
   document.body.appendChild(wrapper);
 
+ // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
   // Force render
   wrapper.offsetHeight;
 
@@ -2227,40 +2565,43 @@ function createBranchContent(data, speed = 30) {
   wrapper.id = data.id;
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/branch_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/branch.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
-      </div>
-
-      <div class="popover_btnRight">
-        <button class="rightBtn" type="button" popovertarget="${data.id}">
-          <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
-        </button>
-      </div>
-
-      <div class="popover_btnWrong">
-        <button class="wrongBtn" type="button" popovertarget="${data.id}">
-          <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
-        </button>
       </div>
 	  <div class="popover_btnBranchA">
 		<button class="branchABtn" type="button" popovertarget="${data.id}">
-		 <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+			<img class="branchImg" src="">
 		</button>
 	  </div>
 	  <div class="popover_btnBranchB">
 		<button class="branchBBtn" type="button" popovertarget="${data.id}">
-		 <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+			<img class="branchImg" src="">
 		</button>
-	  </div>	
+	  </div>
+	  <div class="popover_btnBranchC">
+		<button class="branchCBtn" type="button" popovertarget="${data.id}">
+			<img class="branchImg" src="">
+		</button>
+	  </div>
+	  <div class="popover_btnBranchD">
+		<button class="branchDBtn" type="button" popovertarget="${data.id}">
+			<img class="branchImg" src="">
+		</button>
+	  </div>
+	  <div class="popover_btnBranchE">
+		<button class="branchEBtn" type="button" popovertarget="${data.id}">
+			<img class="branchImg" src="">
+		</button>
+	  </div>
 	  <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
@@ -2271,12 +2612,51 @@ function createBranchContent(data, speed = 30) {
 
   document.body.appendChild(wrapper);
 
+ // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
+  
   // Force render
   wrapper.offsetHeight;
 
   // Apply typewriter
   const h1 = wrapper.querySelector(".typewriter-target");
   typeWriter(h1, data.question || "No question found", speed);
+  
+	
+// -----------------------------
+// Inject branch-specific visuals
+// -----------------------------
+const branchMap = [
+  { key: "branchA", selector: ".branchABtn" },
+  { key: "branchB", selector: ".branchBBtn" },
+  { key: "branchC", selector: ".branchCBtn" },
+  { key: "branchD", selector: ".branchDBtn" },
+  { key: "branchE", selector: ".branchEBtn" }
+];
+
+branchMap.forEach(({ key, selector }) => {
+  const branchData = data[key];
+  if (!branchData) return;
+
+  const btn = wrapper.querySelector(selector);
+  if (!btn) return;
+
+  // Image
+  const imgEl = btn.querySelector(".branchImg");
+  if (imgEl) {
+    imgEl.src =
+      QUESTION_TYPE_IMAGES[branchData.type] ||
+      QUESTION_TYPE_IMAGES.default;
+    imgEl.alt = branchData.type;
+  }
+});
+
+
 
   return wrapper;
 }
@@ -2358,31 +2738,30 @@ function createDecisionContent(data, speed = 30) {
   wrapper.id = data.id;
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/decision_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
         <img src="img/categories/decision.png" loading="lazy">
       </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_short">
         <h1 class="typewriter-target"></h1>
       </div>
-
       <div class="popover_btnRight">
         <button class="rightBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/success.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnWrong">
         <button class="wrongBtn" type="button" popovertarget="${data.id}">
           <img src="img/questions/fight.png" width="100%" height="100%" loading="lazy">
+		  <audio src="audio/main/failure.mp3" preload="auto"></audio>
         </button>
       </div>
-
       <div class="popover_btnSkip">
         <button class="skipBtn" type="button" popovertarget="${data.id}">
           <img src="img/misc/skip.png" width="100%" height="100%" loading="lazy">
@@ -2414,10 +2793,24 @@ function createDecisionContent(data, speed = 30) {
 		</button>
 	  </div>
     </div>
+	<div class="popover_success">
+      <img src="img/misc/success.png" loading="lazy">
+    </div>
+	<div class="popover_failure">
+      <img src="img/misc/failure.png" loading="lazy">
+    </div>
   `;
 
   document.body.appendChild(wrapper);
 
+ // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
+  
   // Force render
   wrapper.offsetHeight;
 
@@ -2518,6 +2911,7 @@ function createRiskyContent(data, speed = 30) {
   wrapper.id = data.id;
 
   wrapper.innerHTML = `
+	<audio id="qAudio" src="audio/main/risky_bgm.mp3" loop preload="auto"></audio>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -2527,11 +2921,12 @@ function createRiskyContent(data, speed = 30) {
 	
 	<div class="popover_question_body">
      <img src="img/layout/textNormal.png" width="100%" height="100%">
-      <div class="popover_question_text">
+      <div class="popover_question_text_long">
         <h1 class="typewriter-target"></h1>
       </div>
 	 <div class="popover_btnRiskyYes">
 	  <button class="riskyYesBtn" type="button" popovertarget="Question21">
+		<audio id="rAccept" src="audio/main/risky_accept.mp3" preload="auto"></audio>
 		<img src="img/questions/mercy.png" width="100%" height="100%" loading="lazy">
 	  </button>
 	 </div>
@@ -2544,6 +2939,13 @@ function createRiskyContent(data, speed = 30) {
   `;
 
   document.body.appendChild(wrapper);
+
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
 
   // Force render
   wrapper.offsetHeight;
@@ -2566,9 +2968,11 @@ function createGameoverContent(data) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "gameover";
 
   wrapper.innerHTML = `
-	<div class="gameover_popover">
+	<audio id="qAudio" src="audio/main/game_over.mp3" preload="auto"></audio>
+  <div class="gameover_popover">
 		<div class="popover_cat_body">
 			<img src="img/layout/catNormal.png" width="100%" height="100%">
 				<div class="gameover_popover_header">
@@ -2598,6 +3002,15 @@ function createGameoverContent(data) {
 		</div>
 	</div>
   `;
+    document.body.appendChild(wrapper);
+	
+  // --- Reference the audio element and set JS attributes ---
+  const bg = wrapper.querySelector("#qAudio");
+  if (bg) {
+    bg.volume = 0.2; // works now
+    bg.currentTime = 0;
+    bg.play().catch(() => {}); // just in case
+  }
   return wrapper;
 }
 

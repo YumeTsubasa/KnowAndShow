@@ -8,6 +8,11 @@
   <link rel="stylesheet" type="text/css" href="HTML/CSS/Start.css">
 </head>
 <body>
+<audio id="bgIntro" src="html/audio/main/intro.mp3" autoplay loop preload="auto"></audio>
+<script>
+const bg = document.getElementById('bgIntro');
+bg.volume = 0.1; // MUST be JS, not HTML attribute
+</script>
 <div class="body">
 	<img src="HTML/img/layout/bgNormal.png">
 	<div class="container_startBtn">
