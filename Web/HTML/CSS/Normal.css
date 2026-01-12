@@ -282,6 +282,7 @@ h2 {
     position: absolute;
     top: 10px;
 	left: 10px;
+	white-space: pre-line;
 }
 
 .popover_question_text h1 {
@@ -299,6 +300,7 @@ h2 {
     position: absolute;
     top: 10px;
 	left: 10px;
+	white-space: pre-line;
 }
 
 .popover_question_text_long h1 {
@@ -316,6 +318,7 @@ h2 {
     position: absolute;
     top: 10px;
 	left: 10px;
+	white-space: pre-line;
 }
 
 .popover_question_text_short h1 {
@@ -334,6 +337,7 @@ h2 {
     top: 100px;
 	left: 10px;
 	display:none;
+	white-space: pre-line;
 }
 
 .popover_question_text_short2.show {
@@ -720,23 +724,49 @@ h2 {
     position: absolute;
     top: 25px;
     left: 100px;
-	opacity:1; 
-	transition: opacity 1s ease;
 	z-index: 9999;
+	opacity:0;
+    visibility: hidden;
+	background:none;
+}
+
+.popover_screenshot.show {
+	opacity:1;
+	visibility: visible;
 }
 
 .popover_screenshot img {
-    opacity: 0;
-	width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.popover_screenshot img.show {
     opacity: 1;
 	width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.popover_screenshot_flash {
+    width: 1400px;
+    height: 550px;
+    background-color: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+	z-index: 99999;
+	opacity:0;
+}
+
+.popover_screenshot_flash.flash-20 {
+  opacity: 0.2;
+}
+
+.popover_screenshot_flash.flash-40 {
+  opacity: 0.4;
+}
+
+.popover_screenshot_flash.flash-60 {
+  opacity: 0.6;
+}
+
+.popover_screenshot_flash.flash-80 {
+  opacity: 0.8;
 }
 
 /* Character Spotlight */
@@ -747,30 +777,14 @@ h2 {
     position: absolute;
     top: 25px;
     left: 100px;
-	opacity:1; 
-	transition: opacity 1s ease;
+	opacity:0; 
+	transition: opacity 2.5s ease;
 	z-index: 9999;
-	display:none;
+	background:none;
 }
 
 .popover_character.show {
-	display:block;
-}
-
-.popover_character_reveal {
-    width: 1200px;
-    height: 500px;
-    position: absolute;
-    top: 25px;
-    left: 100px;
-	opacity:1; 
-	transition: opacity 1s ease;
-	z-index: 99999;
-	display:none;
-}
-
-.popover_character_reveal.show {
-	display:block;
+	opacity:1;
 }
 
 .popover_character img {
@@ -780,7 +794,22 @@ h2 {
     object-fit: contain;
 }
 
-.popover_character img.show {
+.popover_character_reveal {
+    width: 1200px;
+    height: 500px;
+    position: absolute;
+    top: 25px;
+    left: 100px;
+	opacity:0; 
+	transition: opacity 2.5s ease;
+	z-index: 99999;
+}
+
+.popover_character_reveal.show {
+	opacity:1;
+}
+
+.popover_character_reveal img {
     opacity: 1;
 	width: 100%;
     height: 100%;
@@ -795,6 +824,7 @@ h2 {
     position: absolute;
     bottom: 120px;
     left: 630px;
+	display: none;
 }
 
 .popover_audio_btn img {
@@ -976,6 +1006,16 @@ h2 {
 	display:none;
 }
 
+.popover_btnMineProceed2 {
+    width: 141px;
+    height: 70px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+	display:none;
+}
+
+
 .popover_resultMine {
     width: 1400px;
     height: 550px;
@@ -1121,7 +1161,7 @@ h2 {
     height: 90px;
     position: absolute;
 	border: 1px sold brown;
-    top: 115px;
+    top: 125px;
 	left: 14px;
 }
 
@@ -1130,7 +1170,7 @@ h2 {
     height: 90px;
     position: absolute;
 	border: 1px sold brown;
-    top: 115px;
+    top: 125px;
 	left: 472px;
 }
 
@@ -1138,7 +1178,7 @@ h2 {
     width: 455px;
     height: 110px;
     position: absolute;
-    top: 115px;
+    top: 125px;
 	left: 930px;
 	display: block;
 }
@@ -1147,7 +1187,7 @@ h2 {
     width: 455px;
     height: 90px;
     position: absolute;
-    top: 205px;
+    top: 215px;
 	left: 244px;
 }
 
@@ -1155,7 +1195,7 @@ h2 {
     width: 455px;
     height: 90px;
     position: absolute;
-    top: 205px;
+    top: 215px;
 	left: 702px;
 }
 
@@ -1214,7 +1254,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 10px;
-    top: 100px;
+    top: 120px;
 }
 
 .popover_decision1 {
@@ -1222,7 +1262,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 10px;
-    top: 100px;
+    top: 120px;
 	text-align: left;
 	display: none;
 }
@@ -1233,7 +1273,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 10px;
-    top: 150px;
+    top: 170px;
 }
 
 .popover_decision2 {
@@ -1241,7 +1281,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 10px;
-    top: 100px;
+    top: 120px;
 	text-align: left;
 	display: none;
 }
@@ -1252,7 +1292,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 10px;
-    top: 200px;
+    top: 220px;
 }
 
 .popover_decision3 {
@@ -1260,7 +1300,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 10px;
-    top: 100px;
+    top: 120px;
 	text-align: left;
 	display: none;
 }
@@ -1318,19 +1358,49 @@ h2 {
 }
 
 /* Gameover popover */
+
 .gameover_popover {
     width: 1400px;
     height: 855px;
     position: absolute;
-    transition: opacity 1s ease, transform 1s ease;
     pointer-events: auto;
     z-index: 999;
     cursor: default;
 }
 
-.gameover_popover.show {
-    display: flex;
+.popover_question_body_gameover {
+    width: 1400px;
+    height: 305px;
+    background-color: #000;
+    position: absolute;
+    top: 550px;
+	display:none;
 }
+
+.popover_question_body_gameover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.gameover_fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: black;
+    opacity: 0;
+    pointer-events: none; /* click-through */
+    transition: opacity 0.2s linear;
+    z-index: 99;
+}
+.gameover_fade.fade-20 { opacity: 0.2; }
+.gameover_fade.fade-40 { opacity: 0.4; }
+.gameover_fade.fade-60 { opacity: 0.6; }
+.gameover_fade.fade-80 { opacity: 0.8; }
+.gameover_fade.fade-100 { opacity: 1; }
+
 
 .gameover_popover_header {
     width: 1000px;
@@ -1342,7 +1412,7 @@ h2 {
 
 .gameover_popover_score {
     width: 1000px;
-    height: 100px;
+    height: 120px;
     position: absolute;
     top: 150px;
     left: 200px;
@@ -1356,7 +1426,7 @@ h2 {
     left: 500px;
     border: 5px solid #00FF00;
     background-color: #000;
-    display: block;
+    display: none;
     cursor: pointer;
 }
 
@@ -1368,7 +1438,7 @@ h2 {
 							left: 800px;
 							border: 5px solid #00FF00;
 							background-color: #000;
-							display: block;
+							display: none;
 							cursor: pointer;
 }
 
@@ -1378,6 +1448,7 @@ h2 {
     position: absolute;
     bottom: 120px;
     right: 40px;
+	display: none;
 }
 
 gameover_popover_gameoverBtn img {

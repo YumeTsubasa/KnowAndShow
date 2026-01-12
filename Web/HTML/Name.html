@@ -15,6 +15,7 @@ bg.volume = 0.5; // MUST be JS, not HTML attribute
 </script>
 <!-- popover target confirmation of name -->
 <div id="InputOK" class="popover_name" data-type="name">
+	<img src="img/name/name.png">
 	<div class="popover_text">
 		<h1></h1> <!-- This will be filled dynamically by JS -->
 	</div>
@@ -34,14 +35,15 @@ bg.volume = 0.5; // MUST be JS, not HTML attribute
 <div class="body">
 	<img src="img/layout/bgNormal.png">
 	<div class="container_namechoice">
-		<div class="container_text">
-			<h1>Choose your <br> NAME </h1>
+	<img src="img/name/name.png">
+		<div class="container_text">			
+			<h1>Choose your <br> name </h1>
 		</div>
 		<div class="container_entername">
 			<input type="text" id="playerNameInput" placeholder="Enter your name" maxlength="26">
 		</div>
 		<div class="container_readyBtn">
-			<button class="readyBtn" type="button" popovertarget="InputOK">
+			<button class="readyBtn" type="button">
 				<img src="img/name/ready.png" width="100%" height="100%" loading="lazy">
 			</button>
 		</div>

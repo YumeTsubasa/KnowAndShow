@@ -2,13 +2,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get the scores array from localStorage
   const scores = JSON.parse(localStorage.getItem("scores")) || [];
 
-  // Find the <h1> inside the .Scores container
-  const scoreHeading = document.querySelector(".Scores h1");
+  // Find the <h2> inside the .Scores container
+  const scoreHeading = document.querySelector(".Scores h2");
 
   if (!scoreHeading) {
-    console.error("No <h1> found inside .Scores container.");
+    console.error("No <h2> found inside .Scores container.");
     return;
   }
+
+
+
+  // Enable multi-column flow when content grows
+  scoreHeading.style.columnCount = 2;          // 👈 adjust if needed
+  scoreHeading.style.columnGap = "40px";
+  scoreHeading.style.whiteSpace = "normal";
+  scoreHeading.style.columnWidth = "680px";
 
   // If there are no stored scores
   if (scores.length === 0) {
@@ -16,15 +24,14 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 🔹 Sort the scores by points descending
+  // Sort scores by points descending
   scores.sort((a, b) => b.points - a.points);
 
-  // 🔹 Build a readable HTML output with <br> after each entry
+  // Build HTML
   let scoreHTML = "";
   scores.forEach(entry => {
     scoreHTML += `${entry.player}: ${entry.points} points<br>`;
   });
 
-  // Replace the existing "Test" text with the sorted scores
   scoreHeading.innerHTML = scoreHTML;
 });

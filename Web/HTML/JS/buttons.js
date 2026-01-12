@@ -75,6 +75,13 @@ if (window.location.href.includes("Risky.html")) {
     localStorage.setItem('pointsCounter', pointsCounter);
   }
 
+	function awardPoints(basePoints = 1) {
+	  const multiplier = (window.GAME_MODE === "risky") ? 2 : 1;
+	  pointsCounter += basePoints * multiplier;
+	  updatePointsDisplay();
+	}
+
+
   // -----------------------------
   // Save individual tile to localStorage
   // -----------------------------
@@ -94,11 +101,32 @@ if (!popoverContainer) {
     document.body.appendChild(popoverContainer);
 }
 
-  // -----------------------------
-  // Game over handling
-  // -----------------------------
+// -----------------------------
+// Game over handling
+// -----------------------------
 function showGameOver() {
     if (!popoverContainer) return;
+
+    // --- Stop main BGM ---
+    if (mainBGM && !mainBGM.paused) {
+        mainBGM.pause();
+        mainBGM.currentTime = 0;
+    }
+
+	const fade = document.querySelector('.gameover_fade');
+	if (fade) {
+	  setTimeout(() => fade.classList.add('fade-20'), 10);
+	  setTimeout(() => { fade.classList.remove('fade-20'); fade.classList.add('fade-40'); }, 110);
+	  setTimeout(() => { fade.classList.remove('fade-40'); fade.classList.add('fade-60'); }, 210);
+	  setTimeout(() => { fade.classList.remove('fade-60'); fade.classList.add('fade-80'); }, 310);
+	  setTimeout(() => { fade.classList.remove('fade-80'); fade.classList.add('fade-100'); }, 410);
+	  //setTimeout(() => { fade.classList.remove('fade-100'); fade.classList.add('fade-80'); }, 1410);
+	  //setTimeout(() => { fade.classList.remove('fade-80'); fade.classList.add('fade-60'); }, 1610);
+	  //setTimeout(() => { fade.classList.remove('fade-60'); fade.classList.add('fade-40'); }, 1810);
+	  //setTimeout(() => { fade.classList.remove('fade-40'); fade.classList.add('fade-20'); }, 2010);
+	  //setTimeout(() => { fade.classList.remove('fade-20'); }, 2210);
+}
+
 
     let gameoverPopover = document.getElementById('gameoverPopover');
     if (!gameoverPopover) {
@@ -111,11 +139,7 @@ function showGameOver() {
     if (scoreDiv) {
         scoreDiv.textContent = `Player ${playerName} has scored ${pointsCounter} points`;
     }
-
-    // Make sure the popover itself is visible
-    gameoverPopover.classList.add('show');
-
-
+    
     // Save the score in localStorage
     let scores = JSON.parse(localStorage.getItem('scores')) || [];
     const existingIndex = scores.findIndex(s => s.player === playerName);
@@ -132,8 +156,10 @@ function showGameOver() {
     livesCounter = 1;
     pointsCounter = 0;
 
-    // Show the popover
-    gameoverPopover.classList.add('show');
+    // Show popover after 2s delay
+    setTimeout(() => {
+        gameoverPopover.classList.add('show');
+    }, 3500);
 
     // Add button event listeners
     const restartBtn = gameoverPopover.querySelector('.restartBtn');
@@ -142,9 +168,21 @@ function showGameOver() {
     const scoresBtn = gameoverPopover.querySelector('.scoresBtn');
     if (scoresBtn) scoresBtn.addEventListener('click', () => window.location.href = 'Scores.html');
 
-    const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
-    if (dismissBtn) dismissBtn.addEventListener('click', () => gameoverPopover.classList.remove('show'));
+	const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
+	if (dismissBtn) {
+	  dismissBtn.addEventListener('click', () => {
+		gameoverPopover.classList.remove('show');
+		if (mainBGM && mainBGM.paused) {
+		  mainBGM.play().catch(() => {});
+		}
+		fade.classList.remove('fade-100');
+	  });
+	}
+
+
 }
+
+
 
 
 
@@ -175,6 +213,8 @@ function showGameOver() {
 
           document.querySelectorAll(".popover.show").forEach(p => { if (p !== branchPopover) p.classList.remove("show"); });
           branchPopover.classList.add('show');
+		  // Pause main BGM for the branch menu
+		  if (mainBGM && !mainBGM.paused) mainBGM.pause();
           window.lastPopoverID = tileId;
 
           const branchABtn = branchPopover.querySelector('.branchABtn');
@@ -253,20 +293,6 @@ function showGameOver() {
         popover.id = tileId;
         popoverContainer.innerHTML = "";
         popoverContainer.appendChild(popover);
-
-        // SCREEN fade-in
-        if (questionData.type && questionData.type.toLowerCase() === "screen") {
-          const imgEl = popover.querySelector('.popover_screenshot img');
-          if (imgEl) {
-            setTimeout(() => {
-              console.log('Screen question fade-in triggered');
-              imgEl.classList.add('show');
-            }, 5000);
-          }
-        }
-      } else {
-        popover = document.getElementById(tileId);
-        if (!popover) { console.error("No data for", tileId); return; }
       }
 
       document.querySelectorAll(".popover.show").forEach(p => { if (p !== popover) p.classList.remove("show"); });
@@ -363,6 +389,8 @@ if (board2Btn) {
 	const closeBtn = popover.querySelector('.closeBtn');
 	const shortBtn = popover.querySelector('.shortBtn');
 	const shortDiv = popover.querySelector('.popover_question_text_short2');
+	const answerCharacterBtn = popover.querySelector('.answerCharacterBtn');
+	const characterRevealDiv = popover.querySelector('.popover_character_reveal');
 
     // -----------------------------
     // Disable tile after use
@@ -383,7 +411,16 @@ if (board2Btn) {
     }
 
     // --- Attach standard button events ---
-    if (answerBtn && answerDiv) answerBtn.addEventListener('click', () => { 
+	if (answerCharacterBtn && answerDiv && characterRevealDiv) {
+	  answerCharacterBtn.addEventListener('click', () => { 
+		answerDiv.classList.add('show');
+		answerCharacterBtn.parentElement.classList.add('hidden');
+		characterRevealDiv.classList.add('show');
+	  });
+	}
+
+	
+	if (answerBtn && answerDiv) answerBtn.addEventListener('click', () => { 
       answerDiv.classList.add('show'); 
       answerBtn.parentElement.classList.add('hidden'); 
     });
@@ -431,10 +468,46 @@ setTimeout(() => {
 }, 1700);
 
 	});
+	
+if (wrongBtn) wrongBtn.addEventListener('click', () => {
+	// 1️⃣ Apply game consequence immediately
+		livesCounter--;
+		updateLivesDisplay();
+		disableTileAfterUse();
+		failureDiv.classList.add('show');
+		const audio = wrongBtn.querySelector('audio');
+			if (audio) {
+			audio.currentTime = 0;
+			audio.volume = 0.5;
+			audio.play().catch(() => {});
+			}
+		if (qAudio && !qAudio.paused) {
+			qAudio.pause();
+			qAudio.currentTime = 0;
+			}
+  
+	// 3️⃣ Delay popover close so feedback + sound can play
+  
+	setTimeout(() => {
+	  // Only resume main BGM if the player still has lives left
+	  if (livesCounter >= 0 && mainBGM && mainBGM.paused) {
+		mainBGM.play().catch(() => {});
+	  }
+
+	  popover.classList.remove('show');
+
+	  // Optionally show game over after removing popover
+	  if (livesCounter === -1) {
+		showGameOver();
+	  }
+	}, 1700);
+
+		});
 
 
     if (rightBtn) rightBtn.addEventListener('click', () => { 
-      pointsCounter++; 
+	  // 1️⃣ Award points (normal = 1, risky = 2)
+	  awardPoints(1);
       updatePointsDisplay(); 
       disableTileAfterUse();
 	  successDiv.classList.add('show');
@@ -449,13 +522,13 @@ setTimeout(() => {
 		qAudio.currentTime = 0;
 		}
 
-	// 3️⃣ Delay popover close so feedback + sound can play
-	setTimeout(() => {
+		// 3️⃣ Delay popover close so feedback + sound can play
+		setTimeout(() => {
 
-if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
-		popover.classList.remove('show');
-		}, 2500); // 2.5 seconds
-    });
+	if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
+			popover.classList.remove('show');
+			}, 2500); // 2.5 seconds
+		});
 
 // -----------------------------
 // Multi-choice question handling (2x2 layout, non-clickable, borderless)
@@ -521,8 +594,10 @@ if (multiPopover) setupMultiChoice(multiPopover);
 let minefieldPoints = 0;
 let minefieldActive = false;
 let selectedTiles = [];
+let nonSelectedTiles = [];
 
 const proceedMineBtn = popover.querySelector('.proceedMineBtn');
+const proceedMine2Btn = popover.querySelector('.proceedMine2Btn');
 
 const resultBox = document.querySelector('.popover_resultMine');
 if (resultBox) {
@@ -555,6 +630,18 @@ tiles.forEach(tileBtn => {
   );
   tileBtn.style.backgroundColor = "";
 });
+
+// Helper: desaturate a color (for non-selected tiles)
+function desaturateColor(color, factor = 0.50) {
+  let hsl;
+  switch (color) {
+    case "red": hsl = [0, 80, 50]; break;
+    case "lime": hsl = [120, 80, 50]; break;
+    default: return color;
+  }
+  hsl[1] = hsl[1] * factor; // reduce saturation
+  return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
+}
 
 // Grab the dedicated proceed button
 if (proceedMineBtn) {
@@ -617,8 +704,9 @@ tiles.forEach(tileBtn => {
   });
 });
 
+
 // ---------------------------------
-// Proceed button click
+// Proceed button click (selected tiles)
 // ---------------------------------
 if (proceedMineBtn) {
   proceedMineBtn.addEventListener('click', () => {
@@ -629,69 +717,81 @@ if (proceedMineBtn) {
     // Disable all tiles
     tiles.forEach(t => (t.disabled = true));
 
+    // Disable first proceed button
+    proceedMineBtn.disabled = true;
+
+    // Enable second proceed button
+    if (proceedMine2Btn) proceedMine2Btn.disabled = false;
+
     // Separate non-selected tiles and shuffle
-    let nonSelectedTiles = tiles.filter(t => !selectedTiles.includes(t));
+    nonSelectedTiles = tiles.filter(t => !selectedTiles.includes(t));
     nonSelectedTiles.sort(() => Math.random() - 0.5);
 
-    // 🔊 Minefield reveal sound (one instance, reused)
-    const mineRevealSound = new Audio("audio/main/mine_reveal.wav");
-    mineRevealSound.preload = "auto";
-    mineRevealSound.volume = 0.25;
+    // 🔊 Minefield reveal sounds
+    const safeRevealSound = new Audio("audio/main/mine_right.wav");
+    const mineRevealSound = new Audio("audio/main/mine_wrong.wav");
+    safeRevealSound.volume = 0.65;
+    mineRevealSound.volume = 0.65;
 
-    // -----------------------------
-    // Reveal selected tiles first
-    // -----------------------------
     let selIdx = 0;
     function revealSelected() {
-      if (selIdx >= selectedTiles.length) {
-        revealNonSelected();
-        return;
-      }
+      if (selIdx >= selectedTiles.length) return;
 
       const tile = selectedTiles[selIdx];
-      tile.style.backgroundColor =
-        tile.dataset.type === 'mine' ? "red" : "lime";
-      tile.classList.add(
-        tile.dataset.type === 'mine' ? 'used-mine' : 'used-safe'
-      );
+      const isMine = tile.dataset.type === 'mine';
 
-      // 🔊 Play reveal sound
-      mineRevealSound.currentTime = 0;
-      mineRevealSound.play().catch(() => {});
+      tile.style.backgroundColor = isMine ? "red" : "lime";
+      tile.classList.add(isMine ? 'used-mine' : 'used-safe');
+
+      const sound = isMine ? mineRevealSound : safeRevealSound;
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
 
       selIdx++;
       setTimeout(revealSelected, 1000);
-    }
-
-    // -----------------------------
-    // Reveal non-selected tiles
-    // -----------------------------
-    let idx = 0;
-    function revealNonSelected() {
-      if (idx >= nonSelectedTiles.length) {
-        finalizeMinefield(); // your existing finalization logic
-        return;
-      }
-
-      const tile = nonSelectedTiles[idx];
-      tile.style.backgroundColor =
-        tile.dataset.type === 'mine' ? "red" : "lime";
-      tile.classList.add(
-        tile.dataset.type === 'mine' ? 'used-mine' : 'used-safe'
-      );
-
-      // 🔊 Play reveal sound
-      mineRevealSound.currentTime = 0;
-      mineRevealSound.play().catch(() => {});
-
-      idx++;
-      setTimeout(revealNonSelected, 750);
     }
 
     revealSelected();
   });
 }
 
+// ---------------------------------
+// Proceed button #2 (non-selected tiles)
+// ---------------------------------
+if (proceedMine2Btn) {
+  proceedMine2Btn.addEventListener('click', () => {
+    proceedMine2Btn.disabled = true;
+
+    const safeRevealSound = new Audio("audio/main/mine_right.wav");
+    const mineRevealSound = new Audio("audio/main/mine_wrong.wav");
+    safeRevealSound.volume = 0.65;
+    mineRevealSound.volume = 0.65;
+
+    let idx = 0;
+    function revealNonSelected() {
+      if (idx >= nonSelectedTiles.length) {
+        finalizeMinefield(); // ✅ scoring ONLY here
+        return;
+      }
+
+      const tile = nonSelectedTiles[idx];
+      const isMine = tile.dataset.type === 'mine';
+
+      const baseColor = isMine ? "red" : "lime";
+      tile.style.backgroundColor = desaturateColor(baseColor, 0.75);
+      tile.classList.add(isMine ? 'used-mine' : 'used-safe');
+
+      const sound = isMine ? mineRevealSound : safeRevealSound;
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+
+      idx++;
+      setTimeout(revealNonSelected, 750);
+    }
+
+    revealNonSelected();
+  });
+}
 
 
 
@@ -703,9 +803,12 @@ function finalizeMinefield() {
     t => t.dataset.type !== 'mine'
   ).length;
 
+  let basePoints = 0;
   let pointsEarned = 0;
   let lifeLost = false;
   let resultType = "";
+
+  const pointMultiplier = (window.GAME_MODE === "risky") ? 2 : 1;
 
   if (safeCount < 2) {
     // Lose 1 life
@@ -715,16 +818,19 @@ function finalizeMinefield() {
     resultType = "lifeLost";
   }
   else if (safeCount === 2 || safeCount === 3) {
-    pointsEarned = 1;
-    pointsCounter += pointsEarned;
-    updatePointsDisplay();
+    basePoints = 1;
     resultType = "smallWin";
   }
   else if (safeCount === 4) {
-    pointsEarned = 2;
+    basePoints = 2;
+    resultType = "bigWin";
+  }
+
+  // Apply multiplier once
+  if (basePoints > 0) {
+    pointsEarned = basePoints * pointMultiplier;
     pointsCounter += pointsEarned;
     updatePointsDisplay();
-    resultType = "bigWin";
   }
 
   showMinefieldResult({
@@ -734,6 +840,7 @@ function finalizeMinefield() {
     resultType
   });
 }
+
 
 // ---------------------------------
 // Result popover UI
@@ -761,7 +868,7 @@ function showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType }) 
       break;
     case "bigWin":
       title = "Perfect Run!";
-      message = `All 4 tiles were safe! You earned +4 points.`;
+      message = `All 4 tiles were safe! You earned +2 points.`;
       break;
   }
 
@@ -775,66 +882,55 @@ function showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType }) 
 // Delayed result audio handling
 // -----------------------------
 setTimeout(() => {
-
-  // Stop Minefield BGM
-  const qAudio = document.querySelector('#qAudio');
-  if (qAudio) {
-    qAudio.pause();
-    qAudio.currentTime = 0;
-  }
-
-  // Play result sound
-  if (resultSound) {
-    const resultAudio = new Audio(resultSound);
-    resultAudio.volume = 0.4;
-    resultAudio.play().catch(() => {});
-  }
-
-  // --- Show result graphic ---
-
-  if (showSuccess && successDiv) {
-    successDiv.classList.add('show');
-  }
-
-  if (!showSuccess && failureDiv) {
-    failureDiv.classList.add('show');
-  }
-  
-  	// --- Decide result ---
-	let resultSound = "";
-	let resultDiv = null; // the div to show
+	
+	// Decide which div to show
+	let resultDiv = null;
+	let showSuccess = false;
+	let showFailure = false;
 
 	const successDiv = popover.querySelector('.popover_success');
 	const failureDiv = popover.querySelector('.popover_failure');
 	const flawlessDiv = popover.querySelector('.popover_flawless');
 
 	if (resultType === "lifeLost") {
-	  resultSound = "audio/main/failure.mp3";
 	  resultDiv = failureDiv;
+	  showFailure = true;
 	}
 
 	if (resultType === "smallWin") {
-	  resultSound = "audio/main/success.mp3";
 	  resultDiv = successDiv;
+	  showSuccess = true;
 	}
 
 	if (resultType === "bigWin") {
-	  resultSound = "audio/main/flawless.mp3";
 	  resultDiv = flawlessDiv;
+	  showSuccess = true;
 	}
 
-	// --- Play result sound ---
-	if (resultSound) {
-	  const resultAudio = new Audio(resultSound);
+	// Stop Minefield BGM
+	const qAudio = document.querySelector('#qAudio');
+	if (qAudio) {
+	  qAudio.pause();
+	  qAudio.currentTime = 0;
+	}
+
+	// Play result sound
+	if (resultDiv) {
+	  const resultAudio = new Audio(
+		resultType === "lifeLost" ? "audio/main/failure.mp3" :
+		resultType === "smallWin" ? "audio/main/success.mp3" :
+		"audio/main/flawless.mp3"
+	  );
 	  resultAudio.volume = 0.4;
 	  resultAudio.play().catch(() => {});
 	}
 
-	// --- Show the correct div ---
+	// Show the correct div
 	if (resultDiv) {
 	  resultDiv.classList.add('show');
 	}
 
+  
 }, 5000); // ⏱ 5 second delay
 
 }
@@ -1077,7 +1173,6 @@ for (let i = 0; i < placeholders.length; i++) {
 	if (resultDiv) {
 	  resultDiv.classList.add('show');
 	}
-
 }
 
 
@@ -1103,16 +1198,23 @@ function updateDisplayForNextItem() {
 function checkQTEEnd() {
   if (currentIndex >= qteItems.length) {
     let livesLost = false;
+    let basePoints = 0;
     let pointsGained = 0;
 
+    const pointMultiplier = (window.GAME_MODE === "risky") ? 2 : 1;
+
     if (qteScore <= 2) {
-      livesCounter--;
+      livesCounter = Math.max(0, livesCounter - 1);
       updateLivesDisplay();
       livesLost = true;
     } else {
-      pointsCounter += 1;
+      basePoints = 1;
+    }
+
+    if (basePoints > 0) {
+      pointsGained = basePoints * pointMultiplier;
+      pointsCounter += pointsGained;
       updatePointsDisplay();
-      pointsGained = 1;
     }
 
     // Disable QTE buttons while result is visible
@@ -1121,9 +1223,16 @@ function checkQTEEnd() {
     if (answerqteBtn) answerqteBtn.disabled = true;
 
     // --- Trigger sequential 5-step reveal with text ---
-    revealQTEResultsSequential(popover, qteResults, qteScore, livesLost, pointsGained);
+    revealQTEResultsSequential(
+      popover,
+      qteResults,
+      qteScore,
+      livesLost,
+      pointsGained
+    );
   }
 }
+
 
 // -----------------------------
 // Go button: start QTE
@@ -1243,7 +1352,6 @@ switch (currentType) {
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "a": currentPopover.querySelector(".answerBtn")?.click(); break;
 	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
-	  case "c": currentPopover.querySelector(".closeBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1251,10 +1359,21 @@ switch (currentType) {
 case "mine": // fallback for normal popovers without data-type
     switch (key) {
 	  case "c": currentPopover.querySelector(".closeBtn")?.click(); break;
-	  case "p": currentPopover.querySelector(".proceedMineBtn")?.click(); break;
+	  case "g": currentPopover.querySelector(".proceedMineBtn")?.click(); break;
+	  case "p": currentPopover.querySelector(".proceedMine2Btn")?.click(); break;
       default: break;
     }
     break;
+
+ case "character":
+      switch (key) {
+      case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
+      case "a": currentPopover.querySelector(".answerCharacterBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
+      default: break;
+    }
+      break;
 
  case "audio":
       switch (key) {
@@ -1323,11 +1442,28 @@ case "mine": // fallback for normal popovers without data-type
       default: break;
     }
     break;
+	
+  case "riskyStrats":
+    switch (key) {
+      case "r": currentPopover.querySelector(".riskyYesBtn")?.click(); break;
+      case "w": currentPopover.querySelector(".riskyNoBtn")?.click(); break;
+      default: break;
+    }
+    break;
+	
+  case "gameover":
+    switch (key) {
+      case "n": currentPopover.querySelector(".restartBtn")?.click(); break;
+      case "b": currentPopover.querySelector(".scoresBtn")?.click(); break;
+	  case "c": currentPopover.querySelector(".dismissBtn")?.click(); break;
+      default: break;
+    }
+    break;
 
     default:
       break;
   }
-});
+}, true);
 
   }
 

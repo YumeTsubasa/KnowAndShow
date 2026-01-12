@@ -11,7 +11,11 @@
 
 
 <body>
-
+<audio id="bgMain" src="audio/main/risky_board.mp3" autoplay loop preload="auto"></audio>
+<script>
+const bg = document.getElementById('bgMain');
+bg.volume = 0.2; // MUST be JS, not HTML attribute
+</script>
 	<div class="body">
 	<img src="img/layout/bgRisky.png">
 		<!-- Carousel initialization -->

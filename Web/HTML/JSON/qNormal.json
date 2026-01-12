@@ -25,7 +25,7 @@
     {
     "id": "Question4",
 	"type": "qte",
-    "question": "To Kart or Not To Kart? <br> Are these real kart names in Mario Kart: Double Dash?",
+    "question": "To Kart or Not To Kart? \n Are these real kart names in Mario Kart: Double Dash?",
 	"qteItems": [
 		{ "text": "Kart1", "display": "test1" },
 		{ "text": "Kart2", "display": "test2" },
@@ -45,7 +45,8 @@
     "id": "Question6",
 	"type": "character",
     "question": "Who's this character?",
-	"img": "img/character/knuckles.jpg",
+	"img": "img/character/arle.jpg",
+	"img_reveal": "img/character/knuckles.jpg",
 	"answer": "&Knuckles"
   },
     {
