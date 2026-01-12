@@ -3310,7 +3310,6 @@ function createRDecisionContent(data, speed = 30) {
 	  <div class="popover_decision2">
 		<h2>${data.game2desc || ""}</h2>
 	  </div>
-	  /div>
 	  <div class="popover_decision3">
 		<h2>${data.game3desc || ""}</h2>
 	  </div>
