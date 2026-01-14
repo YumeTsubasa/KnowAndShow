@@ -1096,6 +1096,8 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
 const qteSound = new Audio();
 qteSound.preload = "auto";
 
+if (answerDivQTE) answerDivQTE.classList.remove('show');
+
 // --- Reveal each placeholder sequentially ---
 for (let i = 0; i < placeholders.length; i++) {
   const img = placeholders[i];

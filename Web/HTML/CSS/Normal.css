@@ -124,7 +124,6 @@ h2 {
     left: 250px;
     bottom: 40px;
     right: 40px;
-
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 1s ease, transform 1s ease;
@@ -173,6 +172,7 @@ h2 {
     justify-content: center;   /* horizontal center */
     align-items: center;       /* vertical center */
     position: absolute;
+	z-index:99;
 }
 
 .popover_cat_img img {
@@ -484,6 +484,8 @@ h2 {
     left: 40px;
 	display:none;
 }
+
+/* Brutal */
 
 /* QTE */
 

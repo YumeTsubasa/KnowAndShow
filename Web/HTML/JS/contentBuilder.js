@@ -419,6 +419,7 @@ function createBrutalContent(data, speed = 30) {
   wrapper.classList.add("popover");
   wrapper.id = data.id;
 
+
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
 	<audio id="introAudio" src="audio/main/brutal_intro.mp3" preload="auto"></audio>
@@ -472,7 +473,7 @@ function createBrutalContent(data, speed = 30) {
 
 	const bg = wrapper.querySelector("#qAudio");
 	const intro = wrapper.querySelector("#introAudio");
-
+		
 	if (intro) {
 	  intro.volume = 0.23;
 	  intro.currentTime = 0;
@@ -488,8 +489,12 @@ function createBrutalContent(data, speed = 30) {
 	  }
 	}
 
+	setTimeout(() => {
+	  wrapper.classList.add("show");
+	}, 2000);
 
 	
+		
   // Force render
   wrapper.offsetHeight;
 
