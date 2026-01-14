@@ -75,11 +75,13 @@ if (window.location.href.includes("Risky.html")) {
     localStorage.setItem('pointsCounter', pointsCounter);
   }
 
-	function awardPoints(basePoints = 1) {
-	  const multiplier = (window.GAME_MODE === "risky") ? 2 : 1;
-	  pointsCounter += basePoints * multiplier;
-	  updatePointsDisplay();
-	}
+function awardPoints() {
+  console.trace("awardPoints called");
+  const multiplier = (window.GAME_MODE === "risky") ? 2 : 1;
+  pointsCounter += multiplier;
+  updatePointsDisplay();
+}
+
 
 
   // -----------------------------
@@ -168,14 +170,17 @@ function showGameOver() {
     const scoresBtn = gameoverPopover.querySelector('.scoresBtn');
     if (scoresBtn) scoresBtn.addEventListener('click', () => window.location.href = 'Scores.html');
 
-    const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
-    if (dismissBtn) dismissBtn.addEventListener('click', () => gameoverPopover.classList.remove('show'));
+	const dismissBtn = gameoverPopover.querySelector('.dismissBtn');
+	if (dismissBtn) {
+	  dismissBtn.addEventListener('click', () => {
+		gameoverPopover.classList.remove('show');
+		if (mainBGM && mainBGM.paused) {
+		  mainBGM.play().catch(() => {});
+		}
+		fade.classList.remove('fade-100');
+	  });
+	}
 }
-
-
-
-
-
 
   updateLivesDisplay();
   updatePointsDisplay();
@@ -495,30 +500,34 @@ if (wrongBtn) wrongBtn.addEventListener('click', () => {
 		});
 
 
-    if (rightBtn) rightBtn.addEventListener('click', () => { 
-	  // 1️⃣ Award points (normal = 1, risky = 2)
-	  awardPoints(1);
-      updatePointsDisplay(); 
-      disableTileAfterUse();
-	  successDiv.classList.add('show');
-	  const audio = rightBtn.querySelector('audio');
-		if (audio) {
-		audio.currentTime = 0;
-		audio.volume = 0.5;
-		audio.play().catch(() => {});
-		}
-	  if (qAudio && !qAudio.paused) {
-		qAudio.pause();
-		qAudio.currentTime = 0;
-		}
+if (rightBtn) rightBtn.addEventListener('click', () => {
 
-		// 3️⃣ Delay popover close so feedback + sound can play
-		setTimeout(() => {
+  // ✅ Award points (normal = 1, risky = 2)
+  awardPoints();
 
-	if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
-			popover.classList.remove('show');
-			}, 2500); // 2.5 seconds
-		});
+  disableTileAfterUse();
+  successDiv.classList.add('show');
+
+  const audio = rightBtn.querySelector('audio');
+  if (audio) {
+    audio.currentTime = 0;
+    audio.volume = 0.5;
+    audio.play().catch(() => {});
+  }
+
+  if (qAudio && !qAudio.paused) {
+    qAudio.pause();
+    qAudio.currentTime = 0;
+  }
+
+  // ⏳ Delay popover close so feedback + sound can play
+  setTimeout(() => {
+    if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
+    popover.classList.remove('show');
+  }, 2500);
+
+});
+
 
 // -----------------------------
 // Multi-choice question handling (2x2 layout, non-clickable, borderless)
@@ -1321,6 +1330,11 @@ document.addEventListener("keydown", (event) => {
   const currentPopover = document.querySelector(".popover.show");
   if (!currentPopover) return;
 
+event.stopImmediatePropagation();
+event.preventDefault();
+
+
+
 const currentType = currentPopover.dataset.type;
 
 switch (currentType) {
@@ -1330,7 +1344,7 @@ switch (currentType) {
       case "w": currentPopover.querySelector(".wrongqteBtn")?.click(); break;
       case "a": currentPopover.querySelector(".answerqteBtn")?.click(); break;
       case "g": currentPopover.querySelector(".qtegobtn")?.click(); break;
-	  case "p": currentPopover.querySelector(".closeBtn")?.click(); break;
+	  case "c": currentPopover.querySelector(".closeBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1440,11 +1454,11 @@ case "mine": // fallback for normal popovers without data-type
       default: break;
     }
     break;
-
+	
     default:
       break;
   }
-});
+}, true);
 
   }
 
@@ -1465,3 +1479,35 @@ case "mine": // fallback for normal popovers without data-type
   updateLivesDisplay();
   updatePointsDisplay();
 });
+
+
+document.addEventListener('keydown', (e) => {
+    const key = e.key.toLowerCase();
+
+    // --- Step 1: Determine which popover is active ---
+    let currentPopover = document.querySelector('.popover.show');
+
+    // --- Step 2: Special case: if gameover popover exists and is shown ---
+    const gameoverPopover = document.getElementById('gameoverPopover');
+    if (gameoverPopover && gameoverPopover.classList.contains('show')) {
+        currentPopover = gameoverPopover;
+    }
+
+    if (!currentPopover) return; // nothing to act on
+
+    const currentType = currentPopover.dataset.type;
+
+    // --- Step 3: Handle keyboard shortcuts ---
+    switch (currentType) {
+        case "gameover":
+            switch (key) {
+                case "n": currentPopover.querySelector(".restartBtn")?.click(); break;
+                case "b": currentPopover.querySelector(".scoresBtn")?.click(); break;
+                case "c": currentPopover.querySelector(".dismissBtn")?.click(); break;
+                default: break;
+            }
+            break;
+
+        // ...other popover cases as you already have them...
+    }
+}, true);

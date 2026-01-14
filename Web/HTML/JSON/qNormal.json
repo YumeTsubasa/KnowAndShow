@@ -106,7 +106,7 @@
     {
     "id": "Question12",
 	"type": "audience",
-	"question": "Take on an audience member in a head-to-head challenge!",
+	"question": "Take on an audience member in a \n head-to-head challenge!",
     "challenge": "OhNo"
   },
     {
@@ -161,7 +161,7 @@
 	},
 	"branchE": {
 		"id": "Question16_E",
-		"type": "easy",
+		"type": "risky",
 		"question": "Choose a host and take on their challenge!",
 		"Boxmeister": "Survive 5 minutes of puns from Box",
 		"DoubleDubbel": "Mario Kart Double Dash baby!"
@@ -180,6 +180,16 @@
   },
     {
     "id": "Question18",
+	"type": "risky",
+    "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+      {
+    "id": "Question19",
+	"type": "risky",
+    "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+      {
+    "id": "Question20",
 	"type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },

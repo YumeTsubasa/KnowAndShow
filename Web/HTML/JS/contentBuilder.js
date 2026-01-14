@@ -37,6 +37,7 @@ const QUESTION_TYPE_IMAGES = {
   host: "img/branches/host.png",
   branch: "img/branches/branch.png",
   decision: "img/branches/decision.png",
+  risky: "img/branches/risky.png",
 };
 
 // Define handlers for question types
@@ -921,34 +922,8 @@ function createScreenContent(data, speed = 30) {
 
 	if (flash) {
 
-	  setTimeout(() => flash.classList.add('flash-20'), 2150);
-	  setTimeout(() => {
-		flash.classList.remove('flash-20');
-		flash.classList.add('flash-40');
-	  }, 2300);
-	  setTimeout(() => {
-		flash.classList.remove('flash-40');
-		flash.classList.add('flash-60');
-	  }, 2450);
-	  setTimeout(() => {
-		flash.classList.remove('flash-60');
-		flash.classList.add('flash-80');
-	  }, 2600);
-	  setTimeout(() => {
-		flash.classList.remove('flash-80');
-		flash.classList.add('flash-60');
-	  }, 2900);
-	  setTimeout(() => {
-		flash.classList.remove('flash-60');
-		flash.classList.add('flash-40');
-	  }, 3200);
-	  setTimeout(() => {
-		flash.classList.remove('flash-40');
-		flash.classList.add('flash-20');
-	  }, 3500);
-	  setTimeout(() => {
-		flash.classList.remove('flash-20');
-	  }, 3800);
+	  setTimeout(() => flash.classList.add('flash-80'), 0);
+	  setTimeout(() => {flash.classList.remove('flash-80'); }, 2650);
 	  
 	}
 	

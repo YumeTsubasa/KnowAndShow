@@ -751,18 +751,7 @@ h2 {
     left: 0;
 	z-index: 99999;
 	opacity:0;
-}
-
-.popover_screenshot_flash.flash-20 {
-  opacity: 0.2;
-}
-
-.popover_screenshot_flash.flash-40 {
-  opacity: 0.4;
-}
-
-.popover_screenshot_flash.flash-60 {
-  opacity: 0.6;
+	transition: opacity 2.2s ease;
 }
 
 .popover_screenshot_flash.flash-80 {
@@ -1363,9 +1352,14 @@ h2 {
     width: 1400px;
     height: 855px;
     position: absolute;
-    pointer-events: auto;
+    pointer-events: none;
     z-index: 999;
     cursor: default;
+}
+
+.gameover_popover show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .popover_question_body_gameover {
@@ -1395,12 +1389,12 @@ h2 {
     transition: opacity 0.2s linear;
     z-index: 99;
 }
+
 .gameover_fade.fade-20 { opacity: 0.2; }
 .gameover_fade.fade-40 { opacity: 0.4; }
 .gameover_fade.fade-60 { opacity: 0.6; }
 .gameover_fade.fade-80 { opacity: 0.8; }
 .gameover_fade.fade-100 { opacity: 1; }
-
 
 .gameover_popover_header {
     width: 1000px;
@@ -1426,8 +1420,7 @@ h2 {
     left: 500px;
     border: 5px solid #00FF00;
     background-color: #000;
-    display: none;
-    cursor: pointer;
+    display: block;
 }
 
 .gameover_popover_scoresBtn {
@@ -1438,8 +1431,7 @@ h2 {
 							left: 800px;
 							border: 5px solid #00FF00;
 							background-color: #000;
-							display: none;
-							cursor: pointer;
+							display: block;
 }
 
 .popover_btnDismiss {
@@ -1448,7 +1440,7 @@ h2 {
     position: absolute;
     bottom: 120px;
     right: 40px;
-	display: none;
+	display: block;
 }
 
 gameover_popover_gameoverBtn img {

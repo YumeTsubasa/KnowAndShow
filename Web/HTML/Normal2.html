@@ -15,10 +15,12 @@
 <audio id="bgMain" src="audio/main/main_bgm.mp3" autoplay loop preload="auto"></audio>
 <script>
 const bg = document.getElementById('bgMain');
-bg.volume = 0.2; // MUST be JS, not HTML attribute
+bg.volume = 0.17; // MUST be JS, not HTML attribute
 </script>
 
 	<div class="body">
+	<div class="gameover_fade">
+	</div>
 		<img src="img/layout/bgNormal.png">
 		<!-- Carousel initialization -->
 		<div class="carousel" role="region" aria-label="Image carousel" tabindex="0">

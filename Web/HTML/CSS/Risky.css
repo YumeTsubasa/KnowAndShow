@@ -820,6 +820,7 @@ h2 {
     position: absolute;
     bottom: 120px;
     left: 630px;
+    display:none;
 }
 
 .popover_audio_btn img {
