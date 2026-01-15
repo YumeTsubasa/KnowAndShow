@@ -277,7 +277,6 @@ function createMultiContent(data, speed = 30) {
         <h1>${data.question || "No question provided"}</h1>
       </div>
       <div class="popover_multi_answers">
-        <h2></h2>
       </div>
       <div class="popover_multi_btnAnswer">
         <button class="answerMultiBtn" type="button">
@@ -415,21 +414,20 @@ function createBrutalContent(data, speed = 30) {
   if (window.GAME_MODE === "risky") {
     return createRBrutalContent(data);
   }
-  const wrapper = document.createElement("div");
-  wrapper.classList.add("popover");
-  wrapper.id = data.id;
-
+  
+	const wrapper = document.createElement("div");
+	wrapper.classList.add("popover_brutal");
+	wrapper.id = data.id;
 
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
 	<audio id="introAudio" src="audio/main/brutal_intro.mp3" preload="auto"></audio>
+	<div class="popover_cat_img_brutal">
+        <img src="img/categories/brutal.png" loading="lazy">
+    </div>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
-      <div class="popover_cat_img">
-        <img src="img/categories/brutal.png" loading="lazy">
-      </div>
     </div>
-
     <div class="popover_question_body">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text_long">
@@ -473,7 +471,28 @@ function createBrutalContent(data, speed = 30) {
 
 	const bg = wrapper.querySelector("#qAudio");
 	const intro = wrapper.querySelector("#introAudio");
-		
+	const fade = document.querySelector('.gameover_fade');
+	const cat = wrapper.querySelector(".popover_cat_img_brutal");
+	
+	if (fade) {
+	  setTimeout(() => fade.classList.add('fade-20'), 400);
+	  setTimeout(() => { fade.classList.remove('fade-20'); fade.classList.add('fade-40'); }, 800);
+	  setTimeout(() => { fade.classList.remove('fade-40'); fade.classList.add('fade-60'); }, 1200);
+	  setTimeout(() => { fade.classList.remove('fade-60'); fade.classList.add('fade-80'); }, 1600);
+	  setTimeout(() => { fade.classList.remove('fade-80'); fade.classList.add('fade-100'); }, 2000);
+	  setTimeout(() => { fade.classList.remove('fade-100'); fade.classList.add('fade-80'); }, 5400);
+	  setTimeout(() => { fade.classList.remove('fade-80'); fade.classList.add('fade-60'); }, 5800);
+	  setTimeout(() => { fade.classList.remove('fade-60'); fade.classList.add('fade-40'); }, 6200);
+	  setTimeout(() => { fade.classList.remove('fade-40'); fade.classList.add('fade-20'); }, 6600);
+	  setTimeout(() => { fade.classList.remove('fade-20'); }, 7000);
+	}
+	
+	if (cat) {
+	  setTimeout(() => {
+		cat.classList.add("show");
+	  }, 2500);
+	}
+	  
 	if (intro) {
 	  intro.volume = 0.23;
 	  intro.currentTime = 0;

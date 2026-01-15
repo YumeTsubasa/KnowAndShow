@@ -427,6 +427,16 @@ if (board2Btn) {
     if (skipBtn) skipBtn.addEventListener('click', () => { 
       disableTileAfterUse(); 
       popover.classList.remove('show'); 
+	  	const audio = wrongBtn.querySelector('audio');
+		if (audio) {
+			audio.currentTime = 0;
+			audio.volume = 0.5;
+			audio.play().catch(() => {});
+			}
+		if (qAudio && !qAudio.paused) {
+			qAudio.pause();
+			qAudio.currentTime = 0;
+			}
     });
 
 	if (wrongBtn) wrongBtn.addEventListener('click', () => {
@@ -536,7 +546,7 @@ function setupMultiChoice(popover) {
   if (!popover) return;
 
   // Grab container and answer button
-  const answersContainer = popover.querySelector('.popover_multi_answers h2');
+  const answersContainer = popover.querySelector('.popover_multi_answers');
   const answerBtn = popover.querySelector('.answerMultiBtn');
   if (!answersContainer || !answerBtn) return;
 
@@ -1378,6 +1388,7 @@ case "mine": // fallback for normal popovers without data-type
 	  case "c": currentPopover.querySelector(".closeBtn")?.click(); break;
 	  case "g": currentPopover.querySelector(".proceedMineBtn")?.click(); break;
 	  case "p": currentPopover.querySelector(".proceedMine2Btn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1429,6 +1440,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1438,6 +1450,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1447,6 +1460,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1456,6 +1470,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;

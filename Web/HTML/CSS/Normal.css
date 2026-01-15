@@ -117,7 +117,7 @@ h2 {
 .popover {
     width: 1400px;
     height: 855px;
-    border: 0;
+    border: none;
     background: black;
     position: absolute;
     top: 185px;
@@ -470,10 +470,11 @@ h2 {
 	text-align: left;
 }
 
-.popover_multi_answers h2 {
+.popover_multi_answers {
     font-family: 'MyCustomFont', Arial, sans-serif;
     font-size: 50px;
     color: #40291A;
+	font-weight: 700;
 }
 
 .popover_multi_btnAnswer {
@@ -486,6 +487,53 @@ h2 {
 }
 
 /* Brutal */
+
+.popover_brutal {
+    width: 1400px;
+    height: 855px;
+    border: none;
+    background: black;
+    position: absolute;
+    top: 185px;
+    left: 250px;
+    bottom: 40px;
+    right: 40px;
+    display:block;
+    pointer-events:none;
+    z-index: 999;
+	opacity:0;
+}
+
+.popover_brutal.show {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.popover_cat_img_brutal {
+    width: 1050px;
+    height: 400px;
+	top: 75px;
+	left: 175px;
+	display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    position: absolute;
+	z-index:99;	
+	transition: opacity 0.5s ease;
+	opacity:0;
+}
+
+.popover_cat_img_brutal.show {
+	opacity:1;
+}
+
+.popover_cat_img_brutal img {
+	display:block;
+	margin: 0 auto;
+	width: 100%;
+    height: 100%;
+	object-fit: contain;
+}
 
 /* QTE */
 
@@ -1355,7 +1403,7 @@ h2 {
     height: 855px;
     position: absolute;
     pointer-events: none;
-    z-index: 999;
+    z-index: 9999;
     cursor: default;
 }
 
@@ -1388,7 +1436,7 @@ h2 {
     background-color: black;
     opacity: 0;
     pointer-events: none; /* click-through */
-    transition: opacity 0.2s linear;
+    transition: opacity 0.4s linear;
     z-index: 99;
 }
 
