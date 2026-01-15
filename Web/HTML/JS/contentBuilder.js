@@ -2225,7 +2225,7 @@ function createRSoloContent(data, speed = 30) {
     <div class="popover_question_body">
       <img src="img/layout/textRisky.png" width="100%" height="100%">
       <div class="popover_question_text_short">
-        <h1>${data.question || "No question provided"}</h1>
+        <h1>${data.challengePart1 || "No question provided"}</h1>
       </div>
 	  <div class="popover_question_text_short2">
 		<h2>${data.challengePart2 || ""}</h2>

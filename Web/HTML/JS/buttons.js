@@ -152,15 +152,16 @@ function showGameOver() {
     }
     localStorage.setItem('scores', JSON.stringify(scores));
 
-    // Reset counters
-    localStorage.removeItem('livesCounter');
-    localStorage.removeItem('pointsCounter');
-    livesCounter = 1;
-    pointsCounter = 0;
+
 
     // Show popover after 2s delay
     setTimeout(() => {
         gameoverPopover.classList.add('show');
+		    // Reset counters
+		localStorage.removeItem('livesCounter');
+		localStorage.removeItem('pointsCounter');
+		livesCounter = 1;
+		pointsCounter = 0;
     }, 3500);
 
     // Add button event listeners

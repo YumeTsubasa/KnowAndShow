@@ -1397,7 +1397,7 @@ h2 {
     left: 500px;
     border: 5px solid #00FF00;
     background-color: #000;
-    display: block;
+    display: none;
     cursor: pointer;
 }
 
@@ -1409,7 +1409,7 @@ h2 {
 							left: 800px;
 							border: 5px solid #00FF00;
 							background-color: #000;
-							display: block;
+							display: none;
 							cursor: pointer;
 }
 
@@ -1419,6 +1419,7 @@ h2 {
     position: absolute;
     bottom: 120px;
     right: 40px;
+	display:none;
 }
 
 gameover_popover_gameoverBtn img {
