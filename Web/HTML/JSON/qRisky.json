@@ -42,14 +42,6 @@
 	"answer": "Philosophers Stone"
   },
     {
-    "id": "QuestionR6",
-	"type": "character",
-    "question": "Who's this character?",
-	"img": "img/character/arle.jpg",
-	"img_reveal": "img/character/knuckles.jpg",
-	"answer": "&Knuckles"
-  },
-    {
     "id": "QuestionR7",
 	"type": "jukebox",
     "audio": "audio/jukebox/kirby.mp3",
@@ -182,5 +174,70 @@
     "id": "QuestionR18",
 	"type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
+  },
+  
+    {
+    "id": "QuestionR6",
+    "type": "branch",
+    "question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
+        "branchA": {
+        "id": "QuestionR6_A",
+        "type": "decision",
+        "question": "Three games to choose from, but you will not know what the challenge is. Time to make a decision...",
+        "game1": "Donkey Kong Country: Returns (Wii)",
+        "game2": "F-Zero GX (GCN)",
+        "game3": "Super Mario Bros. Wonder (NS)",
+        "game1desc": "Donkey Kong Country: Returns (Wii)<br>Beat the first boss!",
+        "game2desc": "F-Zero GX (GCN)<br>Clear Mission 1!",
+        "game3desc": "Super Mario Bros. Wonder (NS)<br>Clear the Bulrush Express stage without using a badge!"
+        },
+        "branchB": {
+        "id": "QuestionR6_B",
+        "type": "trust",
+        "question": "Choose an audience member to take on a challenge for you!",
+        "challenge": "Donkey Kong Jr. (NES)<br>Clear the first stage without getting a game over!"
+        },
+        "branchC": {
+        "id": "QuestionR6_C",
+        "type": "mine",
+        "question": "Which of these Color Power names from Sonic Colors are correct?",
+        "tiles": [
+            [
+                {"text": "White Hover",    "correct": false },
+                {"text": "Orange Rocket",    "correct": true },
+                {"text": "Purple Void",    "correct": false },
+                {"text": "Yellow Drill",    "correct": true }
+            ],
+            [
+                {"text": "Green Rocket",    "correct": false },
+                {"text": "Red Ghost",    "correct": false },
+                {"text": "Black Burst",    "correct": false },
+                {"text": "Green Hover",    "correct": true }
+            ],
+            [
+                {"text": "White Burst",    "correct": false },
+                {"text": "Cyan Laser",    "correct": true },
+                {"text": "Pink Drill",    "correct": false },
+                {"text": "Red Frenzy",    "correct": false }
+            ]
+        ]
+        },
+        "branchD": {
+        "id": "QuestionR6_D",
+        "type": "solo",
+        "challengePart1": "Sonic Mania (NS)<br>Clear Green Hill Zone Act 1 in under 2 minutes!"
+        },
+        "branchE": {
+        "id": "QuestionR6_E",
+        "type": "qte",
+        "question": "Dodged a Bullet<br>Are these weapons from Halo or Gears of War?",
+        "qteitems": [
+            { "text": "CQS48 Bulldog", "display": "Halo" },
+            { "text": "Hammer of Dawn", "display": "Gears of War" },
+            { "text": "Brute Shot", "display": "Halo" },
+            { "text": "Corpsemaker", "display": "Halo" },
+            { "text": "Torque Bow", "display": "Gears of War" }
+        ]
+        }
   }
 ]

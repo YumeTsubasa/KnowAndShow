@@ -564,18 +564,20 @@ function createRBrutalContent(data, speed = 30) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("popover");
   wrapper.id = data.id;
+  wrapper.dataset.type = "brutal";
 
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
 	<audio id="introAudio" src="audio/main/brutal_intro.mp3" preload="auto"></audio>
-    <div class="popover_cat_body">
-      <img src="img/layout/catRisky.png" width="100%" height="100%">
-      <div class="popover_cat_img">
-        <img src="img/categories/brutal.png" loading="lazy">
-      </div>
+	<div class="brutal_fade">
     </div>
-
-    <div class="popover_question_body">
+	<div class="popover_cat_img_brutal">
+		<img src="img/categories/brutal.png" loading="lazy">
+	</div>
+    <div class="popover_cat_body_brutal">
+      <img src="img/layout/catRisky.png" width="100%" height="100%">
+    </div>
+    <div class="popover_question_body_brutal">
       <img src="img/layout/textRisky.png" width="100%" height="100%">
       <div class="popover_question_text_long">
         <h1>${data.question || "No question provided"}</h1>
@@ -618,7 +620,42 @@ function createRBrutalContent(data, speed = 30) {
 
 	const bg = wrapper.querySelector("#qAudio");
 	const intro = wrapper.querySelector("#introAudio");
-
+	const fade = document.querySelector('.brutal_fade');
+	const cat = wrapper.querySelector(".popover_cat_img_brutal");
+	const catbody = wrapper.querySelector(".popover_cat_body_brutal");
+	const question = wrapper.querySelector(".popover_question_body_brutal");
+	
+	if (fade) {
+	  setTimeout(() => fade.classList.add('fade-20'), 400);
+	  setTimeout(() => { fade.classList.remove('fade-20'); fade.classList.add('fade-40'); }, 800);
+	  setTimeout(() => { fade.classList.remove('fade-40'); fade.classList.add('fade-60'); }, 1200);
+	  setTimeout(() => { fade.classList.remove('fade-60'); fade.classList.add('fade-80'); }, 1600);
+	  setTimeout(() => { fade.classList.remove('fade-80'); fade.classList.add('fade-100'); }, 2000);
+	  setTimeout(() => { fade.classList.remove('fade-100'); fade.classList.add('fade-80'); }, 5400);
+	  setTimeout(() => { fade.classList.remove('fade-80'); fade.classList.add('fade-60'); }, 5800);
+	  setTimeout(() => { fade.classList.remove('fade-60'); fade.classList.add('fade-40'); }, 6200);
+	  setTimeout(() => { fade.classList.remove('fade-40'); fade.classList.add('fade-20'); }, 6600);
+	  setTimeout(() => { fade.classList.remove('fade-20'); }, 7000);
+	}
+	
+	if (cat) {
+	  setTimeout(() => {
+		cat.classList.add("show");
+	  }, 2500);
+	}
+	
+	if (question) {
+	  setTimeout(() => {
+		question.classList.add("show");
+	  }, 2500);
+	}
+	
+	if (catbody) {
+	  setTimeout(() => {
+		catbody.classList.add("show");
+	  }, 2500);
+	}
+	  
 	if (intro) {
 	  intro.volume = 0.23;
 	  intro.currentTime = 0;
@@ -632,10 +669,8 @@ function createRBrutalContent(data, speed = 30) {
 		  bg.play().catch(() => {});
 		}, 5000); // delay in ms — adjust to intro length
 	  }
-	}
-
-
-	
+	}	
+		
   // Force render
   wrapper.offsetHeight;
 
