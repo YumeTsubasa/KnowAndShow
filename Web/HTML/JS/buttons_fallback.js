@@ -152,15 +152,16 @@ function showGameOver() {
     }
     localStorage.setItem('scores', JSON.stringify(scores));
 
-    // Reset counters
-    localStorage.removeItem('livesCounter');
-    localStorage.removeItem('pointsCounter');
-    livesCounter = 1;
-    pointsCounter = 0;
+
 
     // Show popover after 2s delay
     setTimeout(() => {
         gameoverPopover.classList.add('show');
+		    // Reset counters
+		localStorage.removeItem('livesCounter');
+		localStorage.removeItem('pointsCounter');
+		livesCounter = 1;
+		pointsCounter = 0;
     }, 3500);
 
     // Add button event listeners
@@ -427,16 +428,8 @@ if (board2Btn) {
     if (skipBtn) skipBtn.addEventListener('click', () => { 
       disableTileAfterUse(); 
       popover.classList.remove('show'); 
-    });
-
-	if (wrongBtn) wrongBtn.addEventListener('click', () => {
-	// 1️⃣ Apply game consequence immediately
-		livesCounter--;
-		updateLivesDisplay();
-		disableTileAfterUse();
-		failureDiv.classList.add('show');
-		const audio = wrongBtn.querySelector('audio');
-			if (audio) {
+	  	const audio = skipBtn.querySelector('audio');
+		if (audio) {
 			audio.currentTime = 0;
 			audio.volume = 0.5;
 			audio.play().catch(() => {});
@@ -445,24 +438,7 @@ if (board2Btn) {
 			qAudio.pause();
 			qAudio.currentTime = 0;
 			}
-  
-	// 3️⃣ Delay popover close so feedback + sound can play
-  
-setTimeout(() => {
-  // Only resume main BGM if the player still has lives left
-  if (livesCounter >= 0 && mainBGM && mainBGM.paused) {
-    mainBGM.play().catch(() => {});
-  }
-
-  popover.classList.remove('show');
-
-  // Optionally show game over after removing popover
-  if (livesCounter === -1) {
-    showGameOver();
-  }
-}, 1700);
-
-	});
+    });
 	
 if (wrongBtn) wrongBtn.addEventListener('click', () => {
 	// 1️⃣ Apply game consequence immediately
@@ -536,7 +512,7 @@ function setupMultiChoice(popover) {
   if (!popover) return;
 
   // Grab container and answer button
-  const answersContainer = popover.querySelector('.popover_multi_answers h2');
+  const answersContainer = popover.querySelector('.popover_multi_answers');
   const answerBtn = popover.querySelector('.answerMultiBtn');
   if (!answersContainer || !answerBtn) return;
 
@@ -599,6 +575,7 @@ const proceedMineBtn = popover.querySelector('.proceedMineBtn');
 const proceedMine2Btn = popover.querySelector('.proceedMine2Btn');
 
 const resultBox = document.querySelector('.popover_resultMine');
+
 if (resultBox) {
   resultBox.classList.remove('show');
 
@@ -873,7 +850,12 @@ function showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType }) 
 
   if (titleEl) titleEl.textContent = title;
   if (messageEl) messageEl.textContent = message;
-
+  
+	const catImg = popover.querySelector('.popover_cat_img');
+	if (catImg) {
+	  catImg.classList.add('hidden');
+	}
+	
   // Show the popover
   resultBox.classList.add('show');
   
@@ -1015,6 +997,17 @@ setTimeout(() => {
       riskyNoBtn.addEventListener('click', () => { 
         disableTileAfterUse(); 
         popover.classList.remove('show'); 
+	if (qAudio && !qAudio.paused) {
+		qAudio.pause();
+		qAudio.currentTime = 0;
+	if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
+  }
+
+  // ⏳ Delay popover close so feedback + sound can play
+  setTimeout(() => {
+    if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
+    popover.classList.remove('show');
+  }, 2500);
       });
     }
 
@@ -1071,6 +1064,10 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
 
   // --- Reset placeholders and hide complete text ---
   resultBox.classList.add('show'); // show parent immediately
+  	const catImg = popover.querySelector('.popover_cat_img');
+	if (catImg) {
+	  catImg.classList.add('hidden');
+	}
   placeholders.forEach(img => {
     if (img && img.parentElement) img.parentElement.classList.add('show');
     if (img) img.src = "img/misc/qteBlank.png";
@@ -1084,6 +1081,8 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
 
 const qteSound = new Audio();
 qteSound.preload = "auto";
+
+if (answerDivQTE) answerDivQTE.classList.remove('show');
 
 // --- Reveal each placeholder sequentially ---
 for (let i = 0; i < placeholders.length; i++) {
@@ -1365,6 +1364,7 @@ case "mine": // fallback for normal popovers without data-type
 	  case "c": currentPopover.querySelector(".closeBtn")?.click(); break;
 	  case "g": currentPopover.querySelector(".proceedMineBtn")?.click(); break;
 	  case "p": currentPopover.querySelector(".proceedMine2Btn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1416,6 +1416,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1425,6 +1426,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1434,6 +1436,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;
@@ -1443,6 +1446,7 @@ case "mine": // fallback for normal popovers without data-type
       case "r": currentPopover.querySelector(".rightBtn")?.click(); break;
       case "w": currentPopover.querySelector(".wrongBtn")?.click(); break;
       case "p": currentPopover.querySelector(".shortBtn")?.click(); break;
+	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
       default: break;
     }
     break;

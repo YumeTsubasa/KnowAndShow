@@ -418,17 +418,20 @@ function createBrutalContent(data, speed = 30) {
 	const wrapper = document.createElement("div");
 	wrapper.classList.add("popover_brutal");
 	wrapper.id = data.id;
+	wrapper.dataset.type = "brutal";
 
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
 	<audio id="introAudio" src="audio/main/brutal_intro.mp3" preload="auto"></audio>
-	<div class="popover_cat_img_brutal">
-        <img src="img/categories/brutal.png" loading="lazy">
+	<div class="brutal_fade">
     </div>
-    <div class="popover_cat_body">
+	<div class="popover_cat_img_brutal">
+		<img src="img/categories/brutal.png" loading="lazy">
+	</div>
+    <div class="popover_cat_body_brutal">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
     </div>
-    <div class="popover_question_body">
+    <div class="popover_question_body_brutal">
       <img src="img/layout/textNormal.png" width="100%" height="100%">
       <div class="popover_question_text_long">
         <h1>${data.question || "No question provided"}</h1>
@@ -471,8 +474,10 @@ function createBrutalContent(data, speed = 30) {
 
 	const bg = wrapper.querySelector("#qAudio");
 	const intro = wrapper.querySelector("#introAudio");
-	const fade = document.querySelector('.gameover_fade');
+	const fade = document.querySelector('.brutal_fade');
 	const cat = wrapper.querySelector(".popover_cat_img_brutal");
+	const catbody = wrapper.querySelector(".popover_cat_body_brutal");
+	const question = wrapper.querySelector(".popover_question_body_brutal");
 	
 	if (fade) {
 	  setTimeout(() => fade.classList.add('fade-20'), 400);
@@ -492,6 +497,18 @@ function createBrutalContent(data, speed = 30) {
 		cat.classList.add("show");
 	  }, 2500);
 	}
+	
+	if (question) {
+	  setTimeout(() => {
+		question.classList.add("show");
+	  }, 2500);
+	}
+	
+	if (catbody) {
+	  setTimeout(() => {
+		catbody.classList.add("show");
+	  }, 2500);
+	}
 	  
 	if (intro) {
 	  intro.volume = 0.23;
@@ -506,13 +523,7 @@ function createBrutalContent(data, speed = 30) {
 		  bg.play().catch(() => {});
 		}, 5000); // delay in ms — adjust to intro length
 	  }
-	}
-
-	setTimeout(() => {
-	  wrapper.classList.add("show");
-	}, 2000);
-
-	
+	}	
 		
   // Force render
   wrapper.offsetHeight;

@@ -428,7 +428,7 @@ if (board2Btn) {
     if (skipBtn) skipBtn.addEventListener('click', () => { 
       disableTileAfterUse(); 
       popover.classList.remove('show'); 
-	  	const audio = wrongBtn.querySelector('audio');
+	  	const audio = skipBtn.querySelector('audio');
 		if (audio) {
 			audio.currentTime = 0;
 			audio.volume = 0.5;
@@ -439,41 +439,6 @@ if (board2Btn) {
 			qAudio.currentTime = 0;
 			}
     });
-
-	if (wrongBtn) wrongBtn.addEventListener('click', () => {
-	// 1️⃣ Apply game consequence immediately
-		livesCounter--;
-		updateLivesDisplay();
-		disableTileAfterUse();
-		failureDiv.classList.add('show');
-		const audio = wrongBtn.querySelector('audio');
-			if (audio) {
-			audio.currentTime = 0;
-			audio.volume = 0.5;
-			audio.play().catch(() => {});
-			}
-		if (qAudio && !qAudio.paused) {
-			qAudio.pause();
-			qAudio.currentTime = 0;
-			}
-  
-	// 3️⃣ Delay popover close so feedback + sound can play
-  
-setTimeout(() => {
-  // Only resume main BGM if the player still has lives left
-  if (livesCounter >= 0 && mainBGM && mainBGM.paused) {
-    mainBGM.play().catch(() => {});
-  }
-
-  popover.classList.remove('show');
-
-  // Optionally show game over after removing popover
-  if (livesCounter === -1) {
-    showGameOver();
-  }
-}, 1700);
-
-	});
 	
 if (wrongBtn) wrongBtn.addEventListener('click', () => {
 	// 1️⃣ Apply game consequence immediately
@@ -610,6 +575,7 @@ const proceedMineBtn = popover.querySelector('.proceedMineBtn');
 const proceedMine2Btn = popover.querySelector('.proceedMine2Btn');
 
 const resultBox = document.querySelector('.popover_resultMine');
+
 if (resultBox) {
   resultBox.classList.remove('show');
 
@@ -884,7 +850,12 @@ function showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType }) 
 
   if (titleEl) titleEl.textContent = title;
   if (messageEl) messageEl.textContent = message;
-
+  
+	const catImg = popover.querySelector('.popover_cat_img');
+	if (catImg) {
+	  catImg.classList.add('hidden');
+	}
+	
   // Show the popover
   resultBox.classList.add('show');
   
@@ -1093,6 +1064,10 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
 
   // --- Reset placeholders and hide complete text ---
   resultBox.classList.add('show'); // show parent immediately
+  	const catImg = popover.querySelector('.popover_cat_img');
+	if (catImg) {
+	  catImg.classList.add('hidden');
+	}
   placeholders.forEach(img => {
     if (img && img.parentElement) img.parentElement.classList.add('show');
     if (img) img.src = "img/misc/qteBlank.png";
@@ -1490,6 +1465,15 @@ case "mine": // fallback for normal popovers without data-type
 }, true);
 
   }
+  
+  document.addEventListener("keydown", (e) => {
+  const brutal = document.querySelector(".popover_brutal.show");
+  if (!brutal) return;
+  if (e.key === "r") { brutal.querySelector(".rightBtn")?.click();  }
+  if (e.key === "w") {brutal.querySelector(".wrongBtn")?.click();  }
+  if (e.key === "a") {brutal.querySelector(".answerBtn")?.click();  }
+  if (e.key === "s") {brutal.querySelector(".skipBtn")?.click();  }
+});
 
   document.addEventListener("keydown", (event) => {
     const key = event.key.toLowerCase();
