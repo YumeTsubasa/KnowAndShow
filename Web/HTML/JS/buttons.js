@@ -458,15 +458,11 @@ if (board2Btn) {
       disableTileAfterUse(); 
       popover.classList.remove('show'); 
 	  	const audio = skipBtn.querySelector('audio');
-		if (audio) {
-			audio.currentTime = 0;
-			audio.volume = 0.5;
-			audio.play().catch(() => {});
-			}
 		if (qAudio && !qAudio.paused) {
 			qAudio.pause();
 			qAudio.currentTime = 0;
 			}
+		if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
     });
 	
 if (wrongBtn) wrongBtn.addEventListener('click', () => {
@@ -1326,7 +1322,8 @@ if (wrongqteBtn) {
 // -----------------------------
 document.addEventListener("keydown", (event) => {
   const key = event.key.toLowerCase();
-  const currentPopover = document.querySelector(".popover.show");
+  const currentPopover =
+  document.querySelector(".popover.show")
   if (!currentPopover) return;
 
 event.stopImmediatePropagation();
@@ -1465,15 +1462,6 @@ case "mine": // fallback for normal popovers without data-type
 }, true);
 
   }
-  
-  document.addEventListener("keydown", (e) => {
-  const brutal = document.querySelector(".popover_brutal.show");
-  if (!brutal) return;
-  if (e.key === "r") { brutal.querySelector(".rightBtn")?.click();  }
-  if (e.key === "w") {brutal.querySelector(".wrongBtn")?.click();  }
-  if (e.key === "a") {brutal.querySelector(".answerBtn")?.click();  }
-  if (e.key === "s") {brutal.querySelector(".skipBtn")?.click();  }
-});
 
   document.addEventListener("keydown", (event) => {
     const key = event.key.toLowerCase();

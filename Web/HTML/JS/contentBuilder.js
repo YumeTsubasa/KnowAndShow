@@ -436,9 +436,8 @@ function createBrutalContent(data, speed = 30) {
   }
   
 	const wrapper = document.createElement("div");
-	wrapper.classList.add("popover_brutal");
+	wrapper.classList.add("popover");
 	wrapper.id = data.id;
-	wrapper.dataset.type = "brutal";
 
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
@@ -529,7 +528,7 @@ function createBrutalContent(data, speed = 30) {
 		catbody.classList.add("show");
 	  }, 2500);
 	}
-	  
+	  	  
 	if (intro) {
 	  intro.volume = 0.23;
 	  intro.currentTime = 0;
@@ -561,9 +560,8 @@ function createBrutalContent(data, speed = 30) {
 
 function createRBrutalContent(data, speed = 30) {
   const wrapper = document.createElement("div");
-  wrapper.classList.add("popover_brutal");
+  wrapper.classList.add("popover");
   wrapper.id = data.id;
-  wrapper.dataset.type = "brutal";
 
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
