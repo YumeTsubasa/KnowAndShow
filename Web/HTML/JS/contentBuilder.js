@@ -329,25 +329,25 @@ function createMultiContent(data, speed = 30) {
       <img src="img/misc/failure.png" loading="lazy">
     </div>
   `;
-    document.body.appendChild(wrapper);
+document.body.appendChild(wrapper);
 
-
-	// --- Reference the audio element and set JS attributes ---
-	const bg = wrapper.querySelector("#qAudio");
-		if (bg) {
-		bg.volume = 0.5; // works now
-		bg.currentTime = 0;
-		bg.play().catch(() => {}); // just in case
-	}
-	
-  // Force render
-  wrapper.offsetHeight;
+// --- Reference the audio element ---
+const bg = wrapper.querySelector("#qAudio");
+if (bg) {
+  bg.volume = 0.5;
+  bg.currentTime = 0;
+  bg.play().catch(() => {});
+}
 
   // Apply typewriter
   const h1 = wrapper.querySelector(".typewriter-target");
   typeWriter(h1, data.question || "No question found", speed);
 
-  return wrapper;
+// Force render
+wrapper.offsetHeight;
+
+
+return wrapper;
 }
 
 // ====================
@@ -374,7 +374,6 @@ function createRMultiContent(data, speed = 30) {
         <h1>${data.question || "No question provided"}</h1>
       </div>
       <div class="popover_multi_answers">
-        <h2></h2>
       </div>
       <div class="popover_multi_btnAnswer">
         <button class="answerMultiBtn" type="button">
@@ -444,10 +443,10 @@ function createBrutalContent(data, speed = 30) {
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
 	<audio id="introAudio" src="audio/main/brutal_intro.mp3" preload="auto"></audio>
-	<div class="brutal_fade">
-    </div>
 	<div class="popover_cat_img_brutal">
 		<img src="img/categories/brutal.png" loading="lazy">
+	</div>
+	<div class="brutal_fade">
 	</div>
     <div class="popover_cat_body_brutal">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
@@ -495,7 +494,7 @@ function createBrutalContent(data, speed = 30) {
 
 	const bg = wrapper.querySelector("#qAudio");
 	const intro = wrapper.querySelector("#introAudio");
-	const fade = document.querySelector('.brutal_fade');
+	const fade = wrapper.querySelector('.brutal_fade');
 	const cat = wrapper.querySelector(".popover_cat_img_brutal");
 	const catbody = wrapper.querySelector(".popover_cat_body_brutal");
 	const question = wrapper.querySelector(".popover_question_body_brutal");
@@ -562,17 +561,17 @@ function createBrutalContent(data, speed = 30) {
 
 function createRBrutalContent(data, speed = 30) {
   const wrapper = document.createElement("div");
-  wrapper.classList.add("popover");
+  wrapper.classList.add("popover_brutal");
   wrapper.id = data.id;
   wrapper.dataset.type = "brutal";
 
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/brutal_bgm.mp3" loop preload="auto"></audio>
 	<audio id="introAudio" src="audio/main/brutal_intro.mp3" preload="auto"></audio>
-	<div class="brutal_fade">
-    </div>
 	<div class="popover_cat_img_brutal">
 		<img src="img/categories/brutal.png" loading="lazy">
+	</div>
+	<div class="brutal_fade">
 	</div>
     <div class="popover_cat_body_brutal">
       <img src="img/layout/catRisky.png" width="100%" height="100%">
@@ -620,7 +619,7 @@ function createRBrutalContent(data, speed = 30) {
 
 	const bg = wrapper.querySelector("#qAudio");
 	const intro = wrapper.querySelector("#introAudio");
-	const fade = document.querySelector('.brutal_fade');
+	const fade = wrapper.querySelector('.brutal_fade');
 	const cat = wrapper.querySelector(".popover_cat_img_brutal");
 	const catbody = wrapper.querySelector(".popover_cat_body_brutal");
 	const question = wrapper.querySelector(".popover_question_body_brutal");

@@ -2,7 +2,7 @@
 // Main game logic, popover handling, lives/points
 
 import { loadQuestions, getQuestionData } from "./data.js";
-import { buildQuestionContent, createBranchContent, createGameoverContent } from "./contentBuilder.js";
+import { buildQuestionContent, createBranchContent, createGameoverContent, createMultiContent } from "./contentBuilder.js";
 
 console.log("🟢 buttons.js loaded");
 
@@ -186,110 +186,141 @@ function showGameOver() {
   updateLivesDisplay();
   updatePointsDisplay();
 
-  // -----------------------------
-  // Tile buttons (dynamic popovers)
-  // -----------------------------
-  document.querySelectorAll('.tileBtn[popovertarget]').forEach(tileBtn => {
+// -----------------------------
+// Multi-choice question handling (2x2 layout, non-clickable, borderless)
+// -----------------------------
+function setupMultiChoice(popover, questionData) {
+    if (!popover || !questionData) return;
+
+    // Create answers container and answer button if not already in DOM
+    let answersContainer = popover.querySelector('.popover_multi_answers');
+    if (!answersContainer) {
+        answersContainer = document.createElement("div");
+        answersContainer.classList.add("popover_multi_answers");
+        popover.appendChild(answersContainer);
+    }
+
+    let answerBtn = popover.querySelector('.answerMultiBtn');
+    if (!answerBtn) {
+        answerBtn = document.createElement("button");
+        answerBtn.classList.add("answerMultiBtn");
+        answerBtn.textContent = "Show Answer";
+        popover.appendChild(answerBtn);
+    }
+
+    // Clear previous content
+    answersContainer.innerHTML = "";
+
+    // Wrapper for 2x2 grid
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "grid";
+    wrapper.style.gridTemplateColumns = "1fr 1fr"; // 2 columns
+    wrapper.style.gridGap = "10px";               // spacing
+    answersContainer.appendChild(wrapper);
+
+    // Populate answers dynamically
+    questionData.answers.forEach((ans, i) => {
+        const ansDiv = document.createElement("div");
+        ansDiv.textContent = `${String.fromCharCode(65 + i)}: ${ans.text || "No answer provided"}`;
+        ansDiv.dataset.correct = ans.correct;
+        ansDiv.style.color = "";           
+        ansDiv.style.textAlign = "left";   
+        wrapper.appendChild(ansDiv);
+    });
+
+    // Answer button: highlight correct answer
+    answerBtn.onclick = () => {
+        wrapper.querySelectorAll("div").forEach(ansDiv => {
+            if (ansDiv.dataset.correct === "true") ansDiv.style.color = "green";
+        });
+        answerBtn.style.display = "none";
+    };
+}
+
+// -----------------------------
+// Tile buttons (dynamic popovers)
+// -----------------------------
+document.querySelectorAll('.tileBtn[popovertarget]').forEach(tileBtn => {
     tileBtn.addEventListener('click', () => {
-      const tileId = tileBtn.getAttribute('popovertarget');
-      const questionData = getQuestionData(tileId);
+        const tileId = tileBtn.getAttribute('popovertarget');
+        const questionData = getQuestionData(tileId);
+        if (!questionData) return;
 
-      let popover;
+        let popoverContainer = document.querySelector('#popoverContainer');
+        if (!popoverContainer) return;
 
-      if (questionData) {
+        let popover;
 
-        // -------------------
-        // Branch tile handling
-        // -------------------
-        if (questionData.type === "branch") {
-          const branchPopover = createBranchContent(questionData);
-          branchPopover.id = tileId;
-          popoverContainer.innerHTML = "";
-          popoverContainer.appendChild(branchPopover);
+        // -----------------------------
+        // Use switch to handle different question types
+        // -----------------------------
+        switch (questionData.type) {
+            // -------------------
+            // Branch tile handling
+            // -------------------
+            case "branch":
+                popover = createBranchContent(questionData);
+                popover.id = tileId;
+                popoverContainer.innerHTML = "";
+                popoverContainer.appendChild(popover);
 
-          document.querySelectorAll(".popover.show").forEach(p => { if (p !== branchPopover) p.classList.remove("show"); });
-          branchPopover.classList.add('show');
-		  // Pause main BGM for the branch menu
-		  if (mainBGM && !mainBGM.paused) mainBGM.pause();
-          window.lastPopoverID = tileId;
+                document.querySelectorAll(".popover.show").forEach(p => {
+                    if (p !== popover) p.classList.remove("show");
+                });
+                popover.classList.add('show');
 
-          const branchABtn = branchPopover.querySelector('.branchABtn');
-          const branchBBtn = branchPopover.querySelector('.branchBBtn');
-          const branchCBtn = branchPopover.querySelector('.branchCBtn');
-          const branchDBtn = branchPopover.querySelector('.branchDBtn');
-          const branchEBtn = branchPopover.querySelector('.branchEBtn');
+                // Pause main BGM if needed
+                if (mainBGM && !mainBGM.paused) mainBGM.pause();
+                window.lastPopoverID = tileId;
 
-          if (branchABtn) branchABtn.addEventListener('click', () => {
-            branchPopover.classList.remove('show');
-            popoverContainer.innerHTML = '';
+                // Setup branch buttons dynamically
+                ["A", "B", "C", "D", "E"].forEach(letter => {
+                    const btn = popover.querySelector(`.branch${letter}Btn`);
+                    if (btn) {
+                        btn.onclick = () => {
+                            popover.classList.remove('show');
+                            popoverContainer.innerHTML = "";
 
-            const newPopover = buildQuestionContent(questionData.branchA);
-            popoverContainer.appendChild(newPopover);
-            setupPopoverButtons(newPopover);
+                            const newPopover = buildQuestionContent(questionData[`branch${letter}`]);
+                            popoverContainer.appendChild(newPopover);
+                            setupPopoverButtons(newPopover);
+                            newPopover.classList.add('show');
+                            window.lastPopoverID = tileId;
+                        };
+                    }
+                });
 
-            newPopover.classList.add('show');
-            window.lastPopoverID = tileId;
-          });
+                break;
 
-          if (branchBBtn) branchBBtn.addEventListener('click', () => {
-            branchPopover.classList.remove('show');
-            popoverContainer.innerHTML = '';
+            // -------------------
+            // Multi-choice handling
+            // -------------------
+case "multi":
+    // Create popover structure using contentBuilder
+    popover = createMultiContent(questionData);
 
-            const newPopover = buildQuestionContent(questionData.branchB);
-            popoverContainer.appendChild(newPopover);
-            setupPopoverButtons(newPopover);
+    // Now populate the 2x2 answers via buttons.js
+    setupMultiChoice(popover, questionData);
 
-            newPopover.classList.add('show');
-            window.lastPopoverID = tileId;
-          });
-		  
-		    if (branchCBtn) branchCBtn.addEventListener('click', () => {
-            branchPopover.classList.remove('show');
-            popoverContainer.innerHTML = '';
+    popoverContainer.innerHTML = "";
+    popoverContainer.appendChild(popover);
+    break;
 
-            const newPopover = buildQuestionContent(questionData.branchC);
-            popoverContainer.appendChild(newPopover);
-            setupPopoverButtons(newPopover);
 
-            newPopover.classList.add('show');
-            window.lastPopoverID = tileId;
-          });
-		  
-		  if (branchDBtn) branchDBtn.addEventListener('click', () => {
-            branchPopover.classList.remove('show');
-            popoverContainer.innerHTML = '';
 
-            const newPopover = buildQuestionContent(questionData.branchD);
-            popoverContainer.appendChild(newPopover);
-            setupPopoverButtons(newPopover);
 
-            newPopover.classList.add('show');
-            window.lastPopoverID = tileId;
-          });
-		  
-		  if (branchEBtn) branchEBtn.addEventListener('click', () => {
-            branchPopover.classList.remove('show');
-            popoverContainer.innerHTML = '';
 
-            const newPopover = buildQuestionContent(questionData.branchE);
-            popoverContainer.appendChild(newPopover);
-            setupPopoverButtons(newPopover);
-
-            newPopover.classList.add('show');
-            window.lastPopoverID = tileId;
-          });
-
-          return; // stop normal tile load
+            // -------------------
+            // Normal question tiles
+            // -------------------
+            default:
+                popover = buildQuestionContent(questionData);
+                popover.id = tileId;
+                popoverContainer.innerHTML = "";
+                popoverContainer.appendChild(popover);
+                break;
         }
 
-        // -------------------
-        // Normal tiles
-        // -------------------
-        popover = buildQuestionContent(questionData);
-        popover.id = tileId;
-        popoverContainer.innerHTML = "";
-        popoverContainer.appendChild(popover);
-      }
 
       document.querySelectorAll(".popover.show").forEach(p => { if (p !== popover) p.classList.remove("show"); });
       popover.classList.add('show');
@@ -358,7 +389,6 @@ if (board2Btn) {
     const skipBtn = popover.querySelector('.skipBtn');
 	const successDiv = popover.querySelector('.popover_success');
     const failureDiv = popover.querySelector('.popover_failure');
-    const answerMultiBtn = popover.querySelector('.answerMultiBtn');
 	const answerDiv = popover.querySelector('.popover_answer');
 	const hint1Div = popover.querySelector('.popover_hint1');
     const hint1Btn = popover.querySelector('.hint1Btn');
@@ -503,12 +533,15 @@ if (rightBtn) rightBtn.addEventListener('click', () => {
 
 });
 
-
 // -----------------------------
 // Multi-choice question handling (2x2 layout, non-clickable, borderless)
 // -----------------------------
 function setupMultiChoice(popover) {
   if (!popover) return;
+	
+	console.log("MULTI popover id:", popover.id);
+console.log("MULTI question data:", getQuestionData(popover.id));
+
 
   // Grab container and answer button
   const answersContainer = popover.querySelector('.popover_multi_answers');
@@ -542,7 +575,7 @@ function setupMultiChoice(popover) {
   });
 
   // Answer button: highlight correct answer
-  answerBtn.onclick = () => {
+  answerBtn.addEventListener("click", () => {
     wrapper.querySelectorAll("div").forEach(ansDiv => {
       if (ansDiv.dataset.correct === "true") {
         ansDiv.style.color = "green";
@@ -553,7 +586,7 @@ function setupMultiChoice(popover) {
 
     // Hide button after press
     answerBtn.style.display = "none";
-  };
+  });
 }
 
 // ---------------------------------
@@ -858,6 +891,7 @@ if (closeBtnMine) {
       // ---------- Cleanup ----------
       minefieldActive = false;
       tiles.forEach(t => t.disabled = true);
+	  disableTileAfterUse();
 
       if (popover) popover.classList.remove('show');
       if (mainBGM && mainBGM.paused && livesCounter >= 0) mainBGM.play().catch(() => {});
