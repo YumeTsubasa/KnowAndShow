@@ -386,7 +386,7 @@ h2 {
 
 .popover_answer {
     width: 1380px;
-    height: 100px;
+    height: 80px;
     position: absolute;
     left: 10px;
     bottom: 13px;
@@ -396,7 +396,7 @@ h2 {
 
 .popover_answer h1 {
     font-family: 'MyCustomFont', Arial, sans-serif;
-    font-size: 50px;
+    font-size: 40px;
     color: #40291A;
 }
 
@@ -923,7 +923,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 10px;
-    top: 100px;
+    top: 70px;
 	text-align: left;
 	display: none;
 }
@@ -937,7 +937,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 10px;
-    top: 150px;
+    top: 120px;
 	text-align: left;
 	display: none;
 }
@@ -951,7 +951,7 @@ h2 {
     height: 50px;
     position: absolute;
     left: 10px;
-    top: 200px;
+    top: 170px;
 	text-align: left;
 	display: none;
 }
@@ -974,7 +974,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 10px;
-    top: 100px;
+    top: 70px;
 }
 .popover_btnHint1.hidden {
     display: none;
@@ -986,7 +986,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 10px;
-    top: 150px;
+    top: 120px;
 }
 .popover_btnHint2.hidden {
     display: none;
@@ -1005,7 +1005,7 @@ h2 {
     position: absolute;
 	display: block;
     left: 10px;
-    top: 200px;
+    top: 170px;
 }
 
 .popover_btnHint3.hidden {
