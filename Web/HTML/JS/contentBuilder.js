@@ -3434,6 +3434,8 @@ function createRiskyContent(data, speed = 30) {
 
   wrapper.innerHTML = `
 	<audio id="qAudio" src="audio/main/risky_bgm.mp3" loop preload="auto"></audio>
+	<div class="risky_fade">
+	</div>
     <div class="popover_cat_body">
       <img src="img/layout/catNormal.png" width="100%" height="100%">
       <div class="popover_cat_img">
@@ -3462,13 +3464,14 @@ function createRiskyContent(data, speed = 30) {
 
   document.body.appendChild(wrapper);
 
-  const bg = wrapper.querySelector("#qAudio");
-  if (bg) {
-    bg.volume = 0.33; // works now
-    bg.currentTime = 0;
-    bg.play().catch(() => {}); // just in case
-  }
-
+	const bg = wrapper.querySelector("#qAudio");
+	  
+	if (bg) {
+		bg.volume = 0.33; // works now
+		bg.currentTime = 0;
+		bg.play().catch(() => {}); // just in case
+	}
+	
   // Force render
   wrapper.offsetHeight;
 

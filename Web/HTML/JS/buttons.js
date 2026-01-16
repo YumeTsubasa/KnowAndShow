@@ -972,13 +972,43 @@ if (closeBtnMine) {
 	  decision3Btn.parentElement.classList.add('hidden'); 
     });
 
-    if (riskyYesBtn) {
-      riskyYesBtn.addEventListener('click', () => {
-        disableTileAfterUse(); 
-        popover.classList.remove('show'); 
-        window.location.href = 'Risky.html';
-      });
-    }
+if (riskyYesBtn) {
+    const fade = document.querySelector('.risky_fade');
+    const audio = document.querySelector("#rAccept"); // button audio
+
+    riskyYesBtn.addEventListener('click', () => {
+        disableTileAfterUse();
+
+        // Step fade
+        if (fade) {
+            setTimeout(() => fade.classList.add('fade-20'), 600);
+            setTimeout(() => { fade.classList.replace('fade-20', 'fade-40'); }, 1200);
+            setTimeout(() => { fade.classList.replace('fade-40', 'fade-60'); }, 1800);
+            setTimeout(() => { fade.classList.replace('fade-60', 'fade-80'); }, 2400);
+            setTimeout(() => { fade.classList.replace('fade-80', 'fade-100'); }, 3000);
+        }
+
+        // Stop question BGM
+        if (qAudio && !qAudio.paused) {
+            qAudio.pause();
+            qAudio.currentTime = 0;
+        }
+
+        // Play button audio
+        if (audio) {
+            audio.currentTime = 0;
+            audio.volume = 0.5;
+            audio.play().catch(() => {});
+        }
+
+        // Navigate after fade
+        setTimeout(() => {
+            window.location.href = 'Risky.html';
+        }, 4000);
+    });
+}
+
+
     if (riskyNoBtn) {
       riskyNoBtn.addEventListener('click', () => { 
         disableTileAfterUse(); 
