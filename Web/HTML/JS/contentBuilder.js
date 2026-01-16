@@ -40,6 +40,27 @@ const QUESTION_TYPE_IMAGES = {
   risky: "img/branches/risky.png",
 };
 
+const RISKY_QUESTION_TYPE_IMAGES = {
+  easy: "img/branches/reasy.png",
+  multi: "img/branches/rmulti.png",
+  brutal: "img/branches/rbrutal.png",
+  qte: "img/branches/rqte.png",
+  screen: "img/branches/rscreen.png",
+  character: "img/branches/rcharacter.png",
+  jukebox: "img/branches/rjukebox.png",    
+  audio: "img/branches/raudio.png",          
+  hint: "img/branches/rhint.png",
+  mine: "img/branches/rmine.png",
+  solo: "img/branches/rsolo.png",
+  audience: "img/branches/raudience.png",
+  team: "img/branches/rteam.png",
+  trust: "img/branches/rtrust.png",
+  host: "img/branches/rhost.png",
+  branch: "img/branches/rbranch.png",
+  decision: "img/branches/rdecision.png",
+  risky: "img/branches/rrisky.png",
+};
+
 // Define handlers for question types
 const typeHandlers = {
   easy: createEasyContent,
@@ -1946,7 +1967,7 @@ function createMineContent(data, speed = 30) {
         </button>
       </div>
 	  <div class="popover_btnClose">
-        <button class="closeBtn" type="button" popovertarget="${data.id}">
+        <button class="closeBtnMine" type="button" popovertarget="${data.id}">
         </button>
       </div>
     </div>
@@ -2064,7 +2085,7 @@ function createRMineContent(data, speed = 30) {
         </button>
       </div>
 	  <div class="popover_btnClose">
-        <button class="closeBtn" type="button" popovertarget="${data.id}">
+        <button class="closeBtnMine" type="button" popovertarget="${data.id}">
         </button>
       </div>
     </div>
@@ -3169,8 +3190,8 @@ branchMap.forEach(({ key, selector }) => {
   const imgEl = btn.querySelector(".branchImg");
   if (imgEl) {
     imgEl.src =
-      QUESTION_TYPE_IMAGES[branchData.type] ||
-      QUESTION_TYPE_IMAGES.default;
+      RISKY_QUESTION_TYPE_IMAGES[branchData.type] ||
+      RISKY_QUESTION_TYPE_IMAGES.default;
     imgEl.alt = branchData.type;
   }
 });

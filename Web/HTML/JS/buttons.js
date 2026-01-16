@@ -382,7 +382,6 @@ if (board2Btn) {
     const decision3Btn = popover.querySelector('.decision3Btn');
     const riskyYesBtn = popover.querySelector('.riskyYesBtn');
     const riskyNoBtn = popover.querySelector('.riskyNoBtn');
-	const closeBtn = popover.querySelector('.closeBtn');
 	const shortBtn = popover.querySelector('.shortBtn');
 	const shortDiv = popover.querySelector('.popover_question_text_short2');
 	const answerCharacterBtn = popover.querySelector('.answerCharacterBtn');
@@ -557,57 +556,47 @@ function setupMultiChoice(popover) {
   };
 }
 
-// -----------------------------
-// Initialize multi-choice popover
-// -----------------------------
-const multiPopover = document.getElementById('Question2'); // adapt for your popover IDs
-if (multiPopover) setupMultiChoice(multiPopover);
-
 // ---------------------------------
 // Minefield minigame state
 // ---------------------------------
-let minefieldPoints = 0;
 let minefieldActive = false;
+let minefieldFinalized = false; // guard to prevent double-finalize
 let selectedTiles = [];
 let nonSelectedTiles = [];
+let minefieldResult = null; // stores result for close button
 
 const proceedMineBtn = popover.querySelector('.proceedMineBtn');
 const proceedMine2Btn = popover.querySelector('.proceedMine2Btn');
+const closeBtnMine = popover.querySelector('.closeBtnMine');
 
-const resultBox = document.querySelector('.popover_resultMine');
+// ---------------------------------
+// Start new minefield
+// ---------------------------------
+function startMinefield() {
+  minefieldActive = true;
+  minefieldFinalized = false;
+  selectedTiles = [];
+  minefieldResult = null;
 
-if (resultBox) {
-  resultBox.classList.remove('show');
+  if (proceedMineBtn) proceedMineBtn.disabled = true;
+  if (proceedMine2Btn) proceedMine2Btn.disabled = true;
+  if (closeBtnMine) closeBtnMine.disabled = true;
 
-  const titleEl = resultBox.querySelector('.mine-result-title');
-  const textEl  = resultBox.querySelector('.mine-result-text');
+  const tiles = Array.from(popover.querySelectorAll('.minefieldTile'));
+  tiles.forEach(tileBtn => {
+    tileBtn.disabled = false;
+    tileBtn.classList.remove('used-safe','used-mine','selected','last-selected');
+    tileBtn.style.backgroundColor = "";
+  });
 
-  if (titleEl) titleEl.textContent = "";
-  if (textEl)  textEl.textContent = "";
+  return tiles;
 }
 
-// Start minefield
-minefieldPoints = 0;
-minefieldActive = true;
-selectedTiles = [];
-if (proceedMineBtn) proceedMineBtn.disabled = true;
+const tiles = startMinefield();
 
-// Collect all minefield tiles
-const tiles = Array.from(popover.querySelectorAll('.minefieldTile'));
-
-// Reset all tiles
-tiles.forEach(tileBtn => {
-  tileBtn.disabled = false;
-  tileBtn.classList.remove(
-    'used-safe',
-    'used-mine',
-    'selected',
-    'last-selected'
-  );
-  tileBtn.style.backgroundColor = "";
-});
-
-// Helper: desaturate a color (for non-selected tiles)
+// ---------------------------------
+// Helper: desaturate color
+// ---------------------------------
 function desaturateColor(color, factor = 0.50) {
   let hsl;
   switch (color) {
@@ -615,30 +604,8 @@ function desaturateColor(color, factor = 0.50) {
     case "lime": hsl = [120, 80, 50]; break;
     default: return color;
   }
-  hsl[1] = hsl[1] * factor; // reduce saturation
+  hsl[1] = hsl[1] * factor;
   return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
-}
-
-// Grab the dedicated proceed button
-if (proceedMineBtn) {
-  proceedMineBtn.disabled = true; // disabled until 4 tiles selected
-}
-
-// Grab the global close button
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    // Stop minefield
-    minefieldActive = false;
-
-    // Disable all tiles
-    tiles.forEach(t => (t.disabled = true));
-	
-	if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
-
-	disableTileAfterUse(); 
-    // Hide popover
-    if (popover) popover.classList.remove('show');
-  });
 }
 
 // ---------------------------------
@@ -646,64 +613,52 @@ if (closeBtn) {
 // ---------------------------------
 tiles.forEach(tileBtn => {
   tileBtn.addEventListener('click', () => {
-    if (!minefieldActive) return;
+    if (!minefieldActive || minefieldFinalized) return;
 
-    // Remove last-selected marker
     tiles.forEach(t => t.classList.remove('last-selected'));
 
-    // Toggle selection
     if (selectedTiles.includes(tileBtn)) {
       tileBtn.classList.remove('selected');
       tileBtn.style.backgroundColor = "";
       selectedTiles = selectedTiles.filter(t => t !== tileBtn);
-
-      // Disable proceed if less than 4
       if (proceedMineBtn) proceedMineBtn.disabled = selectedTiles.length !== 4;
       return;
     }
 
     if (selectedTiles.length < 4) {
       selectedTiles.push(tileBtn);
-      tileBtn.classList.add('selected', 'last-selected');
+      tileBtn.classList.add('selected','last-selected');
       tileBtn.style.backgroundColor = "#4dd0e1";
     }
 
-    // Enable proceed button once 4 tiles are selected
     if (selectedTiles.length === 4 && proceedMineBtn) {
       proceedMineBtn.disabled = false;
     }
 
-    // Highlight last-selected
     const lastTile = selectedTiles[selectedTiles.length - 1];
     lastTile.classList.add('last-selected');
     lastTile.style.backgroundColor = "#4dd0e1";
   });
 });
 
-
 // ---------------------------------
-// Proceed button click (selected tiles)
+// Proceed button #1: reveal selected tiles
 // ---------------------------------
 if (proceedMineBtn) {
   proceedMineBtn.addEventListener('click', () => {
-    if (selectedTiles.length !== 4) return;
+    if (selectedTiles.length !== 4 || minefieldFinalized) return;
 
     minefieldActive = false;
-
-    // Disable all tiles
-    tiles.forEach(t => (t.disabled = true));
-
-    // Disable first proceed button
     proceedMineBtn.disabled = true;
+    if (proceedMine2Btn) proceedMine2Btn.disabled = true;
 
-    // Enable second proceed button
-    if (proceedMine2Btn) proceedMine2Btn.disabled = false;
+    tiles.forEach(t => t.disabled = true);
 
-    // Separate non-selected tiles and shuffle
+    if (proceedMine2Btn) setTimeout(() => proceedMine2Btn.disabled = false, 4000);
+
     nonSelectedTiles = tiles.filter(t => !selectedTiles.includes(t));
     nonSelectedTiles.sort(() => Math.random() - 0.5);
 
-    // 🔊 Minefield reveal sounds
     const safeRevealSound = new Audio("audio/main/mine_right.wav");
     const mineRevealSound = new Audio("audio/main/mine_wrong.wav");
     safeRevealSound.volume = 0.65;
@@ -712,10 +667,8 @@ if (proceedMineBtn) {
     let selIdx = 0;
     function revealSelected() {
       if (selIdx >= selectedTiles.length) return;
-
       const tile = selectedTiles[selIdx];
       const isMine = tile.dataset.type === 'mine';
-
       tile.style.backgroundColor = isMine ? "red" : "lime";
       tile.classList.add(isMine ? 'used-mine' : 'used-safe');
 
@@ -732,10 +685,11 @@ if (proceedMineBtn) {
 }
 
 // ---------------------------------
-// Proceed button #2 (non-selected tiles)
+// Proceed button #2: reveal non-selected tiles
 // ---------------------------------
 if (proceedMine2Btn) {
   proceedMine2Btn.addEventListener('click', () => {
+    if (minefieldFinalized) return;
     proceedMine2Btn.disabled = true;
 
     const safeRevealSound = new Audio("audio/main/mine_right.wav");
@@ -745,14 +699,25 @@ if (proceedMine2Btn) {
 
     let idx = 0;
     function revealNonSelected() {
-      if (idx >= nonSelectedTiles.length) {
-        finalizeMinefield(); // ✅ scoring ONLY here
-        return;
-      }
+		// After all non-selected tiles are revealed
+		if (idx >= nonSelectedTiles.length) {
+		  // Calculate result
+		  minefieldResult = finalizeMinefield();
+
+		  // Show message box immediately (text + hide cat)
+		  const safeCount = selectedTiles.filter(t => t.dataset.type !== 'mine').length;
+		  const pointsEarned = 0; // placeholder, actual points applied on close
+		  const lifeLost = minefieldResult.resultType === "lifeLost";
+		  showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType: minefieldResult.resultType });
+
+		  // Enable close button immediately
+		  if (closeBtnMine) closeBtnMine.disabled = false;
+
+		  return;
+		}
 
       const tile = nonSelectedTiles[idx];
       const isMine = tile.dataset.type === 'mine';
-
       const baseColor = isMine ? "red" : "lime";
       tile.style.backgroundColor = desaturateColor(baseColor, 0.75);
       tile.classList.add(isMine ? 'used-mine' : 'used-safe');
@@ -769,54 +734,20 @@ if (proceedMine2Btn) {
   });
 }
 
-
-
 // ---------------------------------
-// Scoring + result handling
-// ---------------------------------
+// Calculate minefield result (no lives/points yet)
 function finalizeMinefield() {
-  const safeCount = selectedTiles.filter(
-    t => t.dataset.type !== 'mine'
-  ).length;
+  if (minefieldFinalized) return null;
+  minefieldFinalized = true;
 
-  let basePoints = 0;
-  let pointsEarned = 0;
-  let lifeLost = false;
+  const safeCount = selectedTiles.filter(t => t.dataset.type !== 'mine').length;
   let resultType = "";
+  if (safeCount < 2) resultType = "lifeLost";
+  else if (safeCount === 2 || safeCount === 3) resultType = "smallWin";
+  else if (safeCount === 4) resultType = "bigWin";
 
-  const pointMultiplier = (window.GAME_MODE === "risky") ? 2 : 1;
-
-  if (safeCount < 2) {
-    // Lose 1 life
-    livesCounter = Math.max(0, livesCounter - 1);
-    updateLivesDisplay();
-    lifeLost = true;
-    resultType = "lifeLost";
-  }
-  else if (safeCount === 2 || safeCount === 3) {
-    basePoints = 1;
-    resultType = "smallWin";
-  }
-  else if (safeCount === 4) {
-    basePoints = 2;
-    resultType = "bigWin";
-  }
-
-  // Apply multiplier once
-  if (basePoints > 0) {
-    pointsEarned = basePoints * pointMultiplier;
-    pointsCounter += pointsEarned;
-    updatePointsDisplay();
-  }
-
-  showMinefieldResult({
-    safeCount,
-    pointsEarned,
-    lifeLost,
-    resultType
-  });
+  return { safeCount, resultType };
 }
-
 
 // ---------------------------------
 // Result popover UI
@@ -828,7 +759,7 @@ function showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType }) 
   const textContainer = resultBox.querySelector('.popover_resultTextMine');
   if (!textContainer) return;
 
-  const titleEl   = textContainer.querySelector('.mine-result-title');
+  const titleEl = textContainer.querySelector('.mine-result-title');
   const messageEl = textContainer.querySelector('.mine-result-text');
 
   let title = "Minefield Complete";
@@ -850,71 +781,92 @@ function showMinefieldResult({ safeCount, pointsEarned, lifeLost, resultType }) 
 
   if (titleEl) titleEl.textContent = title;
   if (messageEl) messageEl.textContent = message;
-  
-	const catImg = popover.querySelector('.popover_cat_img');
-	if (catImg) {
-	  catImg.classList.add('hidden');
-	}
-	
-  // Show the popover
+
+  // Hide cat image immediately
+  const catImg = popover.querySelector('.popover_cat_img');
+  if (catImg) catImg.classList.add('hidden');
+
+  // Show the message box immediately
   resultBox.classList.add('show');
-  
-// -----------------------------
-// Delayed result audio handling
-// -----------------------------
-setTimeout(() => {
-	
-	// Decide which div to show
-	let resultDiv = null;
-	let showSuccess = false;
-	let showFailure = false;
 
-	const successDiv = popover.querySelector('.popover_success');
-	const failureDiv = popover.querySelector('.popover_failure');
-	const flawlessDiv = popover.querySelector('.popover_flawless');
+  // -----------------------------
+  // Delayed result audio & div display
+  // -----------------------------
+  setTimeout(() => {
+    let resultDiv = null;
+    const successDiv = popover.querySelector('.popover_success');
+    const failureDiv = popover.querySelector('.popover_failure');
+    const flawlessDiv = popover.querySelector('.popover_flawless');
 
-	if (resultType === "lifeLost") {
-	  resultDiv = failureDiv;
-	  showFailure = true;
-	}
+    if (resultType === "lifeLost") resultDiv = failureDiv;
+    if (resultType === "smallWin") resultDiv = successDiv;
+    if (resultType === "bigWin") resultDiv = flawlessDiv;
 
-	if (resultType === "smallWin") {
-	  resultDiv = successDiv;
-	  showSuccess = true;
-	}
+    // Stop Minefield BGM
+    const qAudio = document.querySelector('#qAudio');
+    if (qAudio) {
+      qAudio.pause();
+      qAudio.currentTime = 0;
+    }
 
-	if (resultType === "bigWin") {
-	  resultDiv = flawlessDiv;
-	  showSuccess = true;
-	}
-
-	// Stop Minefield BGM
-	const qAudio = document.querySelector('#qAudio');
-	if (qAudio) {
-	  qAudio.pause();
-	  qAudio.currentTime = 0;
-	}
-
-	// Play result sound
-	if (resultDiv) {
-	  const resultAudio = new Audio(
-		resultType === "lifeLost" ? "audio/main/failure.mp3" :
-		resultType === "smallWin" ? "audio/main/success.mp3" :
-		"audio/main/flawless.mp3"
-	  );
-	  resultAudio.volume = 0.4;
-	  resultAudio.play().catch(() => {});
-	}
-
-	// Show the correct div
-	if (resultDiv) {
-	  resultDiv.classList.add('show');
-	}
-
-  
-}, 5000); // ⏱ 5 second delay
-
+    // Play result sound
+    if (resultDiv) {
+      const resultAudio = new Audio(
+        resultType === "lifeLost" ? "audio/main/failure.mp3" :
+        resultType === "smallWin" ? "audio/main/success.mp3" :
+        "audio/main/flawless.mp3"
+      );
+      resultAudio.volume = 0.4;
+      resultAudio.play().catch(() => {});
+      resultDiv.classList.add('show');
+    }
+  }, 5000); // 5 second delay
 }
+
+
+// Enable close button immediately after non-selected reveal finishes
+if (closeBtnMine) {
+  closeBtnMine.disabled = false;
+
+  // Only add the click listener here once
+  if (!closeBtnMine.dataset.listenerAdded) {
+    closeBtnMine.dataset.listenerAdded = "true"; // prevent double listeners
+    closeBtnMine.addEventListener('click', () => {
+      if (!minefieldResult) return;
+
+      const { safeCount, resultType } = minefieldResult;
+
+      // ---------- Life deduction ----------
+      if (resultType === "lifeLost") {
+        livesCounter--;
+        updateLivesDisplay();
+      }
+
+      // ---------- Points ----------
+      if (resultType === "smallWin" || resultType === "bigWin") {
+        const pointMultiplier = (window.GAME_MODE === "risky") ? 2 : 1;
+        const pointsGained = resultType === "smallWin" ? 1 * pointMultiplier : 2 * pointMultiplier;
+        pointsCounter += pointsGained;
+        updatePointsDisplay();
+      }
+
+      // ---------- Game Over ----------
+      if (livesCounter < 0) {
+        showGameOver();
+      }
+
+      // ---------- Cleanup ----------
+      minefieldActive = false;
+      tiles.forEach(t => t.disabled = true);
+
+      if (popover) popover.classList.remove('show');
+      if (mainBGM && mainBGM.paused && livesCounter >= 0) mainBGM.play().catch(() => {});
+    });
+  }
+}
+
+
+
 
 	// Hint System specific buttons
 	
@@ -1021,7 +973,7 @@ setTimeout(() => {
         });
       }
     }
-	
+
 // -----------------------------
 // QTE DOM references
 // -----------------------------
@@ -1033,6 +985,7 @@ const wrongqteBtn = popover.querySelector('.wrongqteBtn');
 const answerDivQTE = popover.querySelector('.popover_answerQTE'); // container for answer display
 const displayText = popover.querySelector('.popover_item_display h2'); // where JSON text appears
 const qteItems = getQuestionData(popover.id)?.qteItems || [];
+const closeBtn = popover.querySelector('.closeBtn');
 
 // -----------------------------
 // QTE state
@@ -1063,15 +1016,15 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
   const textEl  = qteCompleteText ? qteCompleteText.querySelector('.qte-result-text') : null;
 
   // --- Reset placeholders and hide complete text ---
-  resultBox.classList.add('show'); // show parent immediately
-  	const catImg = popover.querySelector('.popover_cat_img');
-	if (catImg) {
-	  catImg.classList.add('hidden');
-	}
+  resultBox.classList.add('show');
+  const catImg = popover.querySelector('.popover_cat_img');
+  if (catImg) catImg.classList.add('hidden');
+
   placeholders.forEach(img => {
     if (img && img.parentElement) img.parentElement.classList.add('show');
     if (img) img.src = "img/misc/qteBlank.png";
   });
+
   if (qteCompleteText) qteCompleteText.classList.remove('show');
   if (titleEl) titleEl.textContent = "";
   if (textEl) textEl.textContent = "";
@@ -1079,40 +1032,38 @@ async function revealQTEResultsSequential(popover, qteResults, score, livesLost 
   // --- Wait 1 second before starting sequential reveal ---
   await new Promise(resolve => setTimeout(resolve, 1000));
 
-const qteSound = new Audio();
-qteSound.preload = "auto";
+  const qteSound = new Audio();
+  qteSound.preload = "auto";
 
-if (answerDivQTE) answerDivQTE.classList.remove('show');
+  if (answerDivQTE) answerDivQTE.classList.remove('show');
 
-// --- Reveal each placeholder sequentially ---
-for (let i = 0; i < placeholders.length; i++) {
-  const img = placeholders[i];
-  if (!img) continue;
+  // --- Reveal each placeholder sequentially ---
+  for (let i = 0; i < placeholders.length; i++) {
+    const img = placeholders[i];
+    if (!img) continue;
 
-  const isRight = qteResults[i] === "Right";
+    const isRight = qteResults[i] === "Right";
 
-  img.src = isRight
-    ? "img/misc/qteRight.png"
-    : "img/misc/qteWrong.png";
+    img.src = isRight
+      ? "img/misc/qteRight.png"
+      : "img/misc/qteWrong.png";
 
-  // 🔊 Play sound
-  qteSound.src = isRight
-    ? "audio/main/qte_right.wav"
-    : "audio/main/qte_wrong.wav";
+    // 🔊 Play sound
+    qteSound.src = isRight
+      ? "audio/main/qte_right.wav"
+      : "audio/main/qte_wrong.wav";
 
-  qteSound.currentTime = 0;
-  qteSound.volume = 0.2;
-  qteSound.play().catch(() => {});
+    qteSound.currentTime = 0;
+    qteSound.volume = 0.2;
+    qteSound.play().catch(() => {});
 
-  // Wait before next reveal
-  await new Promise(resolve => setTimeout(resolve, 1000));
-}
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
 
-
-  // --- Wait 0.5s after last placeholder ---
+  // --- Wait 1 second after last placeholder ---
   await new Promise(resolve => setTimeout(resolve, 1000));
 
-  // --- Fill in text feedback (without listing answers) ---
+  // --- Fill in text feedback (without applying points/lives yet) ---
   if (titleEl) {
     titleEl.textContent = livesLost ? "Oops 💥" : "QTE Complete";
   }
@@ -1123,114 +1074,115 @@ for (let i = 0; i < placeholders.length; i++) {
     textEl.textContent = message;
   }
 
-  // --- Show complete text ---
   if (qteCompleteText) qteCompleteText.classList.add('show');
-  
-  // --- Wait 2s before final result audio ---
+
+  // --- Wait 5 seconds before final result audio ---
   await new Promise(resolve => setTimeout(resolve, 5000));
 
-  // --- Stop QTE background audio ---
   const qAudio = popover.querySelector('#qAudio');
   if (qAudio) {
     qAudio.pause();
     qAudio.currentTime = 0;
   }
 
+  // --- Decide result div and play result sound ---
+  let resultSound = "";
+  let resultDiv = null;
 
-	// --- Decide result ---
-	let resultSound = "";
-	let resultDiv = null; // the div to show
+  const successDiv = popover.querySelector('.popover_success');
+  const failureDiv = popover.querySelector('.popover_failure');
+  const flawlessDiv = popover.querySelector('.popover_flawless');
 
-	const successDiv = popover.querySelector('.popover_success');
-	const failureDiv = popover.querySelector('.popover_failure');
-	const flawlessDiv = popover.querySelector('.popover_flawless');
+  if (score <= 2) {
+    resultSound = "audio/main/failure.mp3";
+    resultDiv = failureDiv;
+  } else if (score === 3 || score === 4) {
+    resultSound = "audio/main/success.mp3";
+    resultDiv = successDiv;
+  } else if (score === 5) {
+    resultSound = "audio/main/flawless.mp3";
+    resultDiv = flawlessDiv;
+  }
 
-	if (score <= 2) {
-	  resultSound = "audio/main/failure.mp3";
-	  resultDiv = failureDiv;
-	}
+  if (resultSound) {
+    const resultAudio = new Audio(resultSound);
+    resultAudio.volume = 0.4;
+    resultAudio.play().catch(() => {});
+  }
 
-	if (score === 3 || score === 4) {
-	  resultSound = "audio/main/success.mp3";
-	  resultDiv = successDiv;
-	}
-
-	if (score === 5) {
-	  resultSound = "audio/main/flawless.mp3";
-	  resultDiv = flawlessDiv;
-	}
-
-	// --- Play result sound ---
-	if (resultSound) {
-	  const resultAudio = new Audio(resultSound);
-	  resultAudio.volume = 0.4;
-	  resultAudio.play().catch(() => {});
-	}
-
-	// --- Show the correct div ---
-	if (resultDiv) {
-	  resultDiv.classList.add('show');
-	}
+  if (resultDiv) resultDiv.classList.add('show');
 }
 
-
-
 // -----------------------------
-// Helper: show next JSON item or hide display if done
+// Helper: show next JSON item
 // -----------------------------
 function updateDisplayForNextItem() {
   if (currentIndex < qteItems.length) {
     displayText.textContent = qteItems[currentIndex].text;
-    answerDivQTE.classList.remove('show'); // hide answer container
+    answerDivQTE.classList.remove('show');
     if (answerqteBtn && answerqteBtn.parentElement) {
-      answerqteBtn.parentElement.classList.remove('hidden'); // show answer button
+      answerqteBtn.parentElement.classList.remove('hidden');
     }
   } else {
-    displayText.textContent = ""; // optional: hide text when finished
+    displayText.textContent = "";
   }
 }
 
 // -----------------------------
-// Helper: check end-of-QTE and show results
+// Helper: check end-of-QTE
 // -----------------------------
 function checkQTEEnd() {
   if (currentIndex >= qteItems.length) {
-    let livesLost = false;
-    let basePoints = 0;
-    let pointsGained = 0;
-
-    const pointMultiplier = (window.GAME_MODE === "risky") ? 2 : 1;
-
-    if (qteScore <= 2) {
-      livesCounter = Math.max(0, livesCounter - 1);
-      updateLivesDisplay();
-      livesLost = true;
-    } else {
-      basePoints = 1;
-    }
-
-    if (basePoints > 0) {
-      pointsGained = basePoints * pointMultiplier;
-      pointsCounter += pointsGained;
-      updatePointsDisplay();
-    }
-
-    // Disable QTE buttons while result is visible
     if (rightqteBtn) rightqteBtn.disabled = true;
     if (wrongqteBtn) wrongqteBtn.disabled = true;
     if (answerqteBtn) answerqteBtn.disabled = true;
 
-    // --- Trigger sequential 5-step reveal with text ---
-    revealQTEResultsSequential(
-      popover,
-      qteResults,
-      qteScore,
-      livesLost,
-      pointsGained
-    );
+    // Determine "would happen" for display only
+    const livesLost = qteScore <= 2;
+    const basePoints = qteScore > 2 ? 1 : 0;
+    const pointMultiplier = (window.GAME_MODE === "risky") ? 2 : 1;
+    const pointsGained = basePoints * pointMultiplier;
+
+    // Trigger reveal (text reflects what would happen)
+    revealQTEResultsSequential(popover, qteResults, qteScore, livesLost, pointsGained);
   }
 }
 
+// -----------------------------
+// Close button: apply points/lives/game over
+// -----------------------------
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    let livesLost = false;
+    if (qteScore <= 2) {
+      livesCounter--;
+      updateLivesDisplay();
+      livesLost = true;
+    }
+
+    let pointsGained = 0;
+    if (qteScore > 2) {
+      const pointMultiplier = (window.GAME_MODE === "risky") ? 2 : 1;
+      pointsGained = 1 * pointMultiplier;
+      pointsCounter += pointsGained;
+      updatePointsDisplay();
+    }
+
+    if (livesCounter < 0) {
+     showGameOver();
+    }
+
+    minefieldActive = false;
+    tiles.forEach(t => (t.disabled = true));
+    disableTileAfterUse();
+	
+	if (livesCounter >= 0) {
+    if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
+    }
+
+    if (popover) popover.classList.remove('show');
+  });
+}
 
 // -----------------------------
 // Go button: start QTE
@@ -1239,19 +1191,17 @@ if (qtegobtn && qteGoContainer && displayText && qteItems.length > 0) {
   qtegobtn.addEventListener('click', () => {
     qteGoContainer.classList.add('hidden');
 
-    // Reset state
     currentIndex = 0;
     qteScore = 0;
     qteResults = [];
 
-    // Clear previous result popover
     const resultBox = popover.querySelector('.popover_resultQTE');
     if (resultBox) {
       resultBox.classList.remove('show');
       const titleEl = resultBox.querySelector('.qte-result-title');
       const textEl  = resultBox.querySelector('.qte-result-text');
       if (titleEl) titleEl.textContent = "";
-      if (textEl)  textEl.textContent = "";
+      if (textEl) textEl.textContent = "";
     }
 
     displayText.classList.remove('hidden');
@@ -1264,7 +1214,7 @@ if (qtegobtn && qteGoContainer && displayText && qteItems.length > 0) {
 }
 
 // -----------------------------
-// Answer button: shows Text from JSON
+// Answer button: shows text from JSON
 // -----------------------------
 if (answerqteBtn) {
   const answerH1 = answerDivQTE.querySelector("h1");
@@ -1276,7 +1226,7 @@ if (answerqteBtn) {
       answerDivQTE.classList.add('show');
     }
     if (answerqteBtn && answerqteBtn.parentElement) {
-      answerqteBtn.parentElement.classList.add('hidden'); // hide Answer button after use
+      answerqteBtn.parentElement.classList.add('hidden');
     }
   });
 }
@@ -1306,20 +1256,6 @@ if (wrongqteBtn) {
   });
 }
 
-// -----------------------------
-// Global close button
-// -----------------------------
-if (closeBtn) {
-  closeBtn.addEventListener('click', () => {
-    minefieldActive = false;
-    tiles.forEach(t => (t.disabled = true));
-	
-	if (mainBGM && mainBGM.paused) mainBGM.play().catch(() => {});
-		
-    disableTileAfterUse();
-    if (popover) popover.classList.remove('show');
-  });
-}
 
 // -----------------------------
 // Keyboard shortcuts
@@ -1361,7 +1297,7 @@ switch (currentType) {
 	
 case "mine": // fallback for normal popovers without data-type
     switch (key) {
-	  case "c": currentPopover.querySelector(".closeBtn")?.click(); break;
+	  case "c": currentPopover.querySelector(".closeBtnMine")?.click(); break;
 	  case "g": currentPopover.querySelector(".proceedMineBtn")?.click(); break;
 	  case "p": currentPopover.querySelector(".proceedMine2Btn")?.click(); break;
 	  case "s": currentPopover.querySelector(".skipBtn")?.click(); break;
