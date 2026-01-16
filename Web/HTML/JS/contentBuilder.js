@@ -3109,7 +3109,7 @@ function createRBranchContent(data, speed = 30) {
     <div class="popover_cat_body">
       <img src="img/layout/catRisky.png" width="100%" height="100%">
       <div class="popover_cat_img">
-		<img src="img/categories/branch.png" loading="lazy">
+        <img src="img/categories/branch.png" loading="lazy">
       </div>
     </div>
     <div class="popover_question_body">
