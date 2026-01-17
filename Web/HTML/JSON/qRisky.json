@@ -121,43 +121,80 @@
 	"DoubleDubbel": "Mario Kart Double Dash baby!",
 	"Yatogami": "Try to not make any big donation announcements you cannot hold true to (Impossible)"
   },
-    {
+  {
     "id": "QuestionR16",
-	"question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
-	"type": "branch",
+    "question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
+    "type": "branch",
     "branchA": {
-		"id": "QuestionR16_A",
-		"type": "host",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	},
-	"branchB": {
-		"id": "QuestionR16_B",
-		"type": "trust",
-		"question": "Choose an audience member to take on a challenge for you!",
-		"challenge": "Your Sign of Trust Challenge"
-	},
-	"branchC": {
-		"id": "QuestionR16_C",
-		"type": "brutal",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	},
-	"branchD": {
+      "id": "QuestionR16_A",
+		"type": "qte",
+		"question": "To Kart or Not To Kart? \n Are these real kart names in Mario Kart: Double Dash?",
+		"qteItems": [
+		  {
+			"text": "Kart1",
+			"display": "test1"
+		  },
+		  {
+			"text": "Kart2",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart3",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart4",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart5",
+			"display": "test5"
+		  }
+		]
+	  },
+    "branchB": {
+      "id": "QuestionR16_B",
+      "type": "trust",
+      "question": "Choose an audience member to take on a challenge for you!",
+      "challenge": "Your Sign of Trust Challenge"
+    },
+    "branchC": {
+      "id": "QuestionR16_C",
+      "type": "brutal",
+      "question": "Choose a host and take on their challenge!",
+      "Boxmeister": "Survive 5 minutes of puns from Box",
+      "DoubleDubbel": "Mario Kart Double Dash baby!"
+    },
+    "branchD": {
 		"id": "QuestionR16_D",
-		"type": "audio",
-		"question": "Choose an audience member to take on a challenge for you!",
-		"challenge": "Your Sign of Trust Challenge"
-	},
-	"branchE": {
-		"id": "QuestionR16_E",
-		"type": "easy",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	}
+		"type": "multi",
+		"question": "Ducktales",
+		"answers": [
+		  {
+			"text": "Wohoo",
+			"correct": true
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  }
+		]
+	  },
+    "branchE": {
+      "id": "QuestionR16_E",
+      "type": "risky",
+      "question": "Choose a host and take on their challenge!",
+      "Boxmeister": "Survive 5 minutes of puns from Box",
+      "DoubleDubbel": "Mario Kart Double Dash baby!"
+    }
   },
     {
     "id": "QuestionR17",

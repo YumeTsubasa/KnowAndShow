@@ -281,7 +281,12 @@ document.querySelectorAll('.tileBtn[popovertarget]').forEach(tileBtn => {
                             popover.classList.remove('show');
                             popoverContainer.innerHTML = "";
 
-                            const newPopover = buildQuestionContent(questionData[`branch${letter}`]);
+                            const subQuestionData = questionData[`branch${letter}`];
+                            const subQuestionType = subQuestionData['type'];
+                            const newPopover = buildQuestionContent(subQuestionData);
+                            if (subQuestionType === 'multi') {
+                                setupMultiChoice(newPopover, subQuestionData);
+                            }
                             popoverContainer.appendChild(newPopover);
                             setupPopoverButtons(newPopover);
                             newPopover.classList.add('show');

@@ -17,7 +17,20 @@ export async function loadQuestions(path = "JSON/qNormal.json") {
 }
 
 export function getQuestionData(id) {
-  return questionData.find(q => q.id === id) || null;
+  // check if we are looking inside a main question or a branch, branch have their letter in the id: Question91_B
+  let idParts = id.split('_');
+  if (idParts.length < 1) {
+    console.error(`Invalid format for question id ${id}`);
+    return null;
+  } else if (idParts.length === 1) {
+    return questionData.find(q => q.id === id) || null;
+  } else {
+    const extractedParentId = idParts[0];
+    const branchLetter = idParts[1];
+    const parentQuestionData = questionData.find(q => q.id === extractedParentId);
+    const subQuestionData = parentQuestionData[`branch${branchLetter}`]
+    return subQuestionData? subQuestionData: null;
+  }
 }
 
 export function getAllQuestions() {

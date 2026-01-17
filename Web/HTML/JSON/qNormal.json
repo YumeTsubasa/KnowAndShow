@@ -1,438 +1,718 @@
 [
   {
     "id": "Question1",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-{
-  "id": "Question2",
-  "type": "multi",
-  "question": "Ducktales",
-  "answers": [
-    { "text": "Wohoo", "correct": true },
-    { "text": "Wohoo", "correct": false },
-    { "text": "Wohoo", "correct": false },
-    { "text": "Wohoo", "correct": false }
-  ]
-},
-    {
+  {
+    "id": "Question2",
+    "type": "multi",
+    "question": "Ducktales",
+    "answers": [
+      {
+        "text": "Wohoo",
+        "correct": true
+      },
+      {
+        "text": "Wohoo",
+        "correct": false
+      },
+      {
+        "text": "Wohoo",
+        "correct": false
+      },
+      {
+        "text": "Wohoo",
+        "correct": false
+      }
+    ]
+  },
+  {
     "id": "Question3",
-	"type": "brutal",
+    "type": "brutal",
     "question": "Silk",
-	"answer": "Song"
+    "answer": "Song"
   },
-    {
+  {
     "id": "Question4",
-	"type": "qte",
+    "type": "qte",
     "question": "To Kart or Not To Kart? \n Are these real kart names in Mario Kart: Double Dash?",
-	"qteItems": [
-		{ "text": "Kart1", "display": "test1" },
-		{ "text": "Kart2", "display": "test2" },
-		{ "text": "Kart3", "display": "test2" },
-		{ "text": "Kart4", "display": "test2" },
-		{ "text": "Kart5", "display": "test5" }
-	]
+    "qteItems": [
+      {
+        "text": "Kart1",
+        "display": "test1"
+      },
+      {
+        "text": "Kart2",
+        "display": "test2"
+      },
+      {
+        "text": "Kart3",
+        "display": "test2"
+      },
+      {
+        "text": "Kart4",
+        "display": "test2"
+      },
+      {
+        "text": "Kart5",
+        "display": "test5"
+      }
+    ]
   },
-    {
+  {
     "id": "Question5",
-	"type": "screen",
+    "type": "screen",
     "img": "img/screenshot/snore.jpg",
-	"question": "What game is the following screenshot from?",
-	"answer": "Philosophers Stone"
+    "question": "What game is the following screenshot from?",
+    "answer": "Philosophers Stone"
   },
-    {
+  {
     "id": "Question6",
-	"type": "character",
+    "type": "character",
     "question": "Who's this character?",
-	"img": "img/character/arle.jpg",
-	"img_reveal": "img/character/knuckles.jpg",
-	"answer": "&Knuckles"
+    "img": "img/character/arle.jpg",
+    "img_reveal": "img/character/knuckles.jpg",
+    "answer": "&Knuckles"
   },
-    {
+  {
     "id": "Question7",
-	"type": "jukebox",
+    "type": "jukebox",
     "audio": "audio/jukebox/kirby.mp3",
     "question": "Unstable",
-	"answer": "Unicorns"
+    "answer": "Unicorns"
   },
-    {
+  {
     "id": "Question8",
-	"type": "audio",
+    "type": "audio",
     "audio": "audio/audio/knuckles.mp3",
     "question": "Do not go peepee",
-	"answer": "In the ocean"
+    "answer": "In the ocean"
   },
-    {
+  {
     "id": "Question9",
-	"type": "hint",
-	"question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
+    "type": "hint",
+    "question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
     "hint1": "Red",
-	"hint2": "Green",
-	"hint3": "Yellow",
-	"answer": "Pokemon"
+    "hint2": "Green",
+    "hint3": "Yellow",
+    "answer": "Pokemon"
   },
-    {
+  {
     "id": "Question10",
-	"type": "mine",
+    "type": "mine",
     "question": "Which of these items are NOT in The Legend of Zelda: A Link to the Past?",
-	"tiles": [
-	[
-		{ "text": "bomb bag",            "correct": false  },
-		{ "text": "hookshot",           "correct": true },
-		{ "text": "flute",              "correct": true },
-		{ "text": "gold sword",         "correct": true }
-	],
-	[
-		{ "text": "lamp",               "correct": true },
-		{ "text": "zora mask",          "correct": false  },
-		{ "text": "bombos medallion",   "correct": true },
-		{ "text": "diving suit",        "correct": false  }
-	],
-	[
-		{ "text": "harp",               "correct": false  },
-		{ "text": "goron shield",       "correct": false  },
-		{ "text": "silver arrows",      "correct": true },
-		{ "text": "bottle",             "correct": true }
-	]
-   ]
+    "tiles": [
+      [
+        {
+          "text": "bomb bag",
+          "correct": false
+        },
+        {
+          "text": "hookshot",
+          "correct": true
+        },
+        {
+          "text": "flute",
+          "correct": true
+        },
+        {
+          "text": "gold sword",
+          "correct": true
+        }
+      ],
+      [
+        {
+          "text": "lamp",
+          "correct": true
+        },
+        {
+          "text": "zora mask",
+          "correct": false
+        },
+        {
+          "text": "bombos medallion",
+          "correct": true
+        },
+        {
+          "text": "diving suit",
+          "correct": false
+        }
+      ],
+      [
+        {
+          "text": "harp",
+          "correct": false
+        },
+        {
+          "text": "goron shield",
+          "correct": false
+        },
+        {
+          "text": "silver arrows",
+          "correct": true
+        },
+        {
+          "text": "bottle",
+          "correct": true
+        }
+      ]
+    ]
   },
-    {
+  {
     "id": "Question11",
-	"type": "solo",
+    "type": "solo",
     "challengePart1": "This is a placeholder text for testing",
-	"challengePart2": "This should also proceed to be printed with the typewriter function in mind"
+    "challengePart2": "This should also proceed to be printed with the typewriter function in mind"
   },
-    {
+  {
     "id": "Question12",
-	"type": "audience",
-	"question": "Take on an audience member in a \n head-to-head challenge!",
+    "type": "audience",
+    "question": "Take on an audience member in a \n head-to-head challenge!",
     "challenge": "OhNo"
   },
-    {
+  {
     "id": "Question13",
-	"type": "team",
-	"question": "Complete this challenge with the aid of an audience member",
+    "type": "team",
+    "question": "Complete this challenge with the aid of an audience member",
     "challenge": "Your Team Effort Challenge!"
   },
-    {
+  {
     "id": "Question14",
-	"type": "trust",
-	"question": "Choose an audience member to take on a challenge for you!",
+    "type": "trust",
+    "question": "Choose an audience member to take on a challenge for you!",
     "challenge": "Your Sign of Trust Challenge"
   },
-    {
+  {
     "id": "Question15",
-	"type": "host",
-	"question": "Choose a host and take on their challenge!",
+    "type": "host",
+    "question": "Choose a host and take on their challenge!",
     "Boxy": "Survive 5 minutes of puns from Box",
-	"DoubleDubbel": "Mario Kart Double Dash baby!",
-	"Yatogami": "Try to not make any big donation announcements you cannot hold true to (Impossible)"
+    "DoubleDubbel": "Mario Kart Double Dash baby!",
+    "Yatogami": "Try to not make any big donation announcements you cannot hold true to (Impossible)"
   },
-    {
+  {
     "id": "Question16",
-	"question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
-	"type": "branch",
+    "question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
+    "type": "branch",
     "branchA": {
-		"id": "Question16_A",
-		"type": "host",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	},
-	"branchB": {
-		"id": "Question16_B",
-		"type": "trust",
-		"question": "Choose an audience member to take on a challenge for you!",
-		"challenge": "Your Sign of Trust Challenge"
-	},
-	"branchC": {
-		"id": "Question16_C",
-		"type": "brutal",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	},
-	"branchD": {
+      "id": "Question16_A",
+		"type": "qte",
+		"question": "To Kart or Not To Kart? \n Are these real kart names in Mario Kart: Double Dash?",
+		"qteItems": [
+		  {
+			"text": "Kart1",
+			"display": "test1"
+		  },
+		  {
+			"text": "Kart2",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart3",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart4",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart5",
+			"display": "test5"
+		  }
+		]
+	  },
+    "branchB": {
+      "id": "Question16_B",
+      "type": "trust",
+      "question": "Choose an audience member to take on a challenge for you!",
+      "challenge": "Your Sign of Trust Challenge"
+    },
+    "branchC": {
+      "id": "Question16_C",
+      "type": "brutal",
+      "question": "Choose a host and take on their challenge!",
+      "Boxmeister": "Survive 5 minutes of puns from Box",
+      "DoubleDubbel": "Mario Kart Double Dash baby!"
+    },
+    "branchD": {
 		"id": "Question16_D",
-		"type": "audio",
-		"question": "Choose an audience member to take on a challenge for you!",
-		"challenge": "Your Sign of Trust Challenge"
-	},
-	"branchE": {
-		"id": "Question16_E",
-		"type": "risky",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	}
+		"type": "multi",
+		"question": "Ducktales",
+		"answers": [
+		  {
+			"text": "Wohoo",
+			"correct": true
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  }
+		]
+	  },
+    "branchE": {
+      "id": "Question16_E",
+      "type": "risky",
+      "question": "Choose a host and take on their challenge!",
+      "Boxmeister": "Survive 5 minutes of puns from Box",
+      "DoubleDubbel": "Mario Kart Double Dash baby!"
+    }
   },
-    {
+  {
     "id": "Question17",
-	"type": "decision",
-	"question": "Two games to choose from, but you will not know what the challenge is. Time to make a decision…",
+    "type": "decision",
+    "question": "Two games to choose from, but you will not know what the challenge is. Time to make a decision…",
     "game1": "Mario Kart 8",
-	"game2": "Kirby's Dream Land",
-	"game3": "Test",
-	"game1desc": "Time Trials: Get a time of xx:xx on the XXXXXX Circuit",
-	"game2desc": "Beat the first boss",
-	"game3desc": "Test"
+    "game2": "Kirby's Dream Land",
+    "game3": "Test",
+    "game1desc": "Time Trials: Get a time of xx:xx on the XXXXXX Circuit",
+    "game2desc": "Beat the first boss",
+    "game3desc": "Test"
   },
-    {
+  {
     "id": "Question18",
-	"type": "risky",
+    "type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },
-      {
+  {
     "id": "Question19",
-	"type": "risky",
+    "type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },
-      {
+  {
     "id": "Question20",
-	"type": "risky",
+    "type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },
-    {
+  {
     "id": "Question21",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-    {
+  {
     "id": "Question22",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-    {
+  {
     "id": "Question23",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-    {
+  {
     "id": "Question24",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
   {
     "id": "Question101",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-{
-  "id": "Question102",
-  "type": "multi",
-  "question": "Ducktales",
-  "answers": [
-    { "text": "Wohoo", "correct": true },
-    { "text": "Wohoo", "correct": false },
-    { "text": "Wohoo", "correct": false },
-    { "text": "Wohoo", "correct": false }
-  ]
-},
-    {
+  {
+    "id": "Question102",
+    "type": "multi",
+    "question": "Ducktales",
+    "answers": [
+      {
+        "text": "Wohoo",
+        "correct": true
+      },
+      {
+        "text": "Wohoo",
+        "correct": false
+      },
+      {
+        "text": "Wohoo",
+        "correct": false
+      },
+      {
+        "text": "Wohoo",
+        "correct": false
+      }
+    ]
+  },
+  {
     "id": "Question103",
-	"type": "brutal",
+    "type": "brutal",
     "question": "Silk",
-	"answer": "Song"
+    "answer": "Song"
   },
-    {
+  {
     "id": "Question104",
-	"type": "qte",
+    "type": "qte",
     "question": "To Kart or Not To Kart? \n Are these real kart names in Mario Kart: Double Dash?",
-	"qteItems": [
-		{ "text": "Kart1", "display": "test1" },
-		{ "text": "Kart2", "display": "test2" },
-		{ "text": "Kart3", "display": "test2" },
-		{ "text": "Kart4", "display": "test2" },
-		{ "text": "Kart5", "display": "test5" }
-	]
+    "qteItems": [
+      {
+        "text": "Kart1",
+        "display": "test1"
+      },
+      {
+        "text": "Kart2",
+        "display": "test2"
+      },
+      {
+        "text": "Kart3",
+        "display": "test2"
+      },
+      {
+        "text": "Kart4",
+        "display": "test2"
+      },
+      {
+        "text": "Kart5",
+        "display": "test5"
+      }
+    ]
   },
-    {
+  {
     "id": "Question105",
-	"type": "screen",
+    "type": "screen",
     "img": "img/screenshot/snore.jpg",
-	"question": "What game is the following screenshot from?",
-	"answer": "Philosophers Stone"
+    "question": "What game is the following screenshot from?",
+    "answer": "Philosophers Stone"
   },
-    {
+  {
     "id": "Question106",
-	"type": "character",
+    "type": "character",
     "question": "Who's this character?",
-	"img": "img/character/arle.jpg",
-	"img_reveal": "img/character/knuckles.jpg",
-	"answer": "&Knuckles"
+    "img": "img/character/arle.jpg",
+    "img_reveal": "img/character/knuckles.jpg",
+    "answer": "&Knuckles"
   },
-    {
+  {
     "id": "Question107",
-	"type": "jukebox",
+    "type": "jukebox",
     "audio": "audio/jukebox/kirby.mp3",
     "question": "Unstable",
-	"answer": "Unicorns"
+    "answer": "Unicorns"
   },
-    {
+  {
     "id": "Question108",
-	"type": "audio",
+    "type": "audio",
     "audio": "audio/audio/knuckles.mp3",
     "question": "Do not go peepee",
-	"answer": "In the ocean"
+    "answer": "In the ocean"
   },
-    {
+  {
     "id": "Question109",
-	"type": "hint",
-	"question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
+    "type": "hint",
+    "question": "Guess the game based on three hints. If you get it right after the first hint, you get 2 points!",
     "hint1": "Red",
-	"hint2": "Green",
-	"hint3": "Yellow",
-	"answer": "Pokemon"
+    "hint2": "Green",
+    "hint3": "Yellow",
+    "answer": "Pokemon"
   },
-    {
+  {
     "id": "Question110",
-	"type": "mine",
+    "type": "mine",
     "question": "Which of these items are NOT in The Legend of Zelda: A Link to the Past?",
-	"tiles": [
-	[
-		{ "text": "bomb bag",            "correct": false  },
-		{ "text": "hookshot",           "correct": true },
-		{ "text": "flute",              "correct": true },
-		{ "text": "gold sword",         "correct": true }
-	],
-	[
-		{ "text": "lamp",               "correct": true },
-		{ "text": "zora mask",          "correct": false  },
-		{ "text": "bombos medallion",   "correct": true },
-		{ "text": "diving suit",        "correct": false  }
-	],
-	[
-		{ "text": "harp",               "correct": false  },
-		{ "text": "goron shield",       "correct": false  },
-		{ "text": "silver arrows",      "correct": true },
-		{ "text": "bottle",             "correct": true }
-	]
-   ]
+    "tiles": [
+      [
+        {
+          "text": "bomb bag",
+          "correct": false
+        },
+        {
+          "text": "hookshot",
+          "correct": true
+        },
+        {
+          "text": "flute",
+          "correct": true
+        },
+        {
+          "text": "gold sword",
+          "correct": true
+        }
+      ],
+      [
+        {
+          "text": "lamp",
+          "correct": true
+        },
+        {
+          "text": "zora mask",
+          "correct": false
+        },
+        {
+          "text": "bombos medallion",
+          "correct": true
+        },
+        {
+          "text": "diving suit",
+          "correct": false
+        }
+      ],
+      [
+        {
+          "text": "harp",
+          "correct": false
+        },
+        {
+          "text": "goron shield",
+          "correct": false
+        },
+        {
+          "text": "silver arrows",
+          "correct": true
+        },
+        {
+          "text": "bottle",
+          "correct": true
+        }
+      ]
+    ]
   },
-    {
+  {
     "id": "Question111",
-	"type": "solo",
+    "type": "solo",
     "challengePart1": "This is a placeholder text for testing",
-	"challengePart2": "This should also proceed to be printed with the typewriter function in mind"
+    "challengePart2": "This should also proceed to be printed with the typewriter function in mind"
   },
-    {
+  {
     "id": "Question112",
-	"type": "audience",
-	"question": "Take on an audience member in a \n head-to-head challenge!",
+    "type": "audience",
+    "question": "Take on an audience member in a \n head-to-head challenge!",
     "challenge": "OhNo"
   },
-    {
+  {
     "id": "Question113",
-	"type": "team",
-	"question": "Complete this challenge with the aid of an audience member",
+    "type": "team",
+    "question": "Complete this challenge with the aid of an audience member",
     "challenge": "Your Team Effort Challenge!"
   },
-    {
+  {
     "id": "Question114",
-	"type": "trust",
-	"question": "Choose an audience member to take on a challenge for you!",
+    "type": "trust",
+    "question": "Choose an audience member to take on a challenge for you!",
     "challenge": "Your Sign of Trust Challenge"
   },
-    {
+  {
     "id": "Question115",
-	"type": "host",
-	"question": "Choose a host and take on their challenge!",
+    "type": "host",
+    "question": "Choose a host and take on their challenge!",
     "Boxy": "Survive 5 minutes of puns from Box",
-	"DoubleDubbel": "Mario Kart Double Dash baby!",
-	"Yatogami": "Try to not make any big donation announcements you cannot hold true to (Impossible)"
+    "DoubleDubbel": "Mario Kart Double Dash baby!",
+    "Yatogami": "Try to not make any big donation announcements you cannot hold true to (Impossible)"
   },
-    {
+  {
     "id": "Question116",
-	"question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
-	"type": "branch",
+    "question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
+    "type": "branch",
     "branchA": {
-		"id": "Question116_A",
-		"type": "host",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	},
-	"branchB": {
-		"id": "Question116_B",
-		"type": "trust",
-		"question": "Choose an audience member to take on a challenge for you!",
-		"challenge": "Your Sign of Trust Challenge"
-	},
-	"branchC": {
-		"id": "Question116_C",
-		"type": "brutal",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	},
-	"branchD": {
+      "id": "Question116_A",
+		"type": "qte",
+		"question": "To Kart or Not To Kart? \n Are these real kart names in Mario Kart: Double Dash?",
+		"qteItems": [
+		  {
+			"text": "Kart1",
+			"display": "test1"
+		  },
+		  {
+			"text": "Kart2",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart3",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart4",
+			"display": "test2"
+		  },
+		  {
+			"text": "Kart5",
+			"display": "test5"
+		  }
+		]
+	  },
+    "branchB": {
+      "id": "Question116_B",
+      "type": "trust",
+      "question": "Choose an audience member to take on a challenge for you!",
+      "challenge": "Your Sign of Trust Challenge"
+    },
+    "branchC": {
+      "id": "Question116_C",
+      "type": "brutal",
+      "question": "Choose a host and take on their challenge!",
+      "Boxmeister": "Survive 5 minutes of puns from Box",
+      "DoubleDubbel": "Mario Kart Double Dash baby!"
+    },
+    "branchD": {
 		"id": "Question116_D",
-		"type": "audio",
-		"question": "Choose an audience member to take on a challenge for you!",
-		"challenge": "Your Sign of Trust Challenge"
-	},
-	"branchE": {
-		"id": "Question116_E",
-		"type": "risky",
-		"question": "Choose a host and take on their challenge!",
-		"Boxmeister": "Survive 5 minutes of puns from Box",
-		"DoubleDubbel": "Mario Kart Double Dash baby!"
-	}
+		"type": "multi",
+		"question": "Ducktales",
+		"answers": [
+		  {
+			"text": "Wohoo",
+			"correct": true
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  },
+		  {
+			"text": "Wohoo",
+			"correct": false
+		  }
+		]
+	  },
+    "branchE": {
+      "id": "Question116_E",
+      "type": "risky",
+      "question": "Choose a host and take on their challenge!",
+      "Boxmeister": "Survive 5 minutes of puns from Box",
+      "DoubleDubbel": "Mario Kart Double Dash baby!"
+    }
   },
-    {
+  {
     "id": "Question117",
-	"type": "decision",
-	"question": "Two games to choose from, but you will not know what the challenge is. Time to make a decision…",
+    "type": "decision",
+    "question": "Two games to choose from, but you will not know what the challenge is. Time to make a decision…",
     "game1": "Mario Kart 8",
-	"game2": "Kirby's Dream Land",
-	"game3": "Test",
-	"game1desc": "Time Trials: Get a time of xx:xx on the XXXXXX Circuit",
-	"game2desc": "Beat the first boss",
-	"game3desc": "Test"
+    "game2": "Kirby's Dream Land",
+    "game3": "Test",
+    "game1desc": "Time Trials: Get a time of xx:xx on the XXXXXX Circuit",
+    "game2desc": "Beat the first boss",
+    "game3desc": "Test"
   },
-    {
+  {
     "id": "Question118",
-	"type": "risky",
+    "type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },
-      {
+  {
     "id": "Question119",
-	"type": "risky",
+    "type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },
-      {
+  {
     "id": "Question120",
-	"type": "risky",
+    "type": "risky",
     "question": "Risky might just mean worth it! All panels are worth twice as many points, but there are no Easy or Multiple Choice questions and Brutal Questions are more likely to appear. Are you doing The Risky Strat?"
   },
-    {
+  {
     "id": "Question121",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-    {
+  {
     "id": "Question122",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-    {
+  {
     "id": "Question123",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
   },
-    {
+  {
     "id": "Question124",
-	"type": "easy",
+    "type": "easy",
     "question": "Lorem",
-	"answer": "Ipsum"
+    "answer": "Ipsum"
+  },
+  {
+    "id": "Question91",
+    "type": "branch",
+    "question": "Choose from a list of five categories. Willingly choosing Brutal Question or Host Game Challenge awards double points!",
+    "branchA": {
+      "id": "Question91_A",
+      "type": "decision",
+      "question": "Three games to choose from, but you will not know what the challenge is. Time to make a decision...",
+      "game1": "Dr. Mario (NES)",
+      "game2": "Donkey Kong Country 2 (SNES)",
+      "game3": "New Super Lucky's Tale (NS)",
+      "game1desc": "Dr. Mario (NES) \n  Clear level 10 on Medium speed!",
+      "game2desc": "Donkey Kong Country 2 (SNES) \n  Defeat Krow!",
+      "game3desc": "New Super Lucky's Tale (NS) \n  Defeat Lady Meowmalade!"
+    },
+    "branchB": {
+      "id": "Question91_B",
+      "type": "host",
+      "question": "Choose a host and take on their challenge!",
+      "Boxy": "Celeste (NS) \n  Clear Forsaken City A-side faster than Boxy!",
+      "DoubleDubbel": "Worms Blast (GCN) \n  Defeat Dubbel in a Star Collection match!",
+      "Yatogami": "Mega Man X5 (PS1) \n  Clear the Runaway Truck Stage in x time!"
+    },
+    "branchC": {
+      "id": "Question91_C",
+      "type": "multi",
+      "question": "Which game won Game of the Year at The Game Awards in 2022?",
+      "answers": [
+        {
+          "text": "Xenoblace Chronicles 3",
+          "correct": false
+        },
+        {
+          "text": "Stray",
+          "correct": false
+        },
+        {
+          "text": "Elden Ring",
+          "correct": true
+        },
+        {
+          "text": "God of War Ragnarök",
+          "correct": false
+        }
+      ]
+    },
+    "branchD": {
+      "id": "Question91_D",
+      "type": "trust",
+      "question": "Choose an audience member to take on a challenge for you!",
+      "challenge": "Alisia Dragoon (GEN) \n  Clear the first area of the first stage without dying!"
+    },
+    "branchE": {
+      "id": "Question91_E",
+      "type": "qte",
+      "question": "Did They Make That? \n  Were these games made by Sonic Team?",
+      "qteItems": [
+        {
+          "text": "Sonic Unleashed",
+          "display": "Yes"
+        },
+        {
+          "text": "Sonic: Spinball",
+          "display": "No"
+        },
+        {
+          "text": "Sonic Mania",
+          "display": "No"
+        },
+        {
+          "text": "Nights into Dreams",
+          "display": "Yes"
+        },
+        {
+          "text": "Project Rub",
+          "display": "Yes"
+        }
+      ]
+    }
   }
 ]
